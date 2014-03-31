@@ -1,0 +1,420 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		05EDCE2318E9F03E003CF165 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 05EDCE2218E9F03E003CF165 /* Foundation.framework */; };
+		05EDCE2818E9F03E003CF165 /* SPDragNDrop.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 05EDCE2718E9F03E003CF165 /* SPDragNDrop.h */; };
+		05EDCE2A18E9F03E003CF165 /* SPDragNDrop.m in Sources */ = {isa = PBXBuildFile; fileRef = 05EDCE2918E9F03E003CF165 /* SPDragNDrop.m */; };
+		05EDCE3118E9F03E003CF165 /* XCTest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 05EDCE3018E9F03E003CF165 /* XCTest.framework */; };
+		05EDCE3218E9F03E003CF165 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 05EDCE2218E9F03E003CF165 /* Foundation.framework */; };
+		05EDCE3418E9F03E003CF165 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 05EDCE3318E9F03E003CF165 /* UIKit.framework */; };
+		05EDCE3718E9F03E003CF165 /* libSPDragNDrop.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 05EDCE1F18E9F03E003CF165 /* libSPDragNDrop.a */; };
+		05EDCE3D18E9F03E003CF165 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 05EDCE3B18E9F03E003CF165 /* InfoPlist.strings */; };
+		05EDCE3F18E9F03E003CF165 /* SPDragNDropTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 05EDCE3E18E9F03E003CF165 /* SPDragNDropTests.m */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		05EDCE3518E9F03E003CF165 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 05EDCE1718E9F03D003CF165 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 05EDCE1E18E9F03D003CF165;
+			remoteInfo = SPDragNDrop;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		05EDCE1D18E9F03D003CF165 /* CopyFiles */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "include/$(PRODUCT_NAME)";
+			dstSubfolderSpec = 16;
+			files = (
+				05EDCE2818E9F03E003CF165 /* SPDragNDrop.h in CopyFiles */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
+/* Begin PBXFileReference section */
+		05EDCE1F18E9F03E003CF165 /* libSPDragNDrop.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libSPDragNDrop.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		05EDCE2218E9F03E003CF165 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
+		05EDCE2618E9F03E003CF165 /* SPDragNDrop-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "SPDragNDrop-Prefix.pch"; sourceTree = "<group>"; };
+		05EDCE2718E9F03E003CF165 /* SPDragNDrop.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SPDragNDrop.h; sourceTree = "<group>"; };
+		05EDCE2918E9F03E003CF165 /* SPDragNDrop.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SPDragNDrop.m; sourceTree = "<group>"; };
+		05EDCE2F18E9F03E003CF165 /* SPDragNDropTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SPDragNDropTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		05EDCE3018E9F03E003CF165 /* XCTest.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = XCTest.framework; path = Library/Frameworks/XCTest.framework; sourceTree = DEVELOPER_DIR; };
+		05EDCE3318E9F03E003CF165 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = Library/Frameworks/UIKit.framework; sourceTree = DEVELOPER_DIR; };
+		05EDCE3A18E9F03E003CF165 /* SPDragNDropTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "SPDragNDropTests-Info.plist"; sourceTree = "<group>"; };
+		05EDCE3C18E9F03E003CF165 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		05EDCE3E18E9F03E003CF165 /* SPDragNDropTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SPDragNDropTests.m; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		05EDCE1C18E9F03D003CF165 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				05EDCE2318E9F03E003CF165 /* Foundation.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		05EDCE2C18E9F03E003CF165 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				05EDCE3118E9F03E003CF165 /* XCTest.framework in Frameworks */,
+				05EDCE3418E9F03E003CF165 /* UIKit.framework in Frameworks */,
+				05EDCE3718E9F03E003CF165 /* libSPDragNDrop.a in Frameworks */,
+				05EDCE3218E9F03E003CF165 /* Foundation.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		05EDCE1618E9F03D003CF165 = {
+			isa = PBXGroup;
+			children = (
+				05EDCE2418E9F03E003CF165 /* SPDragNDrop */,
+				05EDCE3818E9F03E003CF165 /* SPDragNDropTests */,
+				05EDCE2118E9F03E003CF165 /* Frameworks */,
+				05EDCE2018E9F03E003CF165 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		05EDCE2018E9F03E003CF165 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				05EDCE1F18E9F03E003CF165 /* libSPDragNDrop.a */,
+				05EDCE2F18E9F03E003CF165 /* SPDragNDropTests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		05EDCE2118E9F03E003CF165 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				05EDCE2218E9F03E003CF165 /* Foundation.framework */,
+				05EDCE3018E9F03E003CF165 /* XCTest.framework */,
+				05EDCE3318E9F03E003CF165 /* UIKit.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		05EDCE2418E9F03E003CF165 /* SPDragNDrop */ = {
+			isa = PBXGroup;
+			children = (
+				05EDCE2718E9F03E003CF165 /* SPDragNDrop.h */,
+				05EDCE2918E9F03E003CF165 /* SPDragNDrop.m */,
+				05EDCE2518E9F03E003CF165 /* Supporting Files */,
+			);
+			path = SPDragNDrop;
+			sourceTree = "<group>";
+		};
+		05EDCE2518E9F03E003CF165 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				05EDCE2618E9F03E003CF165 /* SPDragNDrop-Prefix.pch */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		05EDCE3818E9F03E003CF165 /* SPDragNDropTests */ = {
+			isa = PBXGroup;
+			children = (
+				05EDCE3E18E9F03E003CF165 /* SPDragNDropTests.m */,
+				05EDCE3918E9F03E003CF165 /* Supporting Files */,
+			);
+			path = SPDragNDropTests;
+			sourceTree = "<group>";
+		};
+		05EDCE3918E9F03E003CF165 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				05EDCE3A18E9F03E003CF165 /* SPDragNDropTests-Info.plist */,
+				05EDCE3B18E9F03E003CF165 /* InfoPlist.strings */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		05EDCE1E18E9F03D003CF165 /* SPDragNDrop */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 05EDCE4218E9F03E003CF165 /* Build configuration list for PBXNativeTarget "SPDragNDrop" */;
+			buildPhases = (
+				05EDCE1B18E9F03D003CF165 /* Sources */,
+				05EDCE1C18E9F03D003CF165 /* Frameworks */,
+				05EDCE1D18E9F03D003CF165 /* CopyFiles */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = SPDragNDrop;
+			productName = SPDragNDrop;
+			productReference = 05EDCE1F18E9F03E003CF165 /* libSPDragNDrop.a */;
+			productType = "com.apple.product-type.library.static";
+		};
+		05EDCE2E18E9F03E003CF165 /* SPDragNDropTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 05EDCE4518E9F03E003CF165 /* Build configuration list for PBXNativeTarget "SPDragNDropTests" */;
+			buildPhases = (
+				05EDCE2B18E9F03E003CF165 /* Sources */,
+				05EDCE2C18E9F03E003CF165 /* Frameworks */,
+				05EDCE2D18E9F03E003CF165 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				05EDCE3618E9F03E003CF165 /* PBXTargetDependency */,
+			);
+			name = SPDragNDropTests;
+			productName = SPDragNDropTests;
+			productReference = 05EDCE2F18E9F03E003CF165 /* SPDragNDropTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		05EDCE1718E9F03D003CF165 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0510;
+				ORGANIZATIONNAME = Spotify;
+			};
+			buildConfigurationList = 05EDCE1A18E9F03D003CF165 /* Build configuration list for PBXProject "SPDragNDrop" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+			);
+			mainGroup = 05EDCE1618E9F03D003CF165;
+			productRefGroup = 05EDCE2018E9F03E003CF165 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				05EDCE1E18E9F03D003CF165 /* SPDragNDrop */,
+				05EDCE2E18E9F03E003CF165 /* SPDragNDropTests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		05EDCE2D18E9F03E003CF165 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				05EDCE3D18E9F03E003CF165 /* InfoPlist.strings in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		05EDCE1B18E9F03D003CF165 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				05EDCE2A18E9F03E003CF165 /* SPDragNDrop.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		05EDCE2B18E9F03E003CF165 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				05EDCE3F18E9F03E003CF165 /* SPDragNDropTests.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		05EDCE3618E9F03E003CF165 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 05EDCE1E18E9F03D003CF165 /* SPDragNDrop */;
+			targetProxy = 05EDCE3518E9F03E003CF165 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		05EDCE3B18E9F03E003CF165 /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				05EDCE3C18E9F03E003CF165 /* en */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		05EDCE4018E9F03E003CF165 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+			};
+			name = Debug;
+		};
+		05EDCE4118E9F03E003CF165 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = YES;
+				ENABLE_NS_ASSERTIONS = NO;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
+				SDKROOT = iphoneos;
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		05EDCE4318E9F03E003CF165 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				DSTROOT = /tmp/SPDragNDrop.dst;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "SPDragNDrop/SPDragNDrop-Prefix.pch";
+				OTHER_LDFLAGS = "-ObjC";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+			};
+			name = Debug;
+		};
+		05EDCE4418E9F03E003CF165 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				DSTROOT = /tmp/SPDragNDrop.dst;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "SPDragNDrop/SPDragNDrop-Prefix.pch";
+				OTHER_LDFLAGS = "-ObjC";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+			};
+			name = Release;
+		};
+		05EDCE4618E9F03E003CF165 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(SDKROOT)/Developer/Library/Frameworks",
+					"$(inherited)",
+					"$(DEVELOPER_FRAMEWORKS_DIR)",
+				);
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "SPDragNDrop/SPDragNDrop-Prefix.pch";
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				INFOPLIST_FILE = "SPDragNDropTests/SPDragNDropTests-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = xctest;
+			};
+			name = Debug;
+		};
+		05EDCE4718E9F03E003CF165 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(SDKROOT)/Developer/Library/Frameworks",
+					"$(inherited)",
+					"$(DEVELOPER_FRAMEWORKS_DIR)",
+				);
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "SPDragNDrop/SPDragNDrop-Prefix.pch";
+				INFOPLIST_FILE = "SPDragNDropTests/SPDragNDropTests-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = xctest;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		05EDCE1A18E9F03D003CF165 /* Build configuration list for PBXProject "SPDragNDrop" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				05EDCE4018E9F03E003CF165 /* Debug */,
+				05EDCE4118E9F03E003CF165 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		05EDCE4218E9F03E003CF165 /* Build configuration list for PBXNativeTarget "SPDragNDrop" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				05EDCE4318E9F03E003CF165 /* Debug */,
+				05EDCE4418E9F03E003CF165 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+		05EDCE4518E9F03E003CF165 /* Build configuration list for PBXNativeTarget "SPDragNDropTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				05EDCE4618E9F03E003CF165 /* Debug */,
+				05EDCE4718E9F03E003CF165 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 05EDCE1718E9F03D003CF165 /* Project object */;
+}
