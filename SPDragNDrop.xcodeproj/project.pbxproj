@@ -7,15 +7,40 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		05AFEF2E18EA02D0002AACAA /* dragndrop-add.png in Resources */ = {isa = PBXBuildFile; fileRef = 05AFEF2D18EA02D0002AACAA /* dragndrop-add.png */; };
 		05EDCE2318E9F03E003CF165 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 05EDCE2218E9F03E003CF165 /* Foundation.framework */; };
-		05EDCE2818E9F03E003CF165 /* SPDragNDrop.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 05EDCE2718E9F03E003CF165 /* SPDragNDrop.h */; };
-		05EDCE2A18E9F03E003CF165 /* SPDragNDrop.m in Sources */ = {isa = PBXBuildFile; fileRef = 05EDCE2918E9F03E003CF165 /* SPDragNDrop.m */; };
 		05EDCE3118E9F03E003CF165 /* XCTest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 05EDCE3018E9F03E003CF165 /* XCTest.framework */; };
 		05EDCE3218E9F03E003CF165 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 05EDCE2218E9F03E003CF165 /* Foundation.framework */; };
 		05EDCE3418E9F03E003CF165 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 05EDCE3318E9F03E003CF165 /* UIKit.framework */; };
 		05EDCE3718E9F03E003CF165 /* libSPDragNDrop.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 05EDCE1F18E9F03E003CF165 /* libSPDragNDrop.a */; };
 		05EDCE3D18E9F03E003CF165 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 05EDCE3B18E9F03E003CF165 /* InfoPlist.strings */; };
 		05EDCE3F18E9F03E003CF165 /* SPDragNDropTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 05EDCE3E18E9F03E003CF165 /* SPDragNDropTests.m */; };
+		05EDCE5218E9F072003CF165 /* SPDraggingContainerView.m in Sources */ = {isa = PBXBuildFile; fileRef = 05EDCE4A18E9F072003CF165 /* SPDraggingContainerView.m */; };
+		05EDCE5318E9F072003CF165 /* SPDragNDropController.m in Sources */ = {isa = PBXBuildFile; fileRef = 05EDCE4D18E9F072003CF165 /* SPDragNDropController.m */; };
+		05EDCE5418E9F072003CF165 /* SPDragProxyView.m in Sources */ = {isa = PBXBuildFile; fileRef = 05EDCE4F18E9F072003CF165 /* SPDragProxyView.m */; };
+		05EDCE5518E9F072003CF165 /* SPDropHighlightView.m in Sources */ = {isa = PBXBuildFile; fileRef = 05EDCE5118E9F072003CF165 /* SPDropHighlightView.m */; };
+		05EDCE5B18E9FF23003CF165 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 05EDCE2218E9F03E003CF165 /* Foundation.framework */; };
+		05EDCE5D18E9FF23003CF165 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 05EDCE5C18E9FF23003CF165 /* CoreGraphics.framework */; };
+		05EDCE5E18E9FF23003CF165 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 05EDCE3318E9F03E003CF165 /* UIKit.framework */; };
+		05EDCEA118E9FF73003CF165 /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 05EDCE8618E9FF73003CF165 /* Default-568h@2x.png */; };
+		05EDCEA218E9FF73003CF165 /* Default.png in Resources */ = {isa = PBXBuildFile; fileRef = 05EDCE8718E9FF73003CF165 /* Default.png */; };
+		05EDCEA318E9FF73003CF165 /* Default@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 05EDCE8818E9FF73003CF165 /* Default@2x.png */; };
+		05EDCEA418E9FF73003CF165 /* DNDTAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 05EDCE8A18E9FF73003CF165 /* DNDTAppDelegate.m */; };
+		05EDCEA518E9FF73003CF165 /* DemoApp-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 05EDCE8B18E9FF73003CF165 /* DemoApp-Info.plist */; };
+		05EDCEA618E9FF73003CF165 /* DNDTFirstViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 05EDCE8E18E9FF73003CF165 /* DNDTFirstViewController.m */; };
+		05EDCEA718E9FF73003CF165 /* DNDTSecondViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 05EDCE9018E9FF73003CF165 /* DNDTSecondViewController.m */; };
+		05EDCEA818E9FF73003CF165 /* DNDTFirstViewController~ipad.xib in Resources */ = {isa = PBXBuildFile; fileRef = 05EDCE9118E9FF73003CF165 /* DNDTFirstViewController~ipad.xib */; };
+		05EDCEA918E9FF73003CF165 /* DNDTFirstViewController~iphone.xib in Resources */ = {isa = PBXBuildFile; fileRef = 05EDCE9318E9FF73003CF165 /* DNDTFirstViewController~iphone.xib */; };
+		05EDCEAA18E9FF73003CF165 /* DNDTSecondViewController~ipad.xib in Resources */ = {isa = PBXBuildFile; fileRef = 05EDCE9518E9FF73003CF165 /* DNDTSecondViewController~ipad.xib */; };
+		05EDCEAB18E9FF73003CF165 /* DNDTSecondViewController~iphone.xib in Resources */ = {isa = PBXBuildFile; fileRef = 05EDCE9718E9FF73003CF165 /* DNDTSecondViewController~iphone.xib */; };
+		05EDCEAC18E9FF73003CF165 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 05EDCE9918E9FF73003CF165 /* InfoPlist.strings */; };
+		05EDCEAD18E9FF73003CF165 /* first.png in Resources */ = {isa = PBXBuildFile; fileRef = 05EDCE9B18E9FF73003CF165 /* first.png */; };
+		05EDCEAE18E9FF73003CF165 /* first@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 05EDCE9C18E9FF73003CF165 /* first@2x.png */; };
+		05EDCEAF18E9FF73003CF165 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 05EDCE9D18E9FF73003CF165 /* main.m */; };
+		05EDCEB018E9FF73003CF165 /* second.png in Resources */ = {isa = PBXBuildFile; fileRef = 05EDCE9E18E9FF73003CF165 /* second.png */; };
+		05EDCEB118E9FF73003CF165 /* second@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 05EDCE9F18E9FF73003CF165 /* second@2x.png */; };
+		05EDCEB218E9FF73003CF165 /* testimage.png in Resources */ = {isa = PBXBuildFile; fileRef = 05EDCEA018E9FF73003CF165 /* testimage.png */; };
+		05EDCEB318E9FFBD003CF165 /* libSPDragNDrop.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 05EDCE1F18E9F03E003CF165 /* libSPDragNDrop.a */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -35,24 +60,53 @@
 			dstPath = "include/$(PRODUCT_NAME)";
 			dstSubfolderSpec = 16;
 			files = (
-				05EDCE2818E9F03E003CF165 /* SPDragNDrop.h in CopyFiles */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		05AFEF2D18EA02D0002AACAA /* dragndrop-add.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "dragndrop-add.png"; path = "Resources/dragndrop-add.png"; sourceTree = SOURCE_ROOT; };
 		05EDCE1F18E9F03E003CF165 /* libSPDragNDrop.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libSPDragNDrop.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		05EDCE2218E9F03E003CF165 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
-		05EDCE2618E9F03E003CF165 /* SPDragNDrop-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "SPDragNDrop-Prefix.pch"; sourceTree = "<group>"; };
-		05EDCE2718E9F03E003CF165 /* SPDragNDrop.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SPDragNDrop.h; sourceTree = "<group>"; };
-		05EDCE2918E9F03E003CF165 /* SPDragNDrop.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SPDragNDrop.m; sourceTree = "<group>"; };
 		05EDCE2F18E9F03E003CF165 /* SPDragNDropTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SPDragNDropTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		05EDCE3018E9F03E003CF165 /* XCTest.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = XCTest.framework; path = Library/Frameworks/XCTest.framework; sourceTree = DEVELOPER_DIR; };
 		05EDCE3318E9F03E003CF165 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = Library/Frameworks/UIKit.framework; sourceTree = DEVELOPER_DIR; };
 		05EDCE3A18E9F03E003CF165 /* SPDragNDropTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "SPDragNDropTests-Info.plist"; sourceTree = "<group>"; };
 		05EDCE3C18E9F03E003CF165 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		05EDCE3E18E9F03E003CF165 /* SPDragNDropTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SPDragNDropTests.m; sourceTree = "<group>"; };
+		05EDCE4918E9F072003CF165 /* SPDraggingContainerView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SPDraggingContainerView.h; sourceTree = "<group>"; };
+		05EDCE4A18E9F072003CF165 /* SPDraggingContainerView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SPDraggingContainerView.m; sourceTree = "<group>"; };
+		05EDCE4B18E9F072003CF165 /* SPDragNDrop.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SPDragNDrop.h; sourceTree = "<group>"; };
+		05EDCE4C18E9F072003CF165 /* SPDragNDropController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SPDragNDropController.h; sourceTree = "<group>"; };
+		05EDCE4D18E9F072003CF165 /* SPDragNDropController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SPDragNDropController.m; sourceTree = "<group>"; };
+		05EDCE4E18E9F072003CF165 /* SPDragProxyView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SPDragProxyView.h; sourceTree = "<group>"; };
+		05EDCE4F18E9F072003CF165 /* SPDragProxyView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SPDragProxyView.m; sourceTree = "<group>"; };
+		05EDCE5018E9F072003CF165 /* SPDropHighlightView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SPDropHighlightView.h; sourceTree = "<group>"; };
+		05EDCE5118E9F072003CF165 /* SPDropHighlightView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SPDropHighlightView.m; sourceTree = "<group>"; };
+		05EDCE5A18E9FF23003CF165 /* DemoApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DemoApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		05EDCE5C18E9FF23003CF165 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
+		05EDCE8618E9FF73003CF165 /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = "<group>"; };
+		05EDCE8718E9FF73003CF165 /* Default.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Default.png; sourceTree = "<group>"; };
+		05EDCE8818E9FF73003CF165 /* Default@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default@2x.png"; sourceTree = "<group>"; };
+		05EDCE8918E9FF73003CF165 /* DNDTAppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DNDTAppDelegate.h; sourceTree = "<group>"; };
+		05EDCE8A18E9FF73003CF165 /* DNDTAppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DNDTAppDelegate.m; sourceTree = "<group>"; };
+		05EDCE8B18E9FF73003CF165 /* DemoApp-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "DemoApp-Info.plist"; sourceTree = "<group>"; };
+		05EDCE8D18E9FF73003CF165 /* DNDTFirstViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DNDTFirstViewController.h; sourceTree = "<group>"; };
+		05EDCE8E18E9FF73003CF165 /* DNDTFirstViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DNDTFirstViewController.m; sourceTree = "<group>"; };
+		05EDCE8F18E9FF73003CF165 /* DNDTSecondViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DNDTSecondViewController.h; sourceTree = "<group>"; };
+		05EDCE9018E9FF73003CF165 /* DNDTSecondViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DNDTSecondViewController.m; sourceTree = "<group>"; };
+		05EDCE9218E9FF73003CF165 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = "en.lproj/DNDTFirstViewController~ipad.xib"; sourceTree = "<group>"; };
+		05EDCE9418E9FF73003CF165 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = "en.lproj/DNDTFirstViewController~iphone.xib"; sourceTree = "<group>"; };
+		05EDCE9618E9FF73003CF165 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = "en.lproj/DNDTSecondViewController~ipad.xib"; sourceTree = "<group>"; };
+		05EDCE9818E9FF73003CF165 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = "en.lproj/DNDTSecondViewController~iphone.xib"; sourceTree = "<group>"; };
+		05EDCE9A18E9FF73003CF165 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		05EDCE9B18E9FF73003CF165 /* first.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = first.png; sourceTree = "<group>"; };
+		05EDCE9C18E9FF73003CF165 /* first@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "first@2x.png"; sourceTree = "<group>"; };
+		05EDCE9D18E9FF73003CF165 /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		05EDCE9E18E9FF73003CF165 /* second.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = second.png; sourceTree = "<group>"; };
+		05EDCE9F18E9FF73003CF165 /* second@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "second@2x.png"; sourceTree = "<group>"; };
+		05EDCEA018E9FF73003CF165 /* testimage.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = testimage.png; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -75,14 +129,26 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		05EDCE5718E9FF23003CF165 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				05EDCEB318E9FFBD003CF165 /* libSPDragNDrop.a in Frameworks */,
+				05EDCE5D18E9FF23003CF165 /* CoreGraphics.framework in Frameworks */,
+				05EDCE5E18E9FF23003CF165 /* UIKit.framework in Frameworks */,
+				05EDCE5B18E9FF23003CF165 /* Foundation.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
 		05EDCE1618E9F03D003CF165 = {
 			isa = PBXGroup;
 			children = (
-				05EDCE2418E9F03E003CF165 /* SPDragNDrop */,
+				05EDCE4818E9F072003CF165 /* SPDragNDrop */,
 				05EDCE3818E9F03E003CF165 /* SPDragNDropTests */,
+				05EDCE8518E9FF73003CF165 /* DemoApp */,
 				05EDCE2118E9F03E003CF165 /* Frameworks */,
 				05EDCE2018E9F03E003CF165 /* Products */,
 			);
@@ -93,6 +159,7 @@
 			children = (
 				05EDCE1F18E9F03E003CF165 /* libSPDragNDrop.a */,
 				05EDCE2F18E9F03E003CF165 /* SPDragNDropTests.xctest */,
+				05EDCE5A18E9FF23003CF165 /* DemoApp.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -103,26 +170,9 @@
 				05EDCE2218E9F03E003CF165 /* Foundation.framework */,
 				05EDCE3018E9F03E003CF165 /* XCTest.framework */,
 				05EDCE3318E9F03E003CF165 /* UIKit.framework */,
+				05EDCE5C18E9FF23003CF165 /* CoreGraphics.framework */,
 			);
 			name = Frameworks;
-			sourceTree = "<group>";
-		};
-		05EDCE2418E9F03E003CF165 /* SPDragNDrop */ = {
-			isa = PBXGroup;
-			children = (
-				05EDCE2718E9F03E003CF165 /* SPDragNDrop.h */,
-				05EDCE2918E9F03E003CF165 /* SPDragNDrop.m */,
-				05EDCE2518E9F03E003CF165 /* Supporting Files */,
-			);
-			path = SPDragNDrop;
-			sourceTree = "<group>";
-		};
-		05EDCE2518E9F03E003CF165 /* Supporting Files */ = {
-			isa = PBXGroup;
-			children = (
-				05EDCE2618E9F03E003CF165 /* SPDragNDrop-Prefix.pch */,
-			);
-			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
 		05EDCE3818E9F03E003CF165 /* SPDragNDropTests */ = {
@@ -141,6 +191,51 @@
 				05EDCE3B18E9F03E003CF165 /* InfoPlist.strings */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		05EDCE4818E9F072003CF165 /* SPDragNDrop */ = {
+			isa = PBXGroup;
+			children = (
+				05EDCE4918E9F072003CF165 /* SPDraggingContainerView.h */,
+				05EDCE4A18E9F072003CF165 /* SPDraggingContainerView.m */,
+				05EDCE4B18E9F072003CF165 /* SPDragNDrop.h */,
+				05EDCE4C18E9F072003CF165 /* SPDragNDropController.h */,
+				05EDCE4D18E9F072003CF165 /* SPDragNDropController.m */,
+				05EDCE4E18E9F072003CF165 /* SPDragProxyView.h */,
+				05EDCE4F18E9F072003CF165 /* SPDragProxyView.m */,
+				05EDCE5018E9F072003CF165 /* SPDropHighlightView.h */,
+				05EDCE5118E9F072003CF165 /* SPDropHighlightView.m */,
+			);
+			path = SPDragNDrop;
+			sourceTree = "<group>";
+		};
+		05EDCE8518E9FF73003CF165 /* DemoApp */ = {
+			isa = PBXGroup;
+			children = (
+				05EDCE8618E9FF73003CF165 /* Default-568h@2x.png */,
+				05EDCE8718E9FF73003CF165 /* Default.png */,
+				05EDCE8818E9FF73003CF165 /* Default@2x.png */,
+				05EDCE8918E9FF73003CF165 /* DNDTAppDelegate.h */,
+				05EDCE8A18E9FF73003CF165 /* DNDTAppDelegate.m */,
+				05EDCE8B18E9FF73003CF165 /* DemoApp-Info.plist */,
+				05EDCE8D18E9FF73003CF165 /* DNDTFirstViewController.h */,
+				05EDCE8E18E9FF73003CF165 /* DNDTFirstViewController.m */,
+				05EDCE8F18E9FF73003CF165 /* DNDTSecondViewController.h */,
+				05EDCE9018E9FF73003CF165 /* DNDTSecondViewController.m */,
+				05EDCE9118E9FF73003CF165 /* DNDTFirstViewController~ipad.xib */,
+				05EDCE9318E9FF73003CF165 /* DNDTFirstViewController~iphone.xib */,
+				05EDCE9518E9FF73003CF165 /* DNDTSecondViewController~ipad.xib */,
+				05EDCE9718E9FF73003CF165 /* DNDTSecondViewController~iphone.xib */,
+				05EDCE9918E9FF73003CF165 /* InfoPlist.strings */,
+				05EDCE9B18E9FF73003CF165 /* first.png */,
+				05EDCE9C18E9FF73003CF165 /* first@2x.png */,
+				05EDCE9D18E9FF73003CF165 /* main.m */,
+				05EDCE9E18E9FF73003CF165 /* second.png */,
+				05EDCE9F18E9FF73003CF165 /* second@2x.png */,
+				05EDCEA018E9FF73003CF165 /* testimage.png */,
+				05AFEF2D18EA02D0002AACAA /* dragndrop-add.png */,
+			);
+			path = DemoApp;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -181,6 +276,23 @@
 			productReference = 05EDCE2F18E9F03E003CF165 /* SPDragNDropTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
+		05EDCE5918E9FF23003CF165 /* DemoApp */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 05EDCE7F18E9FF23003CF165 /* Build configuration list for PBXNativeTarget "DemoApp" */;
+			buildPhases = (
+				05EDCE5618E9FF23003CF165 /* Sources */,
+				05EDCE5718E9FF23003CF165 /* Frameworks */,
+				05EDCE5818E9FF23003CF165 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = DemoApp;
+			productName = DemoApp;
+			productReference = 05EDCE5A18E9FF23003CF165 /* DemoApp.app */;
+			productType = "com.apple.product-type.application";
+		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -189,6 +301,11 @@
 			attributes = {
 				LastUpgradeCheck = 0510;
 				ORGANIZATIONNAME = Spotify;
+				TargetAttributes = {
+					05EDCE2E18E9F03E003CF165 = {
+						TestTargetID = 05EDCE5918E9FF23003CF165;
+					};
+				};
 			};
 			buildConfigurationList = 05EDCE1A18E9F03D003CF165 /* Build configuration list for PBXProject "SPDragNDrop" */;
 			compatibilityVersion = "Xcode 3.2";
@@ -204,6 +321,7 @@
 			targets = (
 				05EDCE1E18E9F03D003CF165 /* SPDragNDrop */,
 				05EDCE2E18E9F03E003CF165 /* SPDragNDropTests */,
+				05EDCE5918E9FF23003CF165 /* DemoApp */,
 			);
 		};
 /* End PBXProject section */
@@ -217,6 +335,28 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		05EDCE5818E9FF23003CF165 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				05AFEF2E18EA02D0002AACAA /* dragndrop-add.png in Resources */,
+				05EDCEA318E9FF73003CF165 /* Default@2x.png in Resources */,
+				05EDCEA118E9FF73003CF165 /* Default-568h@2x.png in Resources */,
+				05EDCEAB18E9FF73003CF165 /* DNDTSecondViewController~iphone.xib in Resources */,
+				05EDCEB118E9FF73003CF165 /* second@2x.png in Resources */,
+				05EDCEA818E9FF73003CF165 /* DNDTFirstViewController~ipad.xib in Resources */,
+				05EDCEAD18E9FF73003CF165 /* first.png in Resources */,
+				05EDCEA918E9FF73003CF165 /* DNDTFirstViewController~iphone.xib in Resources */,
+				05EDCEAA18E9FF73003CF165 /* DNDTSecondViewController~ipad.xib in Resources */,
+				05EDCEA218E9FF73003CF165 /* Default.png in Resources */,
+				05EDCEAE18E9FF73003CF165 /* first@2x.png in Resources */,
+				05EDCEB018E9FF73003CF165 /* second.png in Resources */,
+				05EDCEB218E9FF73003CF165 /* testimage.png in Resources */,
+				05EDCEAC18E9FF73003CF165 /* InfoPlist.strings in Resources */,
+				05EDCEA518E9FF73003CF165 /* DemoApp-Info.plist in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
@@ -224,7 +364,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				05EDCE2A18E9F03E003CF165 /* SPDragNDrop.m in Sources */,
+				05EDCE5318E9F072003CF165 /* SPDragNDropController.m in Sources */,
+				05EDCE5218E9F072003CF165 /* SPDraggingContainerView.m in Sources */,
+				05EDCE5418E9F072003CF165 /* SPDragProxyView.m in Sources */,
+				05EDCE5518E9F072003CF165 /* SPDropHighlightView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -233,6 +376,17 @@
 			buildActionMask = 2147483647;
 			files = (
 				05EDCE3F18E9F03E003CF165 /* SPDragNDropTests.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		05EDCE5618E9FF23003CF165 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				05EDCEA418E9FF73003CF165 /* DNDTAppDelegate.m in Sources */,
+				05EDCEA618E9FF73003CF165 /* DNDTFirstViewController.m in Sources */,
+				05EDCEAF18E9FF73003CF165 /* main.m in Sources */,
+				05EDCEA718E9FF73003CF165 /* DNDTSecondViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -251,6 +405,46 @@
 			isa = PBXVariantGroup;
 			children = (
 				05EDCE3C18E9F03E003CF165 /* en */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+		05EDCE9118E9FF73003CF165 /* DNDTFirstViewController~ipad.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				05EDCE9218E9FF73003CF165 /* en */,
+			);
+			name = "DNDTFirstViewController~ipad.xib";
+			sourceTree = "<group>";
+		};
+		05EDCE9318E9FF73003CF165 /* DNDTFirstViewController~iphone.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				05EDCE9418E9FF73003CF165 /* en */,
+			);
+			name = "DNDTFirstViewController~iphone.xib";
+			sourceTree = "<group>";
+		};
+		05EDCE9518E9FF73003CF165 /* DNDTSecondViewController~ipad.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				05EDCE9618E9FF73003CF165 /* en */,
+			);
+			name = "DNDTSecondViewController~ipad.xib";
+			sourceTree = "<group>";
+		};
+		05EDCE9718E9FF73003CF165 /* DNDTSecondViewController~iphone.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				05EDCE9818E9FF73003CF165 /* en */,
+			);
+			name = "DNDTSecondViewController~iphone.xib";
+			sourceTree = "<group>";
+		};
+		05EDCE9918E9FF73003CF165 /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				05EDCE9A18E9FF73003CF165 /* en */,
 			);
 			name = InfoPlist.strings;
 			sourceTree = "<group>";
@@ -289,6 +483,10 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
+				HEADER_SEARCH_PATHS = (
+					.,
+					"$(inherited)",
+				);
 				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
@@ -320,6 +518,10 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
+				HEADER_SEARCH_PATHS = (
+					.,
+					"$(inherited)",
+				);
 				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
 				SDKROOT = iphoneos;
 				VALIDATE_PRODUCT = YES;
@@ -330,8 +532,6 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				DSTROOT = /tmp/SPDragNDrop.dst;
-				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = "SPDragNDrop/SPDragNDrop-Prefix.pch";
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
@@ -342,8 +542,6 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				DSTROOT = /tmp/SPDragNDrop.dst;
-				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = "SPDragNDrop/SPDragNDrop-Prefix.pch";
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
@@ -353,6 +551,7 @@
 		05EDCE4618E9F03E003CF165 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/DemoApp.app/DemoApp";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(SDKROOT)/Developer/Library/Frameworks",
 					"$(inherited)",
@@ -366,6 +565,7 @@
 				);
 				INFOPLIST_FILE = "SPDragNDropTests/SPDragNDropTests-Info.plist";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUNDLE_LOADER)";
 				WRAPPER_EXTENSION = xctest;
 			};
 			name = Debug;
@@ -373,6 +573,7 @@
 		05EDCE4718E9F03E003CF165 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/DemoApp.app/DemoApp";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(SDKROOT)/Developer/Library/Frameworks",
 					"$(inherited)",
@@ -382,7 +583,46 @@
 				GCC_PREFIX_HEADER = "SPDragNDrop/SPDragNDrop-Prefix.pch";
 				INFOPLIST_FILE = "SPDragNDropTests/SPDragNDropTests-Info.plist";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUNDLE_LOADER)";
 				WRAPPER_EXTENSION = xctest;
+			};
+			name = Release;
+		};
+		05EDCE8018E9FF23003CF165 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(DEVELOPER_FRAMEWORKS_DIR)",
+				);
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				INFOPLIST_FILE = "DemoApp/DemoApp-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TARGETED_DEVICE_FAMILY = 2;
+				WRAPPER_EXTENSION = app;
+			};
+			name = Debug;
+		};
+		05EDCE8118E9FF23003CF165 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(DEVELOPER_FRAMEWORKS_DIR)",
+				);
+				INFOPLIST_FILE = "DemoApp/DemoApp-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TARGETED_DEVICE_FAMILY = 2;
+				WRAPPER_EXTENSION = app;
 			};
 			name = Release;
 		};
@@ -405,6 +645,7 @@
 				05EDCE4418E9F03E003CF165 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		05EDCE4518E9F03E003CF165 /* Build configuration list for PBXNativeTarget "SPDragNDropTests" */ = {
 			isa = XCConfigurationList;
@@ -413,6 +654,16 @@
 				05EDCE4718E9F03E003CF165 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		05EDCE7F18E9FF23003CF165 /* Build configuration list for PBXNativeTarget "DemoApp" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				05EDCE8018E9FF23003CF165 /* Debug */,
+				05EDCE8118E9FF23003CF165 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
