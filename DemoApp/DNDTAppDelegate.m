@@ -18,13 +18,8 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
-    self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
-    
-    self.tabBarController = [[UITabBarController alloc] init];
-    self.tabBarController.viewControllers = @[[DNDTFirstViewController new], [DNDTSecondViewController new]];
-    
-    self.window.rootViewController = self.tabBarController;
-    [self.window makeKeyAndVisible];
+	self.tabBarController = (id)self.window.rootViewController;
+
     [[SPDragNDropController sharedController] createDraggingContainerInWindow:self.window];
     
     [[SPDragNDropController sharedController] registerDropTarget:self.tabBarController.tabBar delegate:self];
@@ -43,7 +38,7 @@
 }
 - (void)droppable:(UIView*)droppable springload:(id)modelObject atPoint:(CGPoint)p
 {
-    [self.tabBarController setSelectedIndex:abs(self.tabBarController.selectedIndex - 1)];
+    [self.tabBarController setSelectedIndex:(self.tabBarController.selectedIndex + 1) % 2];
 }
 
 - (UIView*)dragController:(SPDragNDropController*)dragndrop iconViewForModelObject:(id)modelObject getTitle:(NSString**)title getSubtitle:(NSString**)subtitle

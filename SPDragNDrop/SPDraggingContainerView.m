@@ -17,6 +17,7 @@
     self.userInteractionEnabled = NO;
     self.backgroundColor = [UIColor clearColor];
     self.opaque = NO;
+	self.layer.zPosition = 1000;
     
     [[NSNotificationCenter defaultCenter] addObserver:self
                                              selector:@selector(applicationDidChangeStatusBarOrientationNotification:) 
