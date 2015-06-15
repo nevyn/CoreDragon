@@ -1,0 +1,3 @@
+[submodule "Libraries/TCAsyncHashProto"]
+	path = Libraries/TCAsyncHashProto
+	url = https://github.com/nevyn/TCAsyncHashProtocol.git

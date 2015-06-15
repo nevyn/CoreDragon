@@ -23,6 +23,10 @@
 		059191181B2E7CE700AD5DE8 /* second@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 05EDCE9F18E9FF73003CF165 /* second@2x.png */; };
 		059191191B2E7CE700AD5DE8 /* testimage.png in Resources */ = {isa = PBXBuildFile; fileRef = 05EDCEA018E9FF73003CF165 /* testimage.png */; };
 		0591911A1B2E7CE700AD5DE8 /* dragndrop-add.png in Resources */ = {isa = PBXBuildFile; fileRef = 05AFEF2D18EA02D0002AACAA /* dragndrop-add.png */; };
+		059191331B2E870C00AD5DE8 /* TCAHPAsyncSocketTransport.m in Sources */ = {isa = PBXBuildFile; fileRef = 0591912A1B2E870C00AD5DE8 /* TCAHPAsyncSocketTransport.m */; };
+		059191341B2E870C00AD5DE8 /* AsyncSocket.m in Sources */ = {isa = PBXBuildFile; fileRef = 0591912C1B2E870C00AD5DE8 /* AsyncSocket.m */; };
+		059191361B2E870C00AD5DE8 /* TCAHPTransport.m in Sources */ = {isa = PBXBuildFile; fileRef = 059191301B2E870C00AD5DE8 /* TCAHPTransport.m */; };
+		059191371B2E870C00AD5DE8 /* TCAsyncHashProtocol.m in Sources */ = {isa = PBXBuildFile; fileRef = 059191321B2E870C00AD5DE8 /* TCAsyncHashProtocol.m */; };
 		05AFEF2E18EA02D0002AACAA /* dragndrop-add.png in Resources */ = {isa = PBXBuildFile; fileRef = 05AFEF2D18EA02D0002AACAA /* dragndrop-add.png */; };
 		05EDCE2318E9F03E003CF165 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 05EDCE2218E9F03E003CF165 /* Foundation.framework */; };
 		05EDCE3118E9F03E003CF165 /* XCTest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 05EDCE3018E9F03E003CF165 /* XCTest.framework */; };
@@ -82,6 +86,14 @@
 		059191071B2E764700AD5DE8 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		0591910A1B2E764700AD5DE8 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		0591910C1B2E764700AD5DE8 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		059191291B2E870C00AD5DE8 /* TCAHPAsyncSocketTransport.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TCAHPAsyncSocketTransport.h; sourceTree = "<group>"; };
+		0591912A1B2E870C00AD5DE8 /* TCAHPAsyncSocketTransport.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TCAHPAsyncSocketTransport.m; sourceTree = "<group>"; };
+		0591912B1B2E870C00AD5DE8 /* AsyncSocket.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AsyncSocket.h; path = TCAHPDemo/TCAHPDemo/AsyncSocket.h; sourceTree = "<group>"; };
+		0591912C1B2E870C00AD5DE8 /* AsyncSocket.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = AsyncSocket.m; path = TCAHPDemo/TCAHPDemo/AsyncSocket.m; sourceTree = "<group>"; };
+		0591912F1B2E870C00AD5DE8 /* TCAHPTransport.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TCAHPTransport.h; sourceTree = "<group>"; };
+		059191301B2E870C00AD5DE8 /* TCAHPTransport.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TCAHPTransport.m; sourceTree = "<group>"; };
+		059191311B2E870C00AD5DE8 /* TCAsyncHashProtocol.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TCAsyncHashProtocol.h; sourceTree = "<group>"; };
+		059191321B2E870C00AD5DE8 /* TCAsyncHashProtocol.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TCAsyncHashProtocol.m; sourceTree = "<group>"; };
 		05AFEF2D18EA02D0002AACAA /* dragndrop-add.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "dragndrop-add.png"; path = "Resources/dragndrop-add.png"; sourceTree = SOURCE_ROOT; };
 		05EDCE1F18E9F03E003CF165 /* libSPDragNDrop.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libSPDragNDrop.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		05EDCE2218E9F03E003CF165 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -180,6 +192,22 @@
 			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
+		0591911B1B2E856200AD5DE8 /* TCAsyncHashProto */ = {
+			isa = PBXGroup;
+			children = (
+				059191291B2E870C00AD5DE8 /* TCAHPAsyncSocketTransport.h */,
+				0591912A1B2E870C00AD5DE8 /* TCAHPAsyncSocketTransport.m */,
+				0591912B1B2E870C00AD5DE8 /* AsyncSocket.h */,
+				0591912C1B2E870C00AD5DE8 /* AsyncSocket.m */,
+				0591912F1B2E870C00AD5DE8 /* TCAHPTransport.h */,
+				059191301B2E870C00AD5DE8 /* TCAHPTransport.m */,
+				059191311B2E870C00AD5DE8 /* TCAsyncHashProtocol.h */,
+				059191321B2E870C00AD5DE8 /* TCAsyncHashProtocol.m */,
+			);
+			name = TCAsyncHashProto;
+			path = ../Libraries/TCAsyncHashProto;
+			sourceTree = "<group>";
+		};
 		05EDCE1618E9F03D003CF165 = {
 			isa = PBXGroup;
 			children = (
@@ -244,6 +272,7 @@
 				05EDCE4F18E9F072003CF165 /* SPDragProxyView.m */,
 				05EDCE5018E9F072003CF165 /* SPDropHighlightView.h */,
 				05EDCE5118E9F072003CF165 /* SPDropHighlightView.m */,
+				0591911B1B2E856200AD5DE8 /* TCAsyncHashProto */,
 			);
 			path = SPDragNDrop;
 			sourceTree = "<group>";
@@ -441,9 +470,13 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				059191361B2E870C00AD5DE8 /* TCAHPTransport.m in Sources */,
 				05EDCE5318E9F072003CF165 /* SPDragNDropController.m in Sources */,
+				059191331B2E870C00AD5DE8 /* TCAHPAsyncSocketTransport.m in Sources */,
 				05EDCE5218E9F072003CF165 /* SPDraggingContainerView.m in Sources */,
+				059191341B2E870C00AD5DE8 /* AsyncSocket.m in Sources */,
 				05EDCE5418E9F072003CF165 /* SPDragProxyView.m in Sources */,
+				059191371B2E870C00AD5DE8 /* TCAsyncHashProtocol.m in Sources */,
 				05EDCE5518E9F072003CF165 /* SPDropHighlightView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -704,6 +737,7 @@
 				);
 				INFOPLIST_FILE = "DemoApp/DemoApp-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TARGETED_DEVICE_FAMILY = 2;
 				WRAPPER_EXTENSION = app;
@@ -721,6 +755,7 @@
 				);
 				INFOPLIST_FILE = "DemoApp/DemoApp-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TARGETED_DEVICE_FAMILY = 2;
 				WRAPPER_EXTENSION = app;
