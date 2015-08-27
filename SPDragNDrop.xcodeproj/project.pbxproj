@@ -23,11 +23,15 @@
 		059191181B2E7CE700AD5DE8 /* second@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 05EDCE9F18E9FF73003CF165 /* second@2x.png */; };
 		059191191B2E7CE700AD5DE8 /* testimage.png in Resources */ = {isa = PBXBuildFile; fileRef = 05EDCEA018E9FF73003CF165 /* testimage.png */; };
 		0591911A1B2E7CE700AD5DE8 /* dragndrop-add.png in Resources */ = {isa = PBXBuildFile; fileRef = 05AFEF2D18EA02D0002AACAA /* dragndrop-add.png */; };
-		059191331B2E870C00AD5DE8 /* TCAHPAsyncSocketTransport.m in Sources */ = {isa = PBXBuildFile; fileRef = 0591912A1B2E870C00AD5DE8 /* TCAHPAsyncSocketTransport.m */; };
-		059191341B2E870C00AD5DE8 /* AsyncSocket.m in Sources */ = {isa = PBXBuildFile; fileRef = 0591912C1B2E870C00AD5DE8 /* AsyncSocket.m */; };
-		059191361B2E870C00AD5DE8 /* TCAHPTransport.m in Sources */ = {isa = PBXBuildFile; fileRef = 059191301B2E870C00AD5DE8 /* TCAHPTransport.m */; };
-		059191371B2E870C00AD5DE8 /* TCAsyncHashProtocol.m in Sources */ = {isa = PBXBuildFile; fileRef = 059191321B2E870C00AD5DE8 /* TCAsyncHashProtocol.m */; };
 		05AFEF2E18EA02D0002AACAA /* dragndrop-add.png in Resources */ = {isa = PBXBuildFile; fileRef = 05AFEF2D18EA02D0002AACAA /* dragndrop-add.png */; };
+		05B92CF01B8E911C00226846 /* CerfingConnection.m in Sources */ = {isa = PBXBuildFile; fileRef = 05B92CB51B8E8D7B00226846 /* CerfingConnection.m */; };
+		05B92CF11B8E911C00226846 /* CerfingSerializer.m in Sources */ = {isa = PBXBuildFile; fileRef = 05B92CB71B8E8D7B00226846 /* CerfingSerializer.m */; };
+		05B92CF21B8E911C00226846 /* CerfingTransport.m in Sources */ = {isa = PBXBuildFile; fileRef = 05B92CC41B8E8D7B00226846 /* CerfingTransport.m */; };
+		05B92CF31B8E911C00226846 /* CerfingMeshPipe.m in Sources */ = {isa = PBXBuildFile; fileRef = 05B92CD61B8E8D7B00226846 /* CerfingMeshPipe.m */; };
+		05B92CF41B8E911C00226846 /* CerfingMeshPipeTransport.m in Sources */ = {isa = PBXBuildFile; fileRef = 05B92CD81B8E8D7B00226846 /* CerfingMeshPipeTransport.m */; };
+		05B92CF51B8E911C00226846 /* AsyncUdpSocket.m in Sources */ = {isa = PBXBuildFile; fileRef = 05B92CDD1B8E8D7B00226846 /* AsyncUdpSocket.m */; };
+		05B92CF61B8E911C00226846 /* GZIP.m in Sources */ = {isa = PBXBuildFile; fileRef = 05B92CDF1B8E8D7B00226846 /* GZIP.m */; };
+		05B92CF71B8E911C00226846 /* MeshPipe.m in Sources */ = {isa = PBXBuildFile; fileRef = 05B92CE21B8E8D7B00226846 /* MeshPipe.m */; };
 		05EDCE2318E9F03E003CF165 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 05EDCE2218E9F03E003CF165 /* Foundation.framework */; };
 		05EDCE3118E9F03E003CF165 /* XCTest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 05EDCE3018E9F03E003CF165 /* XCTest.framework */; };
 		05EDCE3218E9F03E003CF165 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 05EDCE2218E9F03E003CF165 /* Foundation.framework */; };
@@ -86,15 +90,23 @@
 		059191071B2E764700AD5DE8 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		0591910A1B2E764700AD5DE8 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		0591910C1B2E764700AD5DE8 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		059191291B2E870C00AD5DE8 /* TCAHPAsyncSocketTransport.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TCAHPAsyncSocketTransport.h; sourceTree = "<group>"; };
-		0591912A1B2E870C00AD5DE8 /* TCAHPAsyncSocketTransport.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TCAHPAsyncSocketTransport.m; sourceTree = "<group>"; };
-		0591912B1B2E870C00AD5DE8 /* AsyncSocket.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AsyncSocket.h; path = TCAHPDemo/TCAHPDemo/AsyncSocket.h; sourceTree = "<group>"; };
-		0591912C1B2E870C00AD5DE8 /* AsyncSocket.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = AsyncSocket.m; path = TCAHPDemo/TCAHPDemo/AsyncSocket.m; sourceTree = "<group>"; };
-		0591912F1B2E870C00AD5DE8 /* TCAHPTransport.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TCAHPTransport.h; sourceTree = "<group>"; };
-		059191301B2E870C00AD5DE8 /* TCAHPTransport.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TCAHPTransport.m; sourceTree = "<group>"; };
-		059191311B2E870C00AD5DE8 /* TCAsyncHashProtocol.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TCAsyncHashProtocol.h; sourceTree = "<group>"; };
-		059191321B2E870C00AD5DE8 /* TCAsyncHashProtocol.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TCAsyncHashProtocol.m; sourceTree = "<group>"; };
 		05AFEF2D18EA02D0002AACAA /* dragndrop-add.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "dragndrop-add.png"; path = "Resources/dragndrop-add.png"; sourceTree = SOURCE_ROOT; };
+		05B92CB41B8E8D7B00226846 /* CerfingConnection.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CerfingConnection.h; sourceTree = "<group>"; };
+		05B92CB51B8E8D7B00226846 /* CerfingConnection.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CerfingConnection.m; sourceTree = "<group>"; };
+		05B92CB61B8E8D7B00226846 /* CerfingSerializer.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CerfingSerializer.h; sourceTree = "<group>"; };
+		05B92CB71B8E8D7B00226846 /* CerfingSerializer.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CerfingSerializer.m; sourceTree = "<group>"; };
+		05B92CC31B8E8D7B00226846 /* CerfingTransport.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CerfingTransport.h; sourceTree = "<group>"; };
+		05B92CC41B8E8D7B00226846 /* CerfingTransport.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CerfingTransport.m; sourceTree = "<group>"; };
+		05B92CD51B8E8D7B00226846 /* CerfingMeshPipe.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CerfingMeshPipe.h; sourceTree = "<group>"; };
+		05B92CD61B8E8D7B00226846 /* CerfingMeshPipe.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CerfingMeshPipe.m; sourceTree = "<group>"; };
+		05B92CD71B8E8D7B00226846 /* CerfingMeshPipeTransport.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CerfingMeshPipeTransport.h; sourceTree = "<group>"; };
+		05B92CD81B8E8D7B00226846 /* CerfingMeshPipeTransport.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CerfingMeshPipeTransport.m; sourceTree = "<group>"; };
+		05B92CDC1B8E8D7B00226846 /* AsyncUdpSocket.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AsyncUdpSocket.h; sourceTree = "<group>"; };
+		05B92CDD1B8E8D7B00226846 /* AsyncUdpSocket.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AsyncUdpSocket.m; sourceTree = "<group>"; };
+		05B92CDE1B8E8D7B00226846 /* GZIP.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GZIP.h; sourceTree = "<group>"; };
+		05B92CDF1B8E8D7B00226846 /* GZIP.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = GZIP.m; sourceTree = "<group>"; };
+		05B92CE11B8E8D7B00226846 /* MeshPipe.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MeshPipe.h; sourceTree = "<group>"; };
+		05B92CE21B8E8D7B00226846 /* MeshPipe.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MeshPipe.m; sourceTree = "<group>"; };
 		05EDCE1F18E9F03E003CF165 /* libSPDragNDrop.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libSPDragNDrop.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		05EDCE2218E9F03E003CF165 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		05EDCE2F18E9F03E003CF165 /* SPDragNDropTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SPDragNDropTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -192,20 +204,68 @@
 			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
-		0591911B1B2E856200AD5DE8 /* TCAsyncHashProto */ = {
+		05B92CB21B8E8D7B00226846 /* Cerfing */ = {
 			isa = PBXGroup;
 			children = (
-				059191291B2E870C00AD5DE8 /* TCAHPAsyncSocketTransport.h */,
-				0591912A1B2E870C00AD5DE8 /* TCAHPAsyncSocketTransport.m */,
-				0591912B1B2E870C00AD5DE8 /* AsyncSocket.h */,
-				0591912C1B2E870C00AD5DE8 /* AsyncSocket.m */,
-				0591912F1B2E870C00AD5DE8 /* TCAHPTransport.h */,
-				059191301B2E870C00AD5DE8 /* TCAHPTransport.m */,
-				059191311B2E870C00AD5DE8 /* TCAsyncHashProtocol.h */,
-				059191321B2E870C00AD5DE8 /* TCAsyncHashProtocol.m */,
+				05B92CB31B8E8D7B00226846 /* Cerfing */,
 			);
-			name = TCAsyncHashProto;
-			path = ../Libraries/TCAsyncHashProto;
+			name = Cerfing;
+			path = Libraries/Cerfing;
+			sourceTree = "<group>";
+		};
+		05B92CB31B8E8D7B00226846 /* Cerfing */ = {
+			isa = PBXGroup;
+			children = (
+				05B92CB41B8E8D7B00226846 /* CerfingConnection.h */,
+				05B92CB51B8E8D7B00226846 /* CerfingConnection.m */,
+				05B92CB61B8E8D7B00226846 /* CerfingSerializer.h */,
+				05B92CB71B8E8D7B00226846 /* CerfingSerializer.m */,
+				05B92CBD1B8E8D7B00226846 /* Transports */,
+			);
+			path = Cerfing;
+			sourceTree = "<group>";
+		};
+		05B92CBD1B8E8D7B00226846 /* Transports */ = {
+			isa = PBXGroup;
+			children = (
+				05B92CC31B8E8D7B00226846 /* CerfingTransport.h */,
+				05B92CC41B8E8D7B00226846 /* CerfingTransport.m */,
+			);
+			path = Transports;
+			sourceTree = "<group>";
+		};
+		05B92CD31B8E8D7B00226846 /* MeshPipe */ = {
+			isa = PBXGroup;
+			children = (
+				05B92CD41B8E8D7B00226846 /* CerfingMeshPipeTransport */,
+				05B92CDB1B8E8D7B00226846 /* MeshPipe */,
+			);
+			name = MeshPipe;
+			path = Libraries/MeshPipe;
+			sourceTree = "<group>";
+		};
+		05B92CD41B8E8D7B00226846 /* CerfingMeshPipeTransport */ = {
+			isa = PBXGroup;
+			children = (
+				05B92CD51B8E8D7B00226846 /* CerfingMeshPipe.h */,
+				05B92CD61B8E8D7B00226846 /* CerfingMeshPipe.m */,
+				05B92CD71B8E8D7B00226846 /* CerfingMeshPipeTransport.h */,
+				05B92CD81B8E8D7B00226846 /* CerfingMeshPipeTransport.m */,
+			);
+			path = CerfingMeshPipeTransport;
+			sourceTree = "<group>";
+		};
+		05B92CDB1B8E8D7B00226846 /* MeshPipe */ = {
+			isa = PBXGroup;
+			children = (
+				05B92CDC1B8E8D7B00226846 /* AsyncUdpSocket.h */,
+				05B92CDD1B8E8D7B00226846 /* AsyncUdpSocket.m */,
+				05B92CDE1B8E8D7B00226846 /* GZIP.h */,
+				05B92CDF1B8E8D7B00226846 /* GZIP.m */,
+				05B92CE11B8E8D7B00226846 /* MeshPipe.h */,
+				05B92CE21B8E8D7B00226846 /* MeshPipe.m */,
+			);
+			path = MeshPipe;
 			sourceTree = "<group>";
 		};
 		05EDCE1618E9F03D003CF165 = {
@@ -234,6 +294,8 @@
 		05EDCE2118E9F03E003CF165 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				05B92CB21B8E8D7B00226846 /* Cerfing */,
+				05B92CD31B8E8D7B00226846 /* MeshPipe */,
 				05EDCE2218E9F03E003CF165 /* Foundation.framework */,
 				05EDCE3018E9F03E003CF165 /* XCTest.framework */,
 				05EDCE3318E9F03E003CF165 /* UIKit.framework */,
@@ -272,7 +334,6 @@
 				05EDCE4F18E9F072003CF165 /* SPDragProxyView.m */,
 				05EDCE5018E9F072003CF165 /* SPDropHighlightView.h */,
 				05EDCE5118E9F072003CF165 /* SPDropHighlightView.m */,
-				0591911B1B2E856200AD5DE8 /* TCAsyncHashProto */,
 			);
 			path = SPDragNDrop;
 			sourceTree = "<group>";
@@ -470,14 +531,18 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				059191361B2E870C00AD5DE8 /* TCAHPTransport.m in Sources */,
+				05B92CF61B8E911C00226846 /* GZIP.m in Sources */,
+				05B92CF11B8E911C00226846 /* CerfingSerializer.m in Sources */,
+				05B92CF51B8E911C00226846 /* AsyncUdpSocket.m in Sources */,
 				05EDCE5318E9F072003CF165 /* SPDragNDropController.m in Sources */,
-				059191331B2E870C00AD5DE8 /* TCAHPAsyncSocketTransport.m in Sources */,
+				05B92CF71B8E911C00226846 /* MeshPipe.m in Sources */,
 				05EDCE5218E9F072003CF165 /* SPDraggingContainerView.m in Sources */,
-				059191341B2E870C00AD5DE8 /* AsyncSocket.m in Sources */,
+				05B92CF41B8E911C00226846 /* CerfingMeshPipeTransport.m in Sources */,
+				05B92CF01B8E911C00226846 /* CerfingConnection.m in Sources */,
 				05EDCE5418E9F072003CF165 /* SPDragProxyView.m in Sources */,
-				059191371B2E870C00AD5DE8 /* TCAsyncHashProtocol.m in Sources */,
+				05B92CF31B8E911C00226846 /* CerfingMeshPipe.m in Sources */,
 				05EDCE5518E9F072003CF165 /* SPDropHighlightView.m in Sources */,
+				05B92CF21B8E911C00226846 /* CerfingTransport.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -666,6 +731,11 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				DSTROOT = /tmp/SPDragNDrop.dst;
+				HEADER_SEARCH_PATHS = (
+					Libraries/MeshPipe,
+					Libraries/Cerfing,
+					"$(inherited)",
+				);
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
@@ -676,6 +746,11 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				DSTROOT = /tmp/SPDragNDrop.dst;
+				HEADER_SEARCH_PATHS = (
+					Libraries/MeshPipe,
+					Libraries/Cerfing,
+					"$(inherited)",
+				);
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
@@ -772,6 +847,7 @@
 				0591910F1B2E764700AD5DE8 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		05EDCE1A18E9F03D003CF165 /* Build configuration list for PBXProject "SPDragNDrop" */ = {
 			isa = XCConfigurationList;
