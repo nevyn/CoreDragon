@@ -71,6 +71,9 @@ static const NSTimeInterval kSpringloadDelay = 1.3;
 	
 	_cerfing = [[CerfingMeshPipe alloc] initWithBasePort:23576 count:16 peerName:appName];
 	_cerfing.delegate = self;
+	_cerfing.connectionConfigurator = ^(CerfingConnection *connection) {
+		connection.serializer = [CerfingSerializer keyedArchiverSerializerWithSecureCoding:NO];
+	};
     
     return self;
 }
@@ -182,7 +185,10 @@ static UIImage *screenshotForView(UIView *view)
 
 - (void)startDraggingWithInitiator:(UIView*)initiator event:(UIGestureRecognizer*)grec
 {
-    NSAssert(_state == nil, @"Drag operation is already started");
+	if(_state != nil) {
+		[self finishDragging];
+	}
+	
     id<SPDragDelegate> delegate = objc_getAssociatedObject(initiator, kDragSourceDelegateKey);
     id modelObject = [delegate modelObjectForDraggable:initiator];
 
@@ -212,6 +218,7 @@ static UIImage *screenshotForView(UIView *view)
 		@"state": @{
 			@"title": title ?: @"",
 			@"subtitle": subtitle ?: @"",
+			@"modelObject": modelObject,
 		},
 		@"anchorPoint": NSStringFromCGPoint(anchorPoint),
 		@"initialLocation": NSStringFromCGPoint(initialLocation),
@@ -225,6 +232,7 @@ static UIImage *screenshotForView(UIView *view)
 
 	state.title = [stateD[@"title"] length] > 0 ? stateD[@"title"] : nil;
 	state.subtitle = [stateD[@"subtitle"] length] > 0 ? stateD[@"subtitle"] : nil;
+	state.modelObject = stateD[@"modelObject"];
 	
 	[self startDraggingWithState:state anchorPoint:CGPointFromString(msg[@"anchorPoint"]) initialLocation:CGPointFromString(msg[@"initialLocation"])];
 }
@@ -473,11 +481,6 @@ static UIImage *screenshotForView(UIView *view)
 @end
 
 @implementation SPDraggingState
-- (id)modelObject
-{
-    return [self.dragDelegate modelObjectForDraggable:self.dragInitiator];
-}
-
 - (id<SPDragDelegate>)dragDelegate
 {
     return objc_getAssociatedObject(self.dragInitiator, kDragSourceDelegateKey);

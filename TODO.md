@@ -1,2 +1,5 @@
+- [ ] Use a top-layer root window instead of 'dragging container'
 - [ ] Change API to use UTIs and promises
 - [ ] Have client app ask server app for modelObject on demand instead of up front
+- [ ] Establish a TCP connection to do the transfer of the modelObject (so that it can be big)
+- [ ] If drop target doesn't accept drop, don't send the drop to it when dragging ends!
