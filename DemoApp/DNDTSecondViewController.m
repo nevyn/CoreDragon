@@ -38,6 +38,18 @@
     [[SPDragNDropController sharedController] registerDropTarget:label2 delegate:self];
 }
 
+- (void)viewDidAppear:(BOOL)animated
+{
+	[super viewDidAppear:animated];
+	UIWindow *w = [[UIApplication sharedApplication] keyWindow];
+	NSLog(@"Main screen bounds %@", NSStringFromCGRect([[UIScreen mainScreen] bounds]));
+	NSLog(@"Main cspace bounds %@", NSStringFromCGRect([[[UIScreen mainScreen] coordinateSpace] bounds]));
+	NSLog(@"Main native cspace bounds %@", NSStringFromCGRect([[[UIScreen mainScreen] fixedCoordinateSpace] bounds]));
+	NSLog(@"Main window bounds %@", NSStringFromCGRect([w bounds]));
+	NSLog(@"Main window bounds %@", NSStringFromCGPoint([w convertPoint:CGPointZero toWindow:nil]));
+	NSLog(@"Status bar frame %@", NSStringFromCGRect([[UIApplication sharedApplication] statusBarFrame]));
+}
+
 - (void)didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];
