@@ -1,8 +1,15 @@
 SPDragNDrop
 ===========
-Joachim Bengtsson <joachimb@gmail.com>
+Nevyn Bengtsson <nevyn.jpg@gmail.com>
 
 SPDragNDrop is a Hackweek experiment written by me during the December 2012 Hackweek at Spotify. Since I really love the idea and would hate for the code+idea to just rot away, Spotify's letting me release the code under Apache 2.0 before my employment there ends.
+
+Progress in Modern Times
+------------------------
+
+This project is many years old, but I'm resurrecting it in order to bring iPad split-screen cross-app drag and drop to the world! Progress:
+
+* 20150831: [first cross-app drag and drop](https://lookback.io/watch/gFRLes3mS5CWRYqNN)
 
 Background
 ----------
