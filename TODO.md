@@ -1,0 +1,2 @@
+- [ ] Change API to use UTIs and promises
+- [ ] Have client app ask server app for modelObject on demand instead of up front

@@ -4,6 +4,7 @@
 #import "SPDropHighlightView.h"
 #import "SPDraggingContainerView.h"
 #import "SPDragProxyView.h"
+#import <CerfingMeshPipeTransport/CerfingMeshPipe.h>
 
 @class SPDropTarget;
 
@@ -12,6 +13,14 @@ static const void *kDropTargetKey = &kDropTargetKey;
 static const NSTimeInterval kSpringloadDelay = 1.3;
 
 @interface SPDraggingState : NSObject
+// Initial, transferrable state
+@property(nonatomic,retain) UIImage *screenshot;
+@property(nonatomic,copy) NSString *title;
+@property(nonatomic,copy) NSString *subtitle;
+@property(nonatomic,retain) UIView *proxyIcon;
+@property(nonatomic,retain) id modelObject;
+
+// During-drag state
 @property(nonatomic,retain) UIView *dragInitiator; // the thing that was long-pressed
 @property(nonatomic,retain) UIView *proxyView; // thing under finger
 @property(nonatomic,retain) NSArray *activeDropTargets;
@@ -29,8 +38,10 @@ static const NSTimeInterval kSpringloadDelay = 1.3;
 - (BOOL)canDrop:(id)modelObject;
 @end
 
-@interface SPDragNDropController () <UIGestureRecognizerDelegate> {
+@interface SPDragNDropController () <UIGestureRecognizerDelegate, CerfingConnectionDelegate>
+{
     NSMutableSet *_dropTargets;
+	CerfingMeshPipe *_cerfing;
 }
 @property(nonatomic,retain) SPDraggingState *state;
 @property(nonatomic,retain) UILongPressGestureRecognizer *longPressGrec;
@@ -53,6 +64,13 @@ static const NSTimeInterval kSpringloadDelay = 1.3;
         return nil;
     
     _dropTargets = [NSMutableSet new];
+	
+	NSString *appName = [[NSBundle mainBundle] objectForInfoDictionaryKey:@"CFBundleDisplayName"] ?:
+						[[NSBundle mainBundle] objectForInfoDictionaryKey:@"CFBundleName"] ?:
+						[[NSProcessInfo processInfo] processName];
+	
+	_cerfing = [[CerfingMeshPipe alloc] initWithBasePort:23576 count:16 peerName:appName];
+	_cerfing.delegate = self;
     
     return self;
 }
@@ -62,6 +80,8 @@ static const NSTimeInterval kSpringloadDelay = 1.3;
     [self.draggingContainer removeFromSuperview];
     self.draggingContainer = nil; // also uninstalls grec
 }
+
+#pragma mark - Dragging container
 
 - (void)setDraggingContainer:(UIView *)draggingContainer
 {
@@ -82,6 +102,8 @@ static const NSTimeInterval kSpringloadDelay = 1.3;
     self.draggingContainer = container;
 }
 
+#pragma mark - Registration
+
 - (void)registerDragSource:(UIView *)draggable delegate:(id<SPDragDelegate>)delegate
 {
     objc_setAssociatedObject(draggable, kDragSourceDelegateKey, delegate, OBJC_ASSOCIATION_ASSIGN);
@@ -99,9 +121,7 @@ static const NSTimeInterval kSpringloadDelay = 1.3;
     
     
     if(_state) {
-        id<SPDragDelegate> delegate = objc_getAssociatedObject(_state.dragInitiator, kDragSourceDelegateKey);
-        id modelObject = [delegate modelObjectForDraggable:_state.dragInitiator];
-        if([target.delegate droppable:target.view canAcceptModelObject:modelObject]) {
+        if([target.delegate droppable:target.view canAcceptModelObject:_state.modelObject]) {
             _state.activeDropTargets = [_state.activeDropTargets arrayByAddingObject:target];
             [self highlightDropTargets];
         }
@@ -120,6 +140,20 @@ static const NSTimeInterval kSpringloadDelay = 1.3;
     }
 }
 
+static UIImage *screenshotForView(UIView *view)
+{
+    CGSize sz = view.frame.size;
+    
+    UIGraphicsBeginImageContextWithOptions(sz, YES, UIScreen.mainScreen.scale);
+    
+    [view.layer renderInContext:UIGraphicsGetCurrentContext()];
+    UIImage *screenShot = UIGraphicsGetImageFromCurrentImageContext();
+    UIGraphicsEndImageContext();
+    return screenShot;
+}
+
+#pragma mark - Gesture recognition, network and state handling
+
 - (BOOL)gestureRecognizerShouldBegin:(UIGestureRecognizer *)grec
 {
     return [self sourceUnderFinger:grec] != nil;
@@ -136,73 +170,113 @@ static const NSTimeInterval kSpringloadDelay = 1.3;
         UIView *initiator = [self sourceUnderFinger:grec];
         [self startDraggingWithInitiator:initiator event:grec];
     } else if(grec.state == UIGestureRecognizerStateChanged) {
-        [self continueDragging:grec];
+        [self continueDraggingFromGesture:[grec locationInView:_draggingContainer]];
     } else if(grec.state == UIGestureRecognizerStateEnded) {
-        [self concludeDragging];
+        [self concludeDraggingFromGesture];
     } else if(grec.state == UIGestureRecognizerStateCancelled) {
         [self cancelDragging];
     }
 }
 
-static UIImage *screenshotForView(UIView *view)
-{
-    CGSize sz = view.frame.size;
-    
-    UIGraphicsBeginImageContextWithOptions(sz, YES, UIScreen.mainScreen.scale);
-    
-    [view.layer renderInContext:UIGraphicsGetCurrentContext()];
-    UIImage *screenShot = UIGraphicsGetImageFromCurrentImageContext();
-    UIGraphicsEndImageContext();
-    return screenShot;
-}
+#pragma mark Start dragging
 
-
-// Setup all dragging related state
 - (void)startDraggingWithInitiator:(UIView*)initiator event:(UIGestureRecognizer*)grec
 {
     NSAssert(_state == nil, @"Drag operation is already started");
     id<SPDragDelegate> delegate = objc_getAssociatedObject(initiator, kDragSourceDelegateKey);
     id modelObject = [delegate modelObjectForDraggable:initiator];
 
-    self.state = [SPDraggingState new];
-    _state.dragInitiator = initiator;
+    SPDraggingState *state = [SPDraggingState new];
+	state.modelObject = modelObject;
+    state.dragInitiator = initiator;
     
     NSString *title = nil, *subtitle = nil;
-    UIView *proxyIcon = [self.proxyIconDelegate dragController:self iconViewForModelObject:modelObject getTitle:&title getSubtitle:&subtitle];
-    UIView *proxyView = nil;
-    
-    if(proxyIcon) {
-        proxyView = [[SPDragProxyView alloc] initWithIconView:proxyIcon title:title subtitle:subtitle];
+    state.proxyIcon = [self.proxyIconDelegate dragController:self iconViewForModelObject:modelObject getTitle:&title getSubtitle:&subtitle];
+	state.title = title;
+	state.subtitle = subtitle;
+	if(!state.proxyIcon)
+		state.screenshot = screenshotForView(initiator);
+	
+	CGPoint hitInView = [grec locationInView:initiator];
+	CGPoint anchorPoint = CGPointMake(
+		hitInView.x/initiator.frame.size.width,
+		hitInView.y/initiator.frame.size.height
+	);
+	
+	CGPoint initialLocation = [grec locationInView:initiator];
+	
+	[self startDraggingWithState:state anchorPoint:anchorPoint initialLocation:initialLocation];
+	
+	[_cerfing broadcastDict:@{
+		kCerfingCommand: @"startDragging",
+		@"state": @{
+			@"title": title ?: @"",
+			@"subtitle": subtitle ?: @"",
+		},
+		@"anchorPoint": NSStringFromCGPoint(anchorPoint),
+		@"initialLocation": NSStringFromCGPoint(initialLocation),
+	}];
+}
+
+- (void)command:(CerfingConnection*)connection startDragging:(NSDictionary*)msg
+{
+	NSDictionary *stateD = msg[@"state"];
+    SPDraggingState *state = [SPDraggingState new];
+
+	state.title = [stateD[@"title"] length] > 0 ? stateD[@"title"] : nil;
+	state.subtitle = [stateD[@"subtitle"] length] > 0 ? stateD[@"subtitle"] : nil;
+	
+	[self startDraggingWithState:state anchorPoint:CGPointFromString(msg[@"anchorPoint"]) initialLocation:CGPointFromString(msg[@"initialLocation"])];
+}
+
+- (void)startDraggingWithState:(SPDraggingState*)state anchorPoint:(CGPoint)anchorPoint initialLocation:(CGPoint)location
+{
+	self.state = state;
+	
+    if(state.proxyIcon || !state.screenshot) {
+        state.proxyView = [[SPDragProxyView alloc] initWithIconView:state.proxyIcon title:state.title subtitle:state.subtitle];
     } else {
-        proxyView = [[UIImageView alloc] initWithImage:screenshotForView(initiator)];
+        state.proxyView = [[UIImageView alloc] initWithImage:state.screenshot];
     }
-    
-    _state.proxyView = proxyView;
-    proxyView.alpha = 0;
+	
+
+    state.proxyView.alpha = 0;
     [UIView animateWithDuration:.2 animations:^{
-        proxyView.alpha = proxyIcon ? 1 : 0.5;
+        state.proxyView.alpha = state.proxyIcon ? 1 : 0.5;
     }];
-    [_draggingContainer addSubview:proxyView];
+    [_draggingContainer addSubview:state.proxyView];
     
-    if(!proxyIcon) { // it's just a screenshot, position it correctly
-        CGPoint hitInView = [grec locationInView:initiator];
-        proxyView.layer.anchorPoint = CGPointMake(
-            hitInView.x/initiator.frame.size.width,
-            hitInView.y/initiator.frame.size.height
-        );
+    if(!state.proxyIcon) { // it's just a screenshot, position it correctly
+        state.proxyView.layer.anchorPoint = anchorPoint;
     }
-    proxyView.layer.position = [grec locationInView:_draggingContainer];
+    state.proxyView.layer.position = location;
     
     _state.activeDropTargets = [_dropTargets.allObjects filteredArrayUsingPredicate:[NSPredicate predicateWithBlock:^(SPDropTarget *target, NSDictionary *bindings) {
-        return [target.delegate droppable:target.view canAcceptModelObject:modelObject];
+        return [target.delegate droppable:target.view canAcceptModelObject:state.modelObject];
 	}]];
-    
+	
     [self highlightDropTargets];
 }
 
-- (void)continueDragging:(UIGestureRecognizer*)grec
+#pragma mark Continue dragging
+
+- (void)continueDraggingFromGesture:(CGPoint)position
 {
-    _state.proxyView.layer.position = [grec locationInView:_draggingContainer];
+	[_cerfing broadcastDict:@{
+		kCerfingCommand: @"continueDragging",
+		@"position": NSStringFromCGPoint(position),
+	}];
+	[self _continueDragging:position];
+}
+
+- (void)command:(CerfingConnection*)connection continueDragging:(NSDictionary*)msg
+{
+	[self _continueDragging:CGPointFromString(msg[@"position"])];
+}
+
+- (void)_continueDragging:(CGPoint)position
+{
+    _state.proxyView.layer.position = position;
     
     SPDropTarget *previousTarget = _state.hoveringTarget;
     _state.hoveringTarget = [self targetUnderFinger];
@@ -228,21 +302,37 @@ static UIImage *screenshotForView(UIView *view)
     }
 }
 
-- (void)concludeDragging
-{
-    id<SPDragDelegate> delegate = objc_getAssociatedObject(_state.dragInitiator, kDragSourceDelegateKey);
-    id modelObject = [delegate modelObjectForDraggable:_state.dragInitiator];
+#pragma mark Conclude dragging
 
+- (void)concludeDraggingFromGesture
+{
+	[_cerfing broadcastDict:@{
+		kCerfingCommand: @"concludeDragging",
+	}];
+	[self _concludeDragging];
+}
+- (void)command:(CerfingConnection*)conn concludeDragging:(NSDictionary*)dict
+{
+	[self _concludeDragging];
+}
+- (void)_concludeDragging
+{
+	// Another app will take care of the proper drag conclusion?
+	if(![self _draggingIsWithinMyApp]) {
+		[self finishDragging];
+		return;
+	}
+	
     SPDropTarget *targetThatWasHit = [self targetUnderFinger];
     
-    if (![targetThatWasHit canDrop:modelObject]) {
+    if (![targetThatWasHit canDrop:_state.modelObject]) {
         [self cancelDragging];
         return;
     }
     
     CGPoint locationInWindow = _state.proxyView.layer.position;
     CGPoint p = [targetThatWasHit.view convertPoint:locationInWindow fromView:_state.proxyView.superview];
-    [targetThatWasHit.delegate droppable:targetThatWasHit.view acceptDrop:modelObject atPoint:p];
+    [targetThatWasHit.delegate droppable:targetThatWasHit.view acceptDrop:_state.modelObject atPoint:p];
     
     __block int count = 0;
     dispatch_block_t completion = ^{
@@ -256,8 +346,21 @@ static UIImage *screenshotForView(UIView *view)
     } completion:(id)completion];
 }
 
+#pragma mark Cancel dragging
+
 // Animate indicating that the drag failed
 - (void)cancelDragging
+{
+	[_cerfing broadcastDict:@{
+		kCerfingCommand: @"cancelDragging",
+	}];
+	[self _cancelDragging];
+}
+- (void)command:(CerfingConnection*)connection cancelDragging:(NSDictionary*)dict
+{
+	[self _cancelDragging];
+}
+- (void)_cancelDragging
 {
     [self stopHighlightingDropTargets];
     [UIView animateWithDuration:.5 animations:^{
@@ -268,6 +371,8 @@ static UIImage *screenshotForView(UIView *view)
     }];
 }
 
+#pragma mark Util - Finish dragging
+
 // Tear down and reset all dragging related state
 - (void)finishDragging
 {
@@ -276,6 +381,10 @@ static UIImage *screenshotForView(UIView *view)
     [self stopHighlightingDropTargets];
     self.state = nil;
 }
+
+
+
+#pragma mark - Drawing
 
 - (void)highlightDropTargets
 {
@@ -308,6 +417,8 @@ static UIImage *screenshotForView(UIView *view)
         }];
     }
 }
+
+#pragma mark - Etc
 
 - (void)springload
 {
@@ -351,6 +462,12 @@ static UIImage *screenshotForView(UIView *view)
     } while(view && view != _draggingContainer);
 
     return target;
+}
+
+- (BOOL)_draggingIsWithinMyApp
+{
+	#warning TODO
+	return YES;
 }
 
 @end

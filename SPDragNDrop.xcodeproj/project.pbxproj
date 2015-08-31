@@ -90,6 +90,7 @@
 		059191071B2E764700AD5DE8 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		0591910A1B2E764700AD5DE8 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		0591910C1B2E764700AD5DE8 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		05A3BA111B9371930014780A /* TODO.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = TODO.md; sourceTree = SOURCE_ROOT; };
 		05AFEF2D18EA02D0002AACAA /* dragndrop-add.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "dragndrop-add.png"; path = "Resources/dragndrop-add.png"; sourceTree = SOURCE_ROOT; };
 		05B92CB41B8E8D7B00226846 /* CerfingConnection.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CerfingConnection.h; sourceTree = "<group>"; };
 		05B92CB51B8E8D7B00226846 /* CerfingConnection.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CerfingConnection.m; sourceTree = "<group>"; };
@@ -271,6 +272,7 @@
 		05EDCE1618E9F03D003CF165 = {
 			isa = PBXGroup;
 			children = (
+				05A3BA111B9371930014780A /* TODO.md */,
 				05EDCE4818E9F072003CF165 /* SPDragNDrop */,
 				05EDCE3818E9F03E003CF165 /* SPDragNDropTests */,
 				05EDCE8518E9FF73003CF165 /* DemoApp */,
