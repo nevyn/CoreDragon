@@ -42,6 +42,7 @@ static const NSTimeInterval kSpringloadDelay = 1.3;
 {
     NSMutableSet *_dropTargets;
 	CerfingMeshPipe *_cerfing;
+	CGRect _inferredApplicationFrame;
 }
 @property(nonatomic,retain) SPDraggingState *state;
 @property(nonatomic,retain) UILongPressGestureRecognizer *longPressGrec;
@@ -74,7 +75,11 @@ static const NSTimeInterval kSpringloadDelay = 1.3;
 	_cerfing.connectionConfigurator = ^(CerfingConnection *connection) {
 		connection.serializer = [CerfingSerializer keyedArchiverSerializerWithSecureCoding:NO];
 	};
-    
+	
+	[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(invalidateInferredApplicationFrame) name:UIApplicationDidEnterBackgroundNotification object:nil];
+	[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(invalidateInferredApplicationFrame) name:UIApplicationWillEnterForegroundNotification object:nil];
+	#warning TODO: Listen to trait collection change and invalidate inferred appframe
+	
     return self;
 }
 
@@ -169,6 +174,8 @@ static UIImage *screenshotForView(UIView *view)
 
 - (void)dragGesture:(UILongPressGestureRecognizer*)grec
 {
+	[self maybeInferApplicationFrameFromDrag:grec];
+	
     if(grec.state == UIGestureRecognizerStateBegan) {
         UIView *initiator = [self sourceUnderFinger:grec];
         [self startDraggingWithInitiator:initiator event:grec];
@@ -179,6 +186,74 @@ static UIImage *screenshotForView(UIView *view)
     } else if(grec.state == UIGestureRecognizerStateCancelled) {
         [self cancelDragging];
     }
+}
+
+#pragma mark Application frame and coordinate system util
+
+/*
+	In iOS 9 split-screen multitasking, there is no way to know your actual application frame.
+	However, if we see a drag that lies *outside* of what you think is the UIWindow bounds, you can
+	infer what your frame is, since there can only be two apps on screen at a time.
+*/
+- (void)maybeInferApplicationFrameFromDrag:(UIGestureRecognizer*)grec
+{
+	// We already have an inferred frame
+	if(!CGRectEqualToRect(_inferredApplicationFrame, CGRectZero))
+		return;
+	
+	CGRect screenBounds = [UIScreen mainScreen].bounds;
+	CGRect localAppBounds = _draggingContainer.window.bounds;
+	CGPoint p = [grec locationInView:_draggingContainer];
+	
+	if(p.x > localAppBounds.size.width) {
+		// We must be left-most since user could drag beyond our right edge
+		
+		_inferredApplicationFrame = localAppBounds;
+	} else if(p.x < 0) {
+		// We must be right-most since user could drag beyond our left edge
+		
+		_inferredApplicationFrame = (CGRect){
+			.origin = {
+				.x = screenBounds.size.width - localAppBounds.size.width,
+				.y = 0
+			},
+			.size = localAppBounds.size
+		};
+	}
+}
+
+- (void)invalidateInferredApplicationFrame
+{
+	_inferredApplicationFrame = CGRectZero;
+}
+
+- (CGPoint)locationGivenRemotePoint:(CGPoint)remotePoint remoteInferredApplicationFrame:(CGRect)remoteInferredApplicationFrame
+{
+	if(CGRectEqualToRect(remoteInferredApplicationFrame, CGRectZero))
+		return CGPointZero;
+	
+	CGRect myInferredApplicationFrame = {
+		.size = _draggingContainer.window.frame.size
+	};
+	// If remote app is on right, we must be on left; and vice versa
+	if(remoteInferredApplicationFrame.origin.x > 0) {
+		myInferredApplicationFrame.origin = CGPointZero;
+	} else {
+		myInferredApplicationFrame.origin.x = remoteInferredApplicationFrame.size.width;
+		myInferredApplicationFrame.origin.y = 0;
+	}
+	
+	CGPoint pointInWindowSpace = (CGPoint){
+		.x = remotePoint.x + remoteInferredApplicationFrame.origin.x,
+		.y = remotePoint.y + remoteInferredApplicationFrame.origin.y,
+	};
+	
+	CGPoint pointInMySpace = (CGPoint){
+		.x = pointInWindowSpace.x - myInferredApplicationFrame.origin.x,
+		.y = pointInWindowSpace.y - myInferredApplicationFrame.origin.y,
+	};
+	
+	return pointInMySpace;
 }
 
 #pragma mark Start dragging
@@ -209,7 +284,7 @@ static UIImage *screenshotForView(UIView *view)
 		hitInView.y/initiator.frame.size.height
 	);
 	
-	CGPoint initialLocation = [grec locationInView:initiator];
+	CGPoint initialLocation = [grec locationInView:_draggingContainer];
 	
 	[self startDraggingWithState:state anchorPoint:anchorPoint initialLocation:initialLocation];
 	
@@ -222,6 +297,7 @@ static UIImage *screenshotForView(UIView *view)
 		},
 		@"anchorPoint": NSStringFromCGPoint(anchorPoint),
 		@"initialLocation": NSStringFromCGPoint(initialLocation),
+		@"sourceInferredApplicationFrame": NSStringFromCGRect(_inferredApplicationFrame)
 	}];
 }
 
@@ -234,7 +310,13 @@ static UIImage *screenshotForView(UIView *view)
 	state.subtitle = [stateD[@"subtitle"] length] > 0 ? stateD[@"subtitle"] : nil;
 	state.modelObject = stateD[@"modelObject"];
 	
-	[self startDraggingWithState:state anchorPoint:CGPointFromString(msg[@"anchorPoint"]) initialLocation:CGPointFromString(msg[@"initialLocation"])];
+	CGPoint anchorPoint = CGPointFromString(msg[@"anchorPoint"]);
+	CGPoint initialLocation = CGPointFromString(msg[@"initialLocation"]);
+	CGRect remoteAppFrame = CGRectFromString(msg[@"sourceInferredApplicationFrame"]);
+	
+	CGPoint initialLocalLocation = [self locationGivenRemotePoint:initialLocation remoteInferredApplicationFrame:remoteAppFrame];
+	
+	[self startDraggingWithState:state anchorPoint:anchorPoint initialLocation:initialLocalLocation];
 }
 
 - (void)startDraggingWithState:(SPDraggingState*)state anchorPoint:(CGPoint)anchorPoint initialLocation:(CGPoint)location
@@ -273,13 +355,19 @@ static UIImage *screenshotForView(UIView *view)
 	[_cerfing broadcastDict:@{
 		kCerfingCommand: @"continueDragging",
 		@"position": NSStringFromCGPoint(position),
+		@"sourceInferredApplicationFrame": NSStringFromCGRect(_inferredApplicationFrame)
 	}];
 	[self _continueDragging:position];
 }
 
 - (void)command:(CerfingConnection*)connection continueDragging:(NSDictionary*)msg
 {
-	[self _continueDragging:CGPointFromString(msg[@"position"])];
+	CGPoint position = CGPointFromString(msg[@"position"]);
+	CGRect remoteAppFrame = CGRectFromString(msg[@"sourceInferredApplicationFrame"]);
+	
+	CGPoint localPosition = [self locationGivenRemotePoint:position remoteInferredApplicationFrame:remoteAppFrame];
+	
+	[self _continueDragging:localPosition];
 }
 
 - (void)_continueDragging:(CGPoint)position
