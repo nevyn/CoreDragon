@@ -8,7 +8,6 @@
 
 #import <UIKit/UIKit.h>
 
-@interface SPDraggingContainerView : UIView
-- (id)init;
-- (void)installOnWindow:(UIWindow*)window;
+@interface SPDraggingContainerWindow : UIWindow
+- (instancetype)initWithFrame:(CGRect)frame;
 @end

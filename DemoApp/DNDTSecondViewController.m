@@ -8,6 +8,7 @@
 
 #import "DNDTSecondViewController.h"
 #import <SPDragNDrop/SPDragnDrop.h>
+#import <MobileCoreServices/UTCoreTypes.h>
 
 @interface DNDTSecondViewController () <SPDragDelegate, SPDropDelegate>
 {
@@ -38,25 +39,38 @@
     [[SPDragNDropController sharedController] registerDropTarget:label2 delegate:self];
 }
 
+- (void)viewDidAppear:(BOOL)animated
+{
+	[super viewDidAppear:animated];
+	UIWindow *w = [[UIApplication sharedApplication] keyWindow];
+	NSLog(@"Main screen bounds %@", NSStringFromCGRect([[UIScreen mainScreen] bounds]));
+	NSLog(@"Main cspace bounds %@", NSStringFromCGRect([[[UIScreen mainScreen] coordinateSpace] bounds]));
+	NSLog(@"Main native cspace bounds %@", NSStringFromCGRect([[[UIScreen mainScreen] fixedCoordinateSpace] bounds]));
+	NSLog(@"Main window bounds %@", NSStringFromCGRect([w bounds]));
+	NSLog(@"Main window bounds %@", NSStringFromCGPoint([w convertPoint:CGPointZero toWindow:nil]));
+	NSLog(@"Status bar frame %@", NSStringFromCGRect([[UIApplication sharedApplication] statusBarFrame]));
+
+	NSLog(@"Converted %@", NSStringFromCGRect([w convertRect:w.bounds toCoordinateSpace:w.screen.fixedCoordinateSpace]));
+}
+
 - (void)didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
 
-- (id)modelObjectForDraggable:(UIView*)draggable;
+- (void)beginDragOperationFromView:(UIView *)draggable ontoPasteboard:(UIPasteboard *)pasteboard
 {
-    return [(UILabel*)draggable text];
+	[pasteboard setValue:[(UILabel*)draggable text] forPasteboardType:(NSString*)kUTTypePlainText];
 }
 
-- (BOOL)droppable:(UIView*)droppable canAcceptModelObject:(id)modelObject
+- (BOOL)dropTarget:(UIView *)droppable canAcceptDrag:(id<SPDraggingInfo>)drag
 {
-    return [modelObject isKindOfClass:[NSString class]];
+	return [drag.pasteboard containsPasteboardTypes:@[(NSString*)kUTTypePlainText]];
 }
 
-- (void)droppable:(UIView*)droppable acceptDrop:(id)modelObject atPoint:(CGPoint)p;
+- (void)dropTarget:(UIView *)droppable acceptDrag:(id<SPDraggingInfo>)drag atPoint:(CGPoint)p
 {
-    [(UITextView*)droppable setText:modelObject];
+	[(UITextView*)droppable setText:[drag.pasteboard valueForPasteboardType:(NSString*)kUTTypePlainText]];
 }
-
 @end

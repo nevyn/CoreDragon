@@ -1,0 +1,6 @@
+[submodule "Libraries/TCAsyncHashProto"]
+	path = Libraries/Cerfing
+	url = https://github.com/nevyn/Cerfing.git
+[submodule "Libraries/MeshPipe"]
+	path = Libraries/MeshPipe
+	url = https://github.com/nevyn/MeshPipe.git

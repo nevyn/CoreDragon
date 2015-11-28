@@ -10,6 +10,7 @@
 #import "DNDTFirstViewController.h"
 #import "DNDTSecondViewController.h"
 #import <SPDragNDrop/SPDragNDrop.h>
+#import <MobileCoreServices/UTCoreTypes.h>
 
 @interface DNDTAppDelegate () <SPDropDelegate, SPDragProxyIconDelegate>
 @end
@@ -19,32 +20,29 @@
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
 	self.tabBarController = (id)self.window.rootViewController;
-
-    [[SPDragNDropController sharedController] createDraggingContainerInWindow:self.window];
     
     [[SPDragNDropController sharedController] registerDropTarget:self.tabBarController.tabBar delegate:self];
     [[SPDragNDropController sharedController] setProxyIconDelegate:self];
     return YES;
 }
-
-- (BOOL)droppable:(UIView*)droppable canAcceptModelObject:(id)modelObject;
+- (BOOL)dropTarget:(UIView *)droppable canAcceptDrag:(id<SPDraggingInfo>)drag
 {
     return YES;
 }
 
-- (BOOL)droppable:(UIView*)droppable shouldSpringload:(id)modelObject
+- (BOOL)dropTarget:(UIView *)droppable shouldSpringload:(id<SPDraggingInfo>)drag
 {
     return YES;
 }
-- (void)droppable:(UIView*)droppable springload:(id)modelObject atPoint:(CGPoint)p
+- (void)dropTarget:(UIView *)droppable springload:(id<SPDraggingInfo>)drag atPoint:(CGPoint)p
 {
     [self.tabBarController setSelectedIndex:(self.tabBarController.selectedIndex + 1) % 2];
 }
 
-- (UIView*)dragController:(SPDragNDropController*)dragndrop iconViewForModelObject:(id)modelObject getTitle:(NSString**)title getSubtitle:(NSString**)subtitle
+- (UIImage*)dragController:(SPDragNDropController*)dragndrop iconViewForDrag:(id<SPDraggingInfo>)drag getTitle:(NSString *__autoreleasing *)title getSubtitle:(NSString *__autoreleasing *)subtitle
 {
-    *title = modelObject;
-    return [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"testimage"]];
+    *title = [drag.pasteboard valueForPasteboardType:(NSString*)kUTTypePlainText];
+    return [UIImage imageNamed:@"testimage"];
 }
 
 
