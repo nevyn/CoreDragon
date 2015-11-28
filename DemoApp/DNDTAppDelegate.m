@@ -19,8 +19,6 @@
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
 	self.tabBarController = (id)self.window.rootViewController;
-
-    [[SPDragNDropController sharedController] createDraggingContainerInWindow:self.window];
     
     [[SPDragNDropController sharedController] registerDropTarget:self.tabBarController.tabBar delegate:self];
     [[SPDragNDropController sharedController] setProxyIconDelegate:self];

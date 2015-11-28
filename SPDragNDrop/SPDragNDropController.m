@@ -2,50 +2,56 @@
 #import <QuartzCore/QuartzCore.h>
 #import <objc/runtime.h>
 #import "SPDropHighlightView.h"
-#import "SPDraggingContainerView.h"
+#import "SPDraggingContainerWindow.h"
 #import "SPDragProxyView.h"
 #import <CerfingMeshPipeTransport/CerfingMeshPipe.h>
 
-@class SPDropTarget;
+@class SPDropTarget, SPDragSource;
 
-static const void *kDragSourceDelegateKey = &kDragSourceDelegateKey;
+static const void *kDragSourceKey = &kDragSourceKey;
 static const void *kDropTargetKey = &kDropTargetKey;
 static const NSTimeInterval kSpringloadDelay = 1.3;
 
 @interface SPDraggingState : NSObject
 // Initial, transferrable state
-@property(nonatomic,retain) UIImage *screenshot;
+@property(nonatomic,strong) UIImage *screenshot;
 @property(nonatomic,copy) NSString *title;
 @property(nonatomic,copy) NSString *subtitle;
-@property(nonatomic,retain) UIView *proxyIcon;
-@property(nonatomic,retain) id modelObject;
+@property(nonatomic,strong) UIView *proxyIcon;
+@property(nonatomic,strong) id modelObject;
 
 // During-drag state
-@property(nonatomic,retain) UIView *dragInitiator; // the thing that was long-pressed
-@property(nonatomic,retain) UIView *proxyView; // thing under finger
-@property(nonatomic,retain) NSArray *activeDropTargets;
-@property(nonatomic,retain) NSTimer *springloadingTimer;
+@property(nonatomic,strong) UIView *dragInitiator; // the thing that was long-pressed
+@property(nonatomic,strong) UIView *proxyView; // thing under finger
+@property(nonatomic,strong) NSArray *activeDropTargets;
+@property(nonatomic,strong) NSTimer *springloadingTimer;
 @property(nonatomic,assign) SPDropTarget *hoveringTarget;
-- (id<SPDragDelegate>)dragDelegate;
 - (id)modelObject;
 @end
 
+@interface SPDragSource : NSObject
+@property(nonatomic,weak) UIView *view;
+@property(nonatomic,weak) id<SPDragDelegate> delegate;
+@property(nonatomic) UILongPressGestureRecognizer *longPressGrec;
+@end
+
 @interface SPDropTarget : NSObject
-@property(nonatomic,retain) UIView *view;
-@property(nonatomic,retain) id<SPDropDelegate> delegate;
-@property(nonatomic,retain) SPDropHighlightView *highlight;
+@property(nonatomic,weak) UIView *view;
+@property(nonatomic,weak) id<SPDropDelegate> delegate;
+@property(nonatomic,strong) SPDropHighlightView *highlight;
 - (BOOL)canSpringload:(id)modelObject;
 - (BOOL)canDrop:(id)modelObject;
 @end
 
 @interface SPDragNDropController () <UIGestureRecognizerDelegate, CerfingConnectionDelegate>
 {
+	NSMutableSet *_dragSources;
     NSMutableSet *_dropTargets;
 	CerfingMeshPipe *_cerfing;
 	CGRect _inferredApplicationFrame;
 }
-@property(nonatomic,retain) SPDraggingState *state;
-@property(nonatomic,retain) UILongPressGestureRecognizer *longPressGrec;
+@property(nonatomic,strong) SPDraggingState *state;
+@property(nonatomic,strong) SPDraggingContainerWindow *draggingContainer;
 @end
 
 @implementation SPDragNDropController
@@ -63,7 +69,8 @@ static const NSTimeInterval kSpringloadDelay = 1.3;
 {
     if (!(self = [super init]))
         return nil;
-    
+	
+	_dragSources = [NSMutableSet new];
     _dropTargets = [NSMutableSet new];
 	
 	NSString *appName = [[NSBundle mainBundle] objectForInfoDictionaryKey:@"CFBundleDisplayName"] ?:
@@ -78,43 +85,45 @@ static const NSTimeInterval kSpringloadDelay = 1.3;
 	
 	[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(invalidateInferredApplicationFrame) name:UIApplicationDidEnterBackgroundNotification object:nil];
 	[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(invalidateInferredApplicationFrame) name:UIApplicationWillEnterForegroundNotification object:nil];
-	#warning TODO: Listen to trait collection change and invalidate inferred appframe
+	
+	self.draggingContainer = [[SPDraggingContainerWindow alloc] initWithFrame:[UIScreen mainScreen].bounds];
+	self.draggingContainer.hidden = NO;
 	
     return self;
 }
 
 - (void)dealloc
 {
-    [self.draggingContainer removeFromSuperview];
-    self.draggingContainer = nil; // also uninstalls grec
-}
-
-#pragma mark - Dragging container
-
-- (void)setDraggingContainer:(UIView *)draggingContainer
-{
-	_draggingContainer = draggingContainer;
+    self.draggingContainer.hidden = YES;
+    self.draggingContainer = nil;
 	
-	[self.longPressGrec.view removeGestureRecognizer:self.longPressGrec];
-	if (self.draggingContainer) {
-		self.longPressGrec = [[UILongPressGestureRecognizer alloc] initWithTarget:self action:@selector(dragGesture:)];
-		self.longPressGrec.delegate = self;
-		[self.draggingContainer.window addGestureRecognizer:self.longPressGrec];
+	for(SPDragSource *source in _dragSources) {
+		[source.view removeGestureRecognizer:source.longPressGrec];
+		objc_setAssociatedObject(source.view, kDragSourceKey, nil, OBJC_ASSOCIATION_RETAIN);
 	}
-}
-
-- (void)createDraggingContainerInWindow:(UIWindow*)window
-{
-    SPDraggingContainerView *container = [[SPDraggingContainerView alloc] init];
-    [container installOnWindow:window];
-    self.draggingContainer = container;
 }
 
 #pragma mark - Registration
 
 - (void)registerDragSource:(UIView *)draggable delegate:(id<SPDragDelegate>)delegate
 {
-    objc_setAssociatedObject(draggable, kDragSourceDelegateKey, delegate, OBJC_ASSOCIATION_ASSIGN);
+	SPDragSource *source = [SPDragSource new];
+	source.delegate = delegate;
+	source.longPressGrec = [[UILongPressGestureRecognizer alloc] initWithTarget:self action:@selector(dragGesture:)];
+	source.longPressGrec.delegate = self;
+	[draggable addGestureRecognizer:source.longPressGrec];
+
+    objc_setAssociatedObject(draggable, kDragSourceKey, source, OBJC_ASSOCIATION_RETAIN);
+}
+
+- (void)unregisterDragSource:(UIView *)draggable
+{
+    SPDragSource *source = objc_getAssociatedObject(draggable, kDragSourceKey);
+	if(source) {
+		[draggable removeGestureRecognizer:source.longPressGrec];
+		[_dragSources removeObject:source];
+		objc_setAssociatedObject(draggable, kDragSourceKey, NULL, OBJC_ASSOCIATION_RETAIN);
+	}
 }
 
 - (void)registerDropTarget:(UIView *)droppable delegate:(id<SPDropDelegate>)delegate
@@ -162,11 +171,6 @@ static UIImage *screenshotForView(UIView *view)
 
 #pragma mark - Gesture recognition, network and state handling
 
-- (BOOL)gestureRecognizerShouldBegin:(UIGestureRecognizer *)grec
-{
-    return [self sourceUnderFinger:grec] != nil;
-}
-
 - (BOOL)gestureRecognizer:(UIGestureRecognizer *)gestureRecognizer shouldRecognizeSimultaneouslyWithGestureRecognizer:(UIGestureRecognizer *)otherGestureRecognizer
 {
     return _state != nil;
@@ -177,7 +181,7 @@ static UIImage *screenshotForView(UIView *view)
 	[self maybeInferApplicationFrameFromDrag:grec];
 	
     if(grec.state == UIGestureRecognizerStateBegan) {
-        UIView *initiator = [self sourceUnderFinger:grec];
+        UIView *initiator = grec.view;
         [self startDraggingWithInitiator:initiator event:grec];
     } else if(grec.state == UIGestureRecognizerStateChanged) {
         [self continueDraggingFromGesture:[grec locationInView:_draggingContainer]];
@@ -264,7 +268,8 @@ static UIImage *screenshotForView(UIView *view)
 		[self finishDragging];
 	}
 	
-    id<SPDragDelegate> delegate = objc_getAssociatedObject(initiator, kDragSourceDelegateKey);
+	SPDragSource *source = objc_getAssociatedObject(initiator, kDragSourceKey);
+    id<SPDragDelegate> delegate = source.delegate;
     id modelObject = [delegate modelObjectForDraggable:initiator];
 
     SPDraggingState *state = [SPDraggingState new];
@@ -530,21 +535,6 @@ static UIImage *screenshotForView(UIView *view)
     }];
 }
 
-- (UIView*)sourceUnderFinger:(UIGestureRecognizer*)grec
-{
-    CGPoint locationInWindow = [grec locationInView:_draggingContainer.window];
-    UIView *view = [_draggingContainer.window hitTest:locationInWindow withEvent:nil];
-    id<SPDragDelegate> delegate = nil;
-    do {
-        delegate = objc_getAssociatedObject(view, kDragSourceDelegateKey);
-        if (delegate)
-            break;
-        view = [view superview];
-    } while(view && view != _draggingContainer);
-    
-    return delegate ? view : nil;
-}
-
 - (SPDropTarget*)targetUnderFinger
 {
     CGPoint locationInWindow = _state.proxyView.layer.position;
@@ -569,10 +559,9 @@ static UIImage *screenshotForView(UIView *view)
 @end
 
 @implementation SPDraggingState
-- (id<SPDragDelegate>)dragDelegate
-{
-    return objc_getAssociatedObject(self.dragInitiator, kDragSourceDelegateKey);
-}
+@end
+
+@implementation SPDragSource
 @end
 
 @implementation SPDropTarget

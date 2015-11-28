@@ -3,14 +3,10 @@
 
 @interface SPDragNDropController : NSObject
 + (id)sharedController;
-// A view in the window that applies rotation transforms, and covers the whole window. You need to set
-// this from your application (manually or by calling createDraggingContainerInWindow:)
-@property(nonatomic,retain) UIView *draggingContainer;
-- (void)createDraggingContainerInWindow:(UIWindow*)window;
-
-@property(nonatomic,unsafe_unretained) id<SPDragProxyIconDelegate> proxyIconDelegate;
+@property(nonatomic,weak) id<SPDragProxyIconDelegate> proxyIconDelegate;
 
 - (void)registerDragSource:(UIView *)draggable delegate:(id<SPDragDelegate>)delegate;
+- (void)unregisterDragSource:(UIView *)draggable;
 - (void)registerDropTarget:(UIView *)droppable delegate:(id<SPDropDelegate>)delegate;
 - (void)unregisterDropTarget:(id)droppableOrDelegate;
 @end

@@ -39,7 +39,7 @@
 		05EDCE3718E9F03E003CF165 /* libSPDragNDrop.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 05EDCE1F18E9F03E003CF165 /* libSPDragNDrop.a */; };
 		05EDCE3D18E9F03E003CF165 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 05EDCE3B18E9F03E003CF165 /* InfoPlist.strings */; };
 		05EDCE3F18E9F03E003CF165 /* SPDragNDropTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 05EDCE3E18E9F03E003CF165 /* SPDragNDropTests.m */; };
-		05EDCE5218E9F072003CF165 /* SPDraggingContainerView.m in Sources */ = {isa = PBXBuildFile; fileRef = 05EDCE4A18E9F072003CF165 /* SPDraggingContainerView.m */; };
+		05EDCE5218E9F072003CF165 /* SPDraggingContainerWindow.m in Sources */ = {isa = PBXBuildFile; fileRef = 05EDCE4A18E9F072003CF165 /* SPDraggingContainerWindow.m */; };
 		05EDCE5318E9F072003CF165 /* SPDragNDropController.m in Sources */ = {isa = PBXBuildFile; fileRef = 05EDCE4D18E9F072003CF165 /* SPDragNDropController.m */; };
 		05EDCE5418E9F072003CF165 /* SPDragProxyView.m in Sources */ = {isa = PBXBuildFile; fileRef = 05EDCE4F18E9F072003CF165 /* SPDragProxyView.m */; };
 		05EDCE5518E9F072003CF165 /* SPDropHighlightView.m in Sources */ = {isa = PBXBuildFile; fileRef = 05EDCE5118E9F072003CF165 /* SPDropHighlightView.m */; };
@@ -116,8 +116,8 @@
 		05EDCE3A18E9F03E003CF165 /* SPDragNDropTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "SPDragNDropTests-Info.plist"; sourceTree = "<group>"; };
 		05EDCE3C18E9F03E003CF165 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		05EDCE3E18E9F03E003CF165 /* SPDragNDropTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SPDragNDropTests.m; sourceTree = "<group>"; };
-		05EDCE4918E9F072003CF165 /* SPDraggingContainerView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SPDraggingContainerView.h; sourceTree = "<group>"; };
-		05EDCE4A18E9F072003CF165 /* SPDraggingContainerView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SPDraggingContainerView.m; sourceTree = "<group>"; };
+		05EDCE4918E9F072003CF165 /* SPDraggingContainerWindow.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SPDraggingContainerWindow.h; sourceTree = "<group>"; };
+		05EDCE4A18E9F072003CF165 /* SPDraggingContainerWindow.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SPDraggingContainerWindow.m; sourceTree = "<group>"; };
 		05EDCE4B18E9F072003CF165 /* SPDragNDrop.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SPDragNDrop.h; sourceTree = "<group>"; };
 		05EDCE4C18E9F072003CF165 /* SPDragNDropController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SPDragNDropController.h; sourceTree = "<group>"; };
 		05EDCE4D18E9F072003CF165 /* SPDragNDropController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SPDragNDropController.m; sourceTree = "<group>"; };
@@ -327,8 +327,8 @@
 		05EDCE4818E9F072003CF165 /* SPDragNDrop */ = {
 			isa = PBXGroup;
 			children = (
-				05EDCE4918E9F072003CF165 /* SPDraggingContainerView.h */,
-				05EDCE4A18E9F072003CF165 /* SPDraggingContainerView.m */,
+				05EDCE4918E9F072003CF165 /* SPDraggingContainerWindow.h */,
+				05EDCE4A18E9F072003CF165 /* SPDraggingContainerWindow.m */,
 				05EDCE4B18E9F072003CF165 /* SPDragNDrop.h */,
 				05EDCE4C18E9F072003CF165 /* SPDragNDropController.h */,
 				05EDCE4D18E9F072003CF165 /* SPDragNDropController.m */,
@@ -538,7 +538,7 @@
 				05B92CF51B8E911C00226846 /* AsyncUdpSocket.m in Sources */,
 				05EDCE5318E9F072003CF165 /* SPDragNDropController.m in Sources */,
 				05B92CF71B8E911C00226846 /* MeshPipe.m in Sources */,
-				05EDCE5218E9F072003CF165 /* SPDraggingContainerView.m in Sources */,
+				05EDCE5218E9F072003CF165 /* SPDraggingContainerWindow.m in Sources */,
 				05B92CF41B8E911C00226846 /* CerfingMeshPipeTransport.m in Sources */,
 				05B92CF01B8E911C00226846 /* CerfingConnection.m in Sources */,
 				05EDCE5418E9F072003CF165 /* SPDragProxyView.m in Sources */,
