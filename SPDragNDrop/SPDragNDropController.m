@@ -537,17 +537,22 @@ static UIImage *screenshotForView(UIView *view)
 
 - (SPDropTarget*)targetUnderFinger
 {
-    CGPoint locationInWindow = _state.proxyView.layer.position;
-    UIView *view = [_draggingContainer.window hitTest:locationInWindow withEvent:nil];
-    SPDropTarget *target = nil;
-    do {
-        target = objc_getAssociatedObject(view, kDropTargetKey);
-        if (target)
-            break;
-        view = [view superview];
-    } while(view && view != _draggingContainer);
+	for(UIWindow *window in [UIApplication sharedApplication].windows) {
+		CGPoint locationInDragContainer = _state.proxyView.layer.position;
+		CGPoint locationInWindow = [window convertPoint:locationInDragContainer fromWindow:_state.proxyView.window];
+		
+		UIView *view = [window hitTest:locationInWindow withEvent:nil];
+		SPDropTarget *target = nil;
+		do {
+			target = objc_getAssociatedObject(view, kDropTargetKey);
+			if (target)
+				break;
+			view = [view superview];
+		} while(view && view != _draggingContainer);
 
-    return target;
+		return target;
+	}
+	return nil;
 }
 
 - (BOOL)_draggingIsWithinMyApp
