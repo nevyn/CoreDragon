@@ -48,6 +48,8 @@
 	NSLog(@"Main window bounds %@", NSStringFromCGRect([w bounds]));
 	NSLog(@"Main window bounds %@", NSStringFromCGPoint([w convertPoint:CGPointZero toWindow:nil]));
 	NSLog(@"Status bar frame %@", NSStringFromCGRect([[UIApplication sharedApplication] statusBarFrame]));
+
+	NSLog(@"Converted %@", NSStringFromCGRect([w convertRect:w.bounds toCoordinateSpace:w.screen.fixedCoordinateSpace]));
 }
 
 - (void)didReceiveMemoryWarning
