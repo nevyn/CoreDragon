@@ -48,5 +48,5 @@
 @end
 
 @protocol SPDragProxyIconDelegate <NSObject>
-- (UIView*)dragController:(SPDragNDropController*)dragndrop iconViewForDrag:(id<SPDraggingInfo>)drag getTitle:(NSString**)title getSubtitle:(NSString**)subtitle;
+- (UIImage*)dragController:(SPDragNDropController*)dragndrop iconViewForDrag:(id<SPDraggingInfo>)drag getTitle:(NSString**)title getSubtitle:(NSString**)subtitle;
 @end

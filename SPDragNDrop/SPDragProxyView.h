@@ -9,5 +9,5 @@
 #import <UIKit/UIKit.h>
 
 @interface SPDragProxyView : UIView
-- (id)initWithIconView:(UIView*)iconView title:(NSString*)title subtitle:(NSString*)subtitle;
+- (id)initWithIcon:(UIImage*)icon title:(NSString*)title subtitle:(NSString*)subtitle;
 @end

@@ -39,10 +39,10 @@
     [self.tabBarController setSelectedIndex:(self.tabBarController.selectedIndex + 1) % 2];
 }
 
-- (UIView*)dragController:(SPDragNDropController*)dragndrop iconViewForDrag:(id<SPDraggingInfo>)drag getTitle:(NSString *__autoreleasing *)title getSubtitle:(NSString *__autoreleasing *)subtitle
+- (UIImage*)dragController:(SPDragNDropController*)dragndrop iconViewForDrag:(id<SPDraggingInfo>)drag getTitle:(NSString *__autoreleasing *)title getSubtitle:(NSString *__autoreleasing *)subtitle
 {
     *title = [drag.pasteboard valueForPasteboardType:(NSString*)kUTTypePlainText];
-    return [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"testimage"]];
+    return [UIImage imageNamed:@"testimage"];
 }
 
 

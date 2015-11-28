@@ -22,9 +22,9 @@
 @end
 
 @implementation SPDragProxyView
-- (id)initWithIconView:(UIView*)iconView title:(NSString*)title subtitle:(NSString*)subtitle
+- (id)initWithIcon:(UIImage*)icon title:(NSString*)title subtitle:(NSString*)subtitle
 {
-    if(!(self = [super initWithFrame:iconView.bounds]))
+    if(!(self = [super initWithFrame:(CGRect){.size=icon.size}]))
         return nil;
     
     UIFont *titleFont = [UIFont boldSystemFontOfSize:16];
@@ -36,7 +36,7 @@
     static const CGFloat textContainerYMargin = 2;
     static const CGFloat textContainerXMargin = 4;
     
-    _icon = iconView;
+    _icon = [[UIImageView alloc] initWithImage:icon];
     _icon.frame = (CGRect){.size=iconSize};
     _icon.autoresizingMask = UIViewAutoresizingFlexibleWidth|UIViewAutoresizingFlexibleHeight;
     _icon.layer.cornerRadius = iconCornerRadius;

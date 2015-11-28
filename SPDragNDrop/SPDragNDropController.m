@@ -18,7 +18,7 @@ static NSString *const kDragMetadataKey = @"eu.thirdcog.dragndrop.meta";
 @property(nonatomic,strong) UIImage *screenshot;
 @property(nonatomic,copy) NSString *title;
 @property(nonatomic,copy) NSString *subtitle;
-@property(nonatomic,strong) UIView *proxyIcon;
+@property(nonatomic,strong) UIImage *proxyIcon;
 @property(nonatomic,strong) UIPasteboard *pasteboard;
 @property(nonatomic,assign) CGPoint initialPositionInScreenSpace;
 @property(nonatomic,assign) NSString *operationIdentifier;
@@ -237,8 +237,8 @@ static UIImage *screenshotForView(UIView *view)
 	NSMutableDictionary *meta = [@{
 		@"uuid": state.operationIdentifier,
 	} mutableCopy];
-	if(state.proxyIcon) meta[@"proxyIcon"] = state.proxyIcon;
-	if(state.screenshot) meta[@"screenshot"] = state.screenshot;
+	if(state.proxyIcon) meta[@"proxyIcon"] = UIImagePNGRepresentation(state.proxyIcon);
+	if(state.screenshot) meta[@"screenshot"] = UIImagePNGRepresentation(state.screenshot);
 	NSData *metadata = [NSKeyedArchiver archivedDataWithRootObject:meta];
 	[state.pasteboard addItems:@[@{kDragMetadataKey: metadata}]];
 	
@@ -292,8 +292,8 @@ static UIImage *screenshotForView(UIView *view)
 	NSData *metadata = [[state.pasteboard dataForPasteboardType:kDragMetadataKey inItemSet:NULL] firstObject];
 	NSDictionary *meta = [NSKeyedUnarchiver unarchiveObjectWithData:metadata]; // TODO: Use secure coding
 	if([meta[@"uuid"] isEqual:state.operationIdentifier]) {
-		state.proxyIcon = meta[@"proxyIcon"];
-		state.screenshot = meta[@"screenshot"];
+		state.proxyIcon = [UIImage imageWithData:meta[@"proxyIcon"]];
+		state.screenshot = [UIImage imageWithData:meta[@"screenshot"]];
 	} else {
 		NSLog(@"Warning: Missing drag'n'drop metadata over auxilliary pasteboard");
 	}
@@ -307,9 +307,9 @@ static UIImage *screenshotForView(UIView *view)
 	self.state = state;
 	
     if(state.proxyIcon || !state.screenshot) {
-        state.proxyView = [[SPDragProxyView alloc] initWithIconView:state.proxyIcon title:state.title subtitle:state.subtitle];
+        state.proxyView = [[SPDragProxyView alloc] initWithIcon:state.proxyIcon title:state.title subtitle:state.subtitle];
     } else {
-        state.proxyView = [[UIImageView alloc] initWithImage:state.screenshot];
+        state.proxyView = [[UIImageView alloc] initWithImage:state.proxyIcon];
     }
 	
 
