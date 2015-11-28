@@ -6,4 +6,6 @@
 	  We need to be able to navigate away from the drag source during dnd.
 - [ ] Make everybody know when a remote app can accept a drag, so we can do
 	  cancellation/acceptance correctly at the end of a drag.
+- [ ] After the drag destination app has handled the drag, tell the source app
+	  to restore the pasteboard!
 - [ ] Get rid of SPDragProxyIconDelegate and just put it into SPDragDelegate like on Mac

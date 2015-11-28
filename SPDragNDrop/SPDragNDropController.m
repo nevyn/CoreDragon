@@ -11,6 +11,7 @@
 static const void *kDragSourceKey = &kDragSourceKey;
 static const void *kDropTargetKey = &kDropTargetKey;
 static const NSTimeInterval kSpringloadDelay = 1.3;
+static NSString *const kDragMetadataKey = @"eu.thirdcog.dragndrop.meta";
 
 @interface SPDraggingState : NSObject <SPDraggingInfo>
 // Initial, transferrable state
@@ -20,6 +21,7 @@ static const NSTimeInterval kSpringloadDelay = 1.3;
 @property(nonatomic,strong) UIView *proxyIcon;
 @property(nonatomic,strong) UIPasteboard *pasteboard;
 @property(nonatomic,assign) CGPoint initialPositionInScreenSpace;
+@property(nonatomic,assign) NSString *operationIdentifier;
 
 // During-drag state
 @property(nonatomic,strong) NSArray *originalPasteboardContents;
@@ -210,6 +212,7 @@ static UIImage *screenshotForView(UIView *view)
 
     SPDraggingState *state = [SPDraggingState new];
     state.dragInitiator = initiator;
+	state.operationIdentifier = [[NSUUID UUID] UUIDString];
 	
 	// Setup pasteboard contents
 	state.pasteboard = [UIPasteboard generalPasteboard];
@@ -230,6 +233,16 @@ static UIImage *screenshotForView(UIView *view)
 	if(!state.proxyIcon)
 		state.screenshot = screenshotForView(initiator);
 	
+	// Put displayables on pasteboard for transfer to other apps
+	NSMutableDictionary *meta = [@{
+		@"uuid": state.operationIdentifier,
+	} mutableCopy];
+	if(state.proxyIcon) meta[@"proxyIcon"] = state.proxyIcon;
+	if(state.screenshot) meta[@"screenshot"] = state.screenshot;
+	NSData *metadata = [NSKeyedArchiver archivedDataWithRootObject:meta];
+	[state.pasteboard addItems:@[@{kDragMetadataKey: metadata}]];
+	
+	// Figure out anchor point and locations
 	CGPoint hitInView = [grec locationInView:initiator];
 	CGPoint anchorPoint = CGPointMake(
 		hitInView.x/initiator.frame.size.width,
@@ -240,14 +253,17 @@ static UIImage *screenshotForView(UIView *view)
 	CGPoint initialScreenLocation = [self convertLocalPointToScreenSpace:initialLocation];
 	state.initialPositionInScreenSpace = initialScreenLocation;
 	
+	// Setup UI
 	[self startDraggingWithState:state anchorPoint:anchorPoint initialPosition:initialLocation];
 	
+	// And tell other apps
 	[_cerfing broadcastDict:@{
 		kCerfingCommand: @"startDragging",
 		@"state": @{
 			@"title": title ?: @"",
 			@"subtitle": subtitle ?: @"",
 			@"pasteboardName": state.pasteboard.name,
+			@"uuid": state.operationIdentifier,
 		},
 		@"anchorPoint": NSStringFromCGPoint(anchorPoint),
 		@"initialPosition": NSStringFromCGPoint(initialScreenLocation)
@@ -256,12 +272,15 @@ static UIImage *screenshotForView(UIView *view)
 
 - (void)command:(CerfingConnection*)connection startDragging:(NSDictionary*)msg
 {
+	// Setup state that comes from Cerfing
 	NSDictionary *stateD = msg[@"state"];
     SPDraggingState *state = [SPDraggingState new];
 
 	state.title = [stateD[@"title"] length] > 0 ? stateD[@"title"] : nil;
 	state.subtitle = [stateD[@"subtitle"] length] > 0 ? stateD[@"subtitle"] : nil;
 	state.pasteboard = [UIPasteboard pasteboardWithName:stateD[@"pasteboardName"] create:NO];
+	state.operationIdentifier = stateD[@"uuid"];
+	
 	
 	CGPoint anchorPoint = CGPointFromString(msg[@"anchorPoint"]);
 	CGPoint initialPosition = CGPointFromString(msg[@"initialPosition"]);
@@ -269,6 +288,17 @@ static UIImage *screenshotForView(UIView *view)
 	
 	CGPoint initialLocalPosition = [self convertScreenPointToLocalSpace:initialPosition];
 	
+	// Setup state that comes from Pasteboard
+	NSData *metadata = [[state.pasteboard dataForPasteboardType:kDragMetadataKey inItemSet:NULL] firstObject];
+	NSDictionary *meta = [NSKeyedUnarchiver unarchiveObjectWithData:metadata]; // TODO: Use secure coding
+	if([meta[@"uuid"] isEqual:state.operationIdentifier]) {
+		state.proxyIcon = meta[@"proxyIcon"];
+		state.screenshot = meta[@"screenshot"];
+	} else {
+		NSLog(@"Warning: Missing drag'n'drop metadata over auxilliary pasteboard");
+	}
+	
+	// aaand go!
 	[self startDraggingWithState:state anchorPoint:anchorPoint initialPosition:initialLocalPosition];
 }
 
