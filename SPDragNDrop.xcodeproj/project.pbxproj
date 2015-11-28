@@ -327,11 +327,11 @@
 		05EDCE4818E9F072003CF165 /* SPDragNDrop */ = {
 			isa = PBXGroup;
 			children = (
-				05EDCE4918E9F072003CF165 /* SPDraggingContainerWindow.h */,
-				05EDCE4A18E9F072003CF165 /* SPDraggingContainerWindow.m */,
 				05EDCE4B18E9F072003CF165 /* SPDragNDrop.h */,
 				05EDCE4C18E9F072003CF165 /* SPDragNDropController.h */,
 				05EDCE4D18E9F072003CF165 /* SPDragNDropController.m */,
+				05EDCE4918E9F072003CF165 /* SPDraggingContainerWindow.h */,
+				05EDCE4A18E9F072003CF165 /* SPDraggingContainerWindow.m */,
 				05EDCE4E18E9F072003CF165 /* SPDragProxyView.h */,
 				05EDCE4F18E9F072003CF165 /* SPDragProxyView.m */,
 				05EDCE5018E9F072003CF165 /* SPDropHighlightView.h */,
