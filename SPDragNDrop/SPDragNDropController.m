@@ -529,10 +529,18 @@ static UIImage *screenshotForView(UIView *view)
 	return nil;
 }
 
+- (CGRect)localFrameInScreenSpace
+{
+	return [self.draggingContainer convertRect:self.draggingContainer.bounds fromCoordinateSpace:self.draggingContainer.screen.fixedCoordinateSpace];
+}
+
 - (BOOL)_draggingIsWithinMyApp
 {
-	#warning TODO
-	return YES;
+	CGPoint locationInDragContainer = _state.proxyView.layer.position;
+	CGPoint locationInScreenSpace = [self convertLocalPointToScreenSpace:locationInDragContainer];
+
+	BOOL isWithinApp = CGRectContainsPoint([self localFrameInScreenSpace], locationInScreenSpace);
+	return isWithinApp;
 }
 
 @end
