@@ -19,13 +19,14 @@ static const NSTimeInterval kSpringloadDelay = 1.3;
 @property(nonatomic,copy) NSString *subtitle;
 @property(nonatomic,strong) UIView *proxyIcon;
 @property(nonatomic,strong) id modelObject;
+@property(nonatomic,assign) CGPoint initialPositionInScreenSpace;
 
 // During-drag state
 @property(nonatomic,strong) UIView *dragInitiator; // the thing that was long-pressed
 @property(nonatomic,strong) UIView *proxyView; // thing under finger
 @property(nonatomic,strong) NSArray *activeDropTargets;
 @property(nonatomic,strong) NSTimer *springloadingTimer;
-@property(nonatomic,assign) SPDropTarget *hoveringTarget;
+@property(nonatomic,weak) SPDropTarget *hoveringTarget;
 - (id)modelObject;
 @end
 
@@ -229,6 +230,8 @@ static UIImage *screenshotForView(UIView *view)
 	);
 	
 	CGPoint initialLocation = [grec locationInView:_draggingContainer];
+	CGPoint initialScreenLocation = [self convertLocalPointToScreenSpace:initialLocation];
+	state.initialPositionInScreenSpace = initialScreenLocation;
 	
 	[self startDraggingWithState:state anchorPoint:anchorPoint initialPosition:initialLocation];
 	
@@ -240,7 +243,7 @@ static UIImage *screenshotForView(UIView *view)
 			@"modelObject": modelObject,
 		},
 		@"anchorPoint": NSStringFromCGPoint(anchorPoint),
-		@"initialPosition": NSStringFromCGPoint([self convertLocalPointToScreenSpace:initialLocation])
+		@"initialPosition": NSStringFromCGPoint(initialScreenLocation)
 	}];
 }
 
@@ -255,6 +258,7 @@ static UIImage *screenshotForView(UIView *view)
 	
 	CGPoint anchorPoint = CGPointFromString(msg[@"anchorPoint"]);
 	CGPoint initialPosition = CGPointFromString(msg[@"initialPosition"]);
+	state.initialPositionInScreenSpace = initialPosition;
 	
 	CGPoint initialLocalPosition = [self convertScreenPointToLocalSpace:initialPosition];
 	
@@ -399,8 +403,7 @@ static UIImage *screenshotForView(UIView *view)
 {
     [self stopHighlightingDropTargets];
     [UIView animateWithDuration:.5 animations:^{
-        CGPoint initiationPointInWindow = [_draggingContainer convertPoint:_state.dragInitiator.layer.position fromView:_state.dragInitiator.superview];
-        _state.proxyView.layer.position = initiationPointInWindow;
+        _state.proxyView.layer.position = [self convertScreenPointToLocalSpace:_state.initialPositionInScreenSpace];
     } completion:^(BOOL finished) {
         [self finishDragging];
     }];
