@@ -9,3 +9,4 @@
 - [ ] After the drag destination app has handled the drag, tell the source app
 	  to restore the pasteboard!
 - [ ] Get rid of SPDragProxyIconDelegate and just put it into SPDragDelegate like on Mac
+- [ ] Implement some proper example apps! Maybe a 'contacts/chat' app and a 'photos' app
