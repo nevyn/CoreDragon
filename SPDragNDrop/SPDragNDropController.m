@@ -79,9 +79,6 @@ static const NSTimeInterval kSpringloadDelay = 1.3;
 	
 	_cerfing = [[CerfingMeshPipe alloc] initWithBasePort:23576 count:16 peerName:appName];
 	_cerfing.delegate = self;
-	_cerfing.connectionConfigurator = ^(CerfingConnection *connection) {
-		connection.serializer = [CerfingSerializer keyedArchiverSerializerWithSecureCoding:NO];
-	};
 	
 	self.draggingContainer = [[SPDraggingContainerWindow alloc] initWithFrame:[UIScreen mainScreen].bounds];
 	self.draggingContainer.hidden = NO;
