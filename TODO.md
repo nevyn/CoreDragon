@@ -1,5 +1,6 @@
-- [ ] Use a top-layer root window instead of 'dragging container'
-- [ ] Change API to use UTIs and promises
-- [ ] Have client app ask server app for modelObject on demand instead of up front
-- [ ] Establish a TCP connection to do the transfer of the modelObject (so that it can be big)
+- [X] Use a top-layer root window instead of 'dragging container'
+- [ ] Change API to use pasteboard instead of modelObject
+- [ ] Send drag metadata such as thumbnail, icon, name over auxilliary pasteboard
 - [ ] If drop target doesn't accept drop, don't send the drop to it when dragging ends!
+- [ ] Make gesture recognizer survive view disappearing from its superview.
+	  We need to be able to navigate away from the drag source during dnd.
