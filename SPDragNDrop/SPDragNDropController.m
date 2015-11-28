@@ -12,22 +12,22 @@ static const void *kDragSourceKey = &kDragSourceKey;
 static const void *kDropTargetKey = &kDropTargetKey;
 static const NSTimeInterval kSpringloadDelay = 1.3;
 
-@interface SPDraggingState : NSObject
+@interface SPDraggingState : NSObject <SPDraggingInfo>
 // Initial, transferrable state
 @property(nonatomic,strong) UIImage *screenshot;
 @property(nonatomic,copy) NSString *title;
 @property(nonatomic,copy) NSString *subtitle;
 @property(nonatomic,strong) UIView *proxyIcon;
-@property(nonatomic,strong) id modelObject;
+@property(nonatomic,strong) UIPasteboard *pasteboard;
 @property(nonatomic,assign) CGPoint initialPositionInScreenSpace;
 
 // During-drag state
+@property(nonatomic,strong) NSArray *originalPasteboardContents;
 @property(nonatomic,strong) UIView *dragInitiator; // the thing that was long-pressed
 @property(nonatomic,strong) UIView *proxyView; // thing under finger
 @property(nonatomic,strong) NSArray *activeDropTargets;
 @property(nonatomic,strong) NSTimer *springloadingTimer;
 @property(nonatomic,weak) SPDropTarget *hoveringTarget;
-- (id)modelObject;
 @end
 
 @interface SPDragSource : NSObject
@@ -40,8 +40,8 @@ static const NSTimeInterval kSpringloadDelay = 1.3;
 @property(nonatomic,weak) UIView *view;
 @property(nonatomic,weak) id<SPDropDelegate> delegate;
 @property(nonatomic,strong) SPDropHighlightView *highlight;
-- (BOOL)canSpringload:(id)modelObject;
-- (BOOL)canDrop:(id)modelObject;
+- (BOOL)canSpringload:(id<SPDraggingInfo>)drag;
+- (BOOL)canDrop:(id<SPDraggingInfo>)drag;
 @end
 
 @interface SPDragNDropController () <UIGestureRecognizerDelegate, CerfingConnectionDelegate>
@@ -132,7 +132,7 @@ static const NSTimeInterval kSpringloadDelay = 1.3;
     
     
     if(_state) {
-        if([target.delegate droppable:target.view canAcceptModelObject:_state.modelObject]) {
+		if([target.delegate dropTarget:target.view canAcceptDrag:_state]) {
             _state.activeDropTargets = [_state.activeDropTargets arrayByAddingObject:target];
             [self highlightDropTargets];
         }
@@ -207,14 +207,24 @@ static UIImage *screenshotForView(UIView *view)
 	
 	SPDragSource *source = objc_getAssociatedObject(initiator, kDragSourceKey);
     id<SPDragDelegate> delegate = source.delegate;
-    id modelObject = [delegate modelObjectForDraggable:initiator];
 
     SPDraggingState *state = [SPDraggingState new];
-	state.modelObject = modelObject;
     state.dragInitiator = initiator;
-    
+	
+	// Setup pasteboard contents
+	state.pasteboard = [UIPasteboard generalPasteboard];
+	state.originalPasteboardContents = state.pasteboard.items;
+	state.pasteboard.items = @[];
+	[delegate beginDragOperationFromView:initiator ontoPasteboard:state.pasteboard];
+	if(state.pasteboard.items.count == 0) {
+		NSLog(@"%@: Cancelling drag operation because no item was put on pasteboard", [self class]);
+		state.pasteboard.items = state.originalPasteboardContents;
+		return;
+	}
+	
+    // Dragging displayables
     NSString *title = nil, *subtitle = nil;
-    state.proxyIcon = [self.proxyIconDelegate dragController:self iconViewForModelObject:modelObject getTitle:&title getSubtitle:&subtitle];
+    state.proxyIcon = [self.proxyIconDelegate dragController:self iconViewForDrag:state getTitle:&title getSubtitle:&subtitle];
 	state.title = title;
 	state.subtitle = subtitle;
 	if(!state.proxyIcon)
@@ -237,7 +247,7 @@ static UIImage *screenshotForView(UIView *view)
 		@"state": @{
 			@"title": title ?: @"",
 			@"subtitle": subtitle ?: @"",
-			@"modelObject": modelObject,
+			@"pasteboardName": state.pasteboard.name,
 		},
 		@"anchorPoint": NSStringFromCGPoint(anchorPoint),
 		@"initialPosition": NSStringFromCGPoint(initialScreenLocation)
@@ -251,7 +261,7 @@ static UIImage *screenshotForView(UIView *view)
 
 	state.title = [stateD[@"title"] length] > 0 ? stateD[@"title"] : nil;
 	state.subtitle = [stateD[@"subtitle"] length] > 0 ? stateD[@"subtitle"] : nil;
-	state.modelObject = stateD[@"modelObject"];
+	state.pasteboard = [UIPasteboard pasteboardWithName:stateD[@"pasteboardName"] create:NO];
 	
 	CGPoint anchorPoint = CGPointFromString(msg[@"anchorPoint"]);
 	CGPoint initialPosition = CGPointFromString(msg[@"initialPosition"]);
@@ -285,7 +295,7 @@ static UIImage *screenshotForView(UIView *view)
     state.proxyView.layer.position = position;
     
     _state.activeDropTargets = [_dropTargets.allObjects filteredArrayUsingPredicate:[NSPredicate predicateWithBlock:^(SPDropTarget *target, NSDictionary *bindings) {
-        return [target.delegate droppable:target.view canAcceptModelObject:state.modelObject];
+		return [target.delegate dropTarget:target.view canAcceptDrag:state];
 	}]];
 	
     [self highlightDropTargets];
@@ -325,16 +335,16 @@ static UIImage *screenshotForView(UIView *view)
             [_state.springloadingTimer invalidate]; _state.springloadingTimer = nil;
         }
         
-        if ([_state.hoveringTarget canSpringload:_state.modelObject]) {
+        if ([_state.hoveringTarget canSpringload:_state]) {
             _state.springloadingTimer = [NSTimer scheduledTimerWithTimeInterval:kSpringloadDelay target:self selector:@selector(springload) userInfo:nil repeats:NO];
         }
     }
     
-    if([_state.hoveringTarget.delegate respondsToSelector:@selector(droppable:updateHighlight:forDragOf:atPoint:)]) {
+    if([_state.hoveringTarget.delegate respondsToSelector:@selector(dropTarget:updateHighlight:forDrag:atPoint:)]) {
         CGPoint locationInWindow = _state.proxyView.layer.position;
         CGPoint p = [_state.hoveringTarget.view convertPoint:locationInWindow fromView:_state.proxyView.superview];
 
-        [_state.hoveringTarget.delegate droppable:_state.hoveringTarget.view updateHighlight:_state.hoveringTarget.highlight forDragOf:_state.modelObject atPoint:p];
+        [_state.hoveringTarget.delegate dropTarget:_state.hoveringTarget.view updateHighlight:_state.hoveringTarget.highlight forDrag:_state atPoint:p];
     }
 }
 
@@ -361,14 +371,14 @@ static UIImage *screenshotForView(UIView *view)
 	
     SPDropTarget *targetThatWasHit = [self targetUnderFinger];
     
-    if (![targetThatWasHit canDrop:_state.modelObject]) {
+    if (![targetThatWasHit canDrop:_state]) {
         [self cancelDragging];
         return;
     }
     
     CGPoint locationInWindow = _state.proxyView.layer.position;
     CGPoint p = [targetThatWasHit.view convertPoint:locationInWindow fromView:_state.proxyView.superview];
-    [targetThatWasHit.delegate droppable:targetThatWasHit.view acceptDrop:_state.modelObject atPoint:p];
+    [targetThatWasHit.delegate dropTarget:targetThatWasHit.view acceptDrag:_state atPoint:p];
     
     __block int count = 0;
     dispatch_block_t completion = ^{
@@ -429,8 +439,8 @@ static UIImage *screenshotForView(UIView *view)
         
         // Make a drop target highlight
         target.highlight = [[SPDropHighlightView alloc] initWithFrame:target.view.bounds];
-        target.highlight.springloadable = [target canSpringload:_state.modelObject];
-        target.highlight.droppable = [target canDrop:_state.modelObject];
+        target.highlight.springloadable = [target canSpringload:_state];
+        target.highlight.droppable = [target canDrop:_state];
 
         target.highlight.alpha = 0;
         [target.view addSubview:target.highlight];
@@ -463,7 +473,7 @@ static UIImage *screenshotForView(UIView *view)
     CGPoint p = [springloadingTarget.view convertPoint:locationInWindow fromView:_state.proxyView.superview];
     
     [springloadingTarget.highlight animateSpringloadWithCompletion:^{
-        [springloadingTarget.delegate droppable:springloadingTarget.view springload:_state.modelObject atPoint:p];
+        [springloadingTarget.delegate dropTarget:springloadingTarget.view springload:_state atPoint:p];
         
         _state.springloadingTimer = nil;
     }];
@@ -504,18 +514,18 @@ static UIImage *screenshotForView(UIView *view)
 @end
 
 @implementation SPDropTarget
-- (BOOL)canSpringload:(id)modelObject
+- (BOOL)canSpringload:(id<SPDraggingInfo>)drag
 {
-    BOOL supportsSpringloading = [self.delegate respondsToSelector:@selector(droppable:springload:atPoint:)];
-    BOOL supportsShould = [self.delegate respondsToSelector:@selector(droppable:shouldSpringload:)];
-    BOOL shouldStartSpringloading = supportsSpringloading && (!supportsShould || [self.delegate droppable:self.view shouldSpringload:modelObject]);
+    BOOL supportsSpringloading = [self.delegate respondsToSelector:@selector(dropTarget:springload:atPoint:)];
+    BOOL supportsShould = [self.delegate respondsToSelector:@selector(dropTarget:shouldSpringload:)];
+    BOOL shouldStartSpringloading = supportsSpringloading && (!supportsShould || [self.delegate dropTarget:self.view shouldSpringload:drag]);
     return shouldStartSpringloading;
 }
-- (BOOL)canDrop:(id)modelObject
+- (BOOL)canDrop:(id<SPDraggingInfo>)drag
 {
-    BOOL supportsShouldDrop = [self.delegate respondsToSelector:@selector(droppable:shouldAcceptDrop:)];
-    BOOL supportsDrop = [self.delegate respondsToSelector:@selector(droppable:acceptDrop:atPoint:)];
-    BOOL shouldDrop = supportsDrop && (!supportsShouldDrop || [self.delegate droppable:self.view shouldAcceptDrop:modelObject]);
+    BOOL supportsShouldDrop = [self.delegate respondsToSelector:@selector(dropTarget:shouldAcceptDrag:)];
+    BOOL supportsDrop = [self.delegate respondsToSelector:@selector(dropTarget:acceptDrag:atPoint:)];
+    BOOL shouldDrop = supportsDrop && (!supportsShouldDrop || [self.delegate dropTarget:self.view shouldAcceptDrag:drag]);
     return shouldDrop;
 }
 @end
