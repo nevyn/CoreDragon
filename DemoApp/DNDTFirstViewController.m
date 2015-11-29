@@ -44,9 +44,13 @@
     // Dispose of any resources that can be recreated.
 }
 
-- (void)beginDragOperationFromView:(UIView *)draggable ontoPasteboard:(UIPasteboard *)pasteboard
+- (void)beginDragOperation:(id<SPDraggingInfo>)drag fromView:(UIView *)draggable
 {
-	[pasteboard setValue:[(UILabel*)draggable text] forPasteboardType:(NSString*)kUTTypePlainText];
+	NSString *text = [(UILabel*)draggable text];
+    drag.title = text;
+    drag.draggingIcon = [UIImage imageNamed:@"testimage"];
+
+	[drag.pasteboard setValue:text forPasteboardType:(NSString*)kUTTypePlainText];
 }
 
 - (BOOL)dropTarget:(UIView *)droppable canAcceptDrag:(id<SPDraggingInfo>)drag

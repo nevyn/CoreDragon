@@ -12,7 +12,7 @@
 #import <SPDragNDrop/SPDragNDrop.h>
 #import <MobileCoreServices/UTCoreTypes.h>
 
-@interface DNDTAppDelegate () <SPDropDelegate, SPDragProxyIconDelegate>
+@interface DNDTAppDelegate () <SPDropDelegate>
 @end
 
 @implementation DNDTAppDelegate
@@ -22,7 +22,6 @@
 	self.tabBarController = (id)self.window.rootViewController;
     
     [[SPDragNDropController sharedController] registerDropTarget:self.tabBarController.tabBar delegate:self];
-    [[SPDragNDropController sharedController] setProxyIconDelegate:self];
     return YES;
 }
 - (BOOL)dropTarget:(UIView *)droppable canAcceptDrag:(id<SPDraggingInfo>)drag
@@ -38,12 +37,5 @@
 {
     [self.tabBarController setSelectedIndex:(self.tabBarController.selectedIndex + 1) % 2];
 }
-
-- (UIImage*)dragController:(SPDragNDropController*)dragndrop iconViewForDrag:(id<SPDraggingInfo>)drag getTitle:(NSString *__autoreleasing *)title getSubtitle:(NSString *__autoreleasing *)subtitle
-{
-    *title = [drag.pasteboard valueForPasteboardType:(NSString*)kUTTypePlainText];
-    return [UIImage imageNamed:@"testimage"];
-}
-
 
 @end

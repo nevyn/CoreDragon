@@ -21,7 +21,7 @@ static NSString *const kDragMetadataKey = @"eu.thirdcog.dragndrop.meta";
 @property(nonatomic,strong) UIImage *screenshot;
 @property(nonatomic,copy) NSString *title;
 @property(nonatomic,copy) NSString *subtitle;
-@property(nonatomic,strong) UIImage *proxyIcon;
+@property(nonatomic,strong) UIImage *draggingIcon;
 @property(nonatomic,strong) UIPasteboard *pasteboard;
 @property(nonatomic,assign) CGPoint initialPositionInScreenSpace;
 @property(nonatomic,assign) NSString *operationIdentifier;
@@ -235,7 +235,7 @@ static UIImage *screenshotForView(UIView *view)
 	state.pasteboard = [UIPasteboard generalPasteboard];
 	state.originalPasteboardContents = state.pasteboard.items;
 	state.pasteboard.items = @[];
-	[delegate beginDragOperationFromView:initiator ontoPasteboard:state.pasteboard];
+	[delegate beginDragOperation:state fromView:initiator];
 	if(state.pasteboard.items.count == 0) {
 		NSLog(@"%@: Cancelling drag operation because no item was put on pasteboard", [self class]);
 		state.pasteboard.items = state.originalPasteboardContents;
@@ -243,18 +243,14 @@ static UIImage *screenshotForView(UIView *view)
 	}
 	
     // Dragging displayables
-    NSString *title = nil, *subtitle = nil;
-    state.proxyIcon = [self.proxyIconDelegate dragController:self iconViewForDrag:state getTitle:&title getSubtitle:&subtitle];
-	state.title = title;
-	state.subtitle = subtitle;
-	if(!state.proxyIcon)
+	if(!state.draggingIcon)
 		state.screenshot = screenshotForView(initiator);
 	
 	// Put displayables on pasteboard for transfer to other apps
 	NSMutableDictionary *meta = [@{
 		@"uuid": state.operationIdentifier,
 	} mutableCopy];
-	if(state.proxyIcon) meta[@"proxyIcon"] = UIImagePNGRepresentation(state.proxyIcon);
+	if(state.draggingIcon) meta[@"draggingIcon"] = UIImagePNGRepresentation(state.draggingIcon);
 	if(state.screenshot) meta[@"screenshot"] = UIImagePNGRepresentation(state.screenshot);
 	NSData *metadata = [NSKeyedArchiver archivedDataWithRootObject:meta];
 	[state.pasteboard addItems:@[@{kDragMetadataKey: metadata}]];
@@ -277,8 +273,8 @@ static UIImage *screenshotForView(UIView *view)
 	[_cerfing broadcastDict:@{
 		kCerfingCommand: @"startDragging",
 		@"state": @{
-			@"title": title ?: @"",
-			@"subtitle": subtitle ?: @"",
+			@"title": state.title ?: @"",
+			@"subtitle": state.subtitle ?: @"",
 			@"pasteboardName": state.pasteboard.name,
 			@"uuid": state.operationIdentifier,
 		},
@@ -309,7 +305,7 @@ static UIImage *screenshotForView(UIView *view)
 	NSData *metadata = [[state.pasteboard dataForPasteboardType:kDragMetadataKey inItemSet:NULL] firstObject];
 	NSDictionary *meta = [NSKeyedUnarchiver unarchiveObjectWithData:metadata]; // TODO: Use secure coding
 	if([meta[@"uuid"] isEqual:state.operationIdentifier]) {
-		state.proxyIcon = [UIImage imageWithData:meta[@"proxyIcon"]];
+		state.draggingIcon = [UIImage imageWithData:meta[@"draggingIcon"]];
 		state.screenshot = [UIImage imageWithData:meta[@"screenshot"]];
 	} else {
 		NSLog(@"Warning: Missing drag'n'drop metadata over auxilliary pasteboard");
@@ -323,20 +319,20 @@ static UIImage *screenshotForView(UIView *view)
 {
 	self.state = state;
 	
-    if(state.proxyIcon || !state.screenshot) {
-        state.proxyView = [[SPDragProxyView alloc] initWithIcon:state.proxyIcon title:state.title subtitle:state.subtitle];
+    if(state.draggingIcon || !state.screenshot) {
+        state.proxyView = [[SPDragProxyView alloc] initWithIcon:state.draggingIcon title:state.title subtitle:state.subtitle];
     } else {
-        state.proxyView = [[UIImageView alloc] initWithImage:state.proxyIcon];
+        state.proxyView = [[UIImageView alloc] initWithImage:state.draggingIcon];
     }
 	
 
     state.proxyView.alpha = 0;
     [UIView animateWithDuration:.2 animations:^{
-        state.proxyView.alpha = state.proxyIcon ? 1 : 0.5;
+        state.proxyView.alpha = state.draggingIcon ? 1 : 0.5;
     }];
     [_draggingContainer addSubview:state.proxyView];
     
-    if(!state.proxyIcon) { // it's just a screenshot, position it correctly
+    if(!state.draggingIcon) { // it's just a screenshot, position it correctly
         state.proxyView.layer.anchorPoint = anchorPoint;
     }
     state.proxyView.layer.position = position;

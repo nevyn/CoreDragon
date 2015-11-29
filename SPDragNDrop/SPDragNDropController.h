@@ -1,14 +1,11 @@
 #import <UIKit/UIKit.h>
-@protocol SPDragDelegate, SPDropDelegate, SPDragProxyIconDelegate;
+@protocol SPDragDelegate, SPDropDelegate;
 
 /// Controller for managing drag an drop between views (possibly between applications).
 @interface SPDragNDropController : NSObject
 /*! Get the shared SPDragNDropController. Only use this singleton: don't instantiate
 	more of them. */
 + (id)sharedController;
-
-
-@property(nonatomic,weak) id<SPDragProxyIconDelegate> proxyIconDelegate;
 
 /*! Allow drags to be started from the 'draggable' UIView. The given delegate
 	will be asked to customize this drag (by providing the data to be dragged, etc)
@@ -24,9 +21,19 @@
 - (void)unregisterDropTarget:(id)droppableOrDelegate;
 @end
 
-/// Information about a dragging operation that is in progress
+/// Information about a dragging operation that is about to start or is in progress.
 @protocol SPDraggingInfo <NSObject>
 @property(nonatomic,readonly) UIPasteboard *pasteboard;
+
+// Can only be set during 'beingDragOperation:fromView:'
+/*! An icon to represent the data you just put in pasteboard. If not set, the
+	drag will be represented by a screenshot of the dragged view. */
+@property(nonatomic,strong) UIImage *draggingIcon;
+/*! If draggingIcon is set, you can optionally also set a title to be shown next
+	to the icon while dragging. */
+@property(nonatomic,copy) NSString *title;
+/*! And additionally, a subtitle can be displayed below the title. */
+@property(nonatomic,copy) NSString *subtitle;
 @end
 
 
@@ -34,9 +41,9 @@
 @required
 /*!
 	Dragging was just initiated from `draggable`. Put the object(s) to be dragged onto
-	`pasteboard`. Not doing so will cancel the drag.
+	the pasteboard in `drag`. Not doing so will cancel the drag.
 */
-- (void)beginDragOperationFromView:(UIView*)draggable ontoPasteboard:(UIPasteboard*)pasteboard;
+- (void)beginDragOperation:(id<SPDraggingInfo>)drag fromView:(UIView*)draggable;
 @end
 
 @protocol SPDropDelegate <NSObject>
@@ -56,8 +63,4 @@
 // If you want to customize the highlight shown for a drag based on where the finger is right now
 // (e g for doing out-of-edit drag rearrangement in table views), implement this method.
 - (void)dropTarget:(UIView *)droppable updateHighlight:(UIView*)highlightContainer forDrag:(id<SPDraggingInfo>)drag atPoint:(CGPoint)p;
-@end
-
-@protocol SPDragProxyIconDelegate <NSObject>
-- (UIImage*)dragController:(SPDragNDropController*)dragndrop iconViewForDrag:(id<SPDraggingInfo>)drag getTitle:(NSString**)title getSubtitle:(NSString**)subtitle;
 @end

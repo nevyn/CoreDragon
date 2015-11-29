@@ -59,9 +59,9 @@
     // Dispose of any resources that can be recreated.
 }
 
-- (void)beginDragOperationFromView:(UIView *)draggable ontoPasteboard:(UIPasteboard *)pasteboard
+- (void)beginDragOperation:(id<SPDraggingInfo>)drag fromView:(UIView *)draggable
 {
-	[pasteboard setValue:[(UILabel*)draggable text] forPasteboardType:(NSString*)kUTTypePlainText];
+	[drag.pasteboard setValue:[(UILabel*)draggable text] forPasteboardType:(NSString*)kUTTypePlainText];
 }
 
 - (BOOL)dropTarget:(UIView *)droppable canAcceptDrag:(id<SPDraggingInfo>)drag

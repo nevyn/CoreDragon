@@ -9,6 +9,6 @@
 - [X] Fix connection reestablishment when foregrounding
 - [ ] Make gesture recognizer survive view disappearing from its superview.
 	  We need to be able to navigate away from the drag source during dnd.
-- [ ] Get rid of SPDragProxyIconDelegate and just put it into SPDragDelegate like on Mac
+- [X] Get rid of SPDragProxyIconDelegate and just put it into SPDragDelegate like on Mac
 - [ ] Implement some proper example apps! Maybe a 'contacts/chat' app and a 'photos' app
 - [ ] Implement a "successful drop" animation
