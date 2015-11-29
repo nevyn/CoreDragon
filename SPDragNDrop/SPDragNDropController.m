@@ -173,13 +173,28 @@ static NSString *const kDragMetadataKey = @"eu.thirdcog.dragndrop.meta";
 static UIImage *screenshotForView(UIView *view)
 {
     CGSize sz = view.frame.size;
-    
-    UIGraphicsBeginImageContextWithOptions(sz, YES, UIScreen.mainScreen.scale);
-    
-    [view.layer renderInContext:UIGraphicsGetCurrentContext()];
+    UIGraphicsBeginImageContextWithOptions(sz, NO, view.traitCollection.displayScale);
+
+	if(![view drawViewHierarchyInRect:(CGRect){.size=sz} afterScreenUpdates:YES])
+		[view.layer renderInContext:UIGraphicsGetCurrentContext()];
     UIImage *screenShot = UIGraphicsGetImageFromCurrentImageContext();
     UIGraphicsEndImageContext();
     return screenShot;
+}
+
+static NSDictionary *serializedImage(UIImage *image)
+{
+	return @{
+		@"scale": @(image.scale),
+		@"pngData": UIImagePNGRepresentation(image),
+	};
+}
+
+static UIImage *unserializedImage(NSDictionary *rep)
+{
+	if(!rep || !rep[@"pngData"] || !rep[@"scale"])
+		return nil;
+	return [UIImage imageWithData:rep[@"pngData"] scale:[rep[@"scale"] floatValue]];
 }
 
 #pragma mark - Gesture recognition, network and state handling
@@ -250,8 +265,8 @@ static UIImage *screenshotForView(UIView *view)
 	NSMutableDictionary *meta = [@{
 		@"uuid": state.operationIdentifier,
 	} mutableCopy];
-	if(state.draggingIcon) meta[@"draggingIcon"] = UIImagePNGRepresentation(state.draggingIcon);
-	if(state.screenshot) meta[@"screenshot"] = UIImagePNGRepresentation(state.screenshot);
+	if(state.draggingIcon) meta[@"draggingIcon"] = serializedImage(state.draggingIcon);
+	if(state.screenshot) meta[@"screenshot"] = serializedImage(state.screenshot);
 	NSData *metadata = [NSKeyedArchiver archivedDataWithRootObject:meta];
 	[state.pasteboard addItems:@[@{kDragMetadataKey: metadata}]];
 	
@@ -305,8 +320,8 @@ static UIImage *screenshotForView(UIView *view)
 	NSData *metadata = [[state.pasteboard dataForPasteboardType:kDragMetadataKey inItemSet:NULL] firstObject];
 	NSDictionary *meta = [NSKeyedUnarchiver unarchiveObjectWithData:metadata]; // TODO: Use secure coding
 	if([meta[@"uuid"] isEqual:state.operationIdentifier]) {
-		state.draggingIcon = [UIImage imageWithData:meta[@"draggingIcon"]];
-		state.screenshot = [UIImage imageWithData:meta[@"screenshot"]];
+		state.draggingIcon = unserializedImage(meta[@"draggingIcon"]);
+		state.screenshot = unserializedImage(meta[@"screenshot"]);
 	} else {
 		NSLog(@"Warning: Missing drag'n'drop metadata over auxilliary pasteboard");
 	}
@@ -322,7 +337,7 @@ static UIImage *screenshotForView(UIView *view)
     if(state.draggingIcon || !state.screenshot) {
         state.proxyView = [[SPDragProxyView alloc] initWithIcon:state.draggingIcon title:state.title subtitle:state.subtitle];
     } else {
-        state.proxyView = [[UIImageView alloc] initWithImage:state.draggingIcon];
+        state.proxyView = [[UIImageView alloc] initWithImage:state.screenshot];
     }
 	
 

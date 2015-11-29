@@ -7,8 +7,10 @@
 	  to restore the pasteboard!
 - [X] If drop target doesn't accept drop, don't send the drop to it when dragging ends!
 - [X] Fix connection reestablishment when foregrounding
+- [X] Get rid of SPDragProxyIconDelegate and just put it into SPDragDelegate like on Mac
+- [ ] Implement a "successful drop" animation
+- [ ] Put the dragging metadata as an alt type in the first pasteboard item instead
+	  of adding it as a separate item
 - [ ] Make gesture recognizer survive view disappearing from its superview.
 	  We need to be able to navigate away from the drag source during dnd.
-- [X] Get rid of SPDragProxyIconDelegate and just put it into SPDragDelegate like on Mac
 - [ ] Implement some proper example apps! Maybe a 'contacts/chat' app and a 'photos' app
-- [ ] Implement a "successful drop" animation
