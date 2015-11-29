@@ -409,7 +409,7 @@ static UIImage *screenshotForView(UIView *view)
 	
     SPDropTarget *targetThatWasHit = [self targetUnderFinger];
     
-    if (![targetThatWasHit canDrop:_state]) {
+    if (![_state.activeDropTargets containsObject:targetThatWasHit] || ![targetThatWasHit canDrop:_state]) {
         [self cancelDragging];
         return;
     }
