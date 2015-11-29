@@ -78,12 +78,8 @@ static NSString *const kDragMetadataKey = @"eu.thirdcog.dragndrop.meta";
 	_dragSources = [NSMutableSet new];
     _dropTargets = [NSMutableSet new];
 	
-	NSString *appName = [[NSBundle mainBundle] objectForInfoDictionaryKey:@"CFBundleDisplayName"] ?:
-						[[NSBundle mainBundle] objectForInfoDictionaryKey:@"CFBundleName"] ?:
-						[[NSProcessInfo processInfo] processName];
-	
-	_cerfing = [[CerfingMeshPipe alloc] initWithBasePort:23576 count:16 peerName:appName];
-	_cerfing.delegate = self;
+	[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(_establishMeshPipe) name:UIApplicationDidBecomeActiveNotification object:nil];
+	[self _establishMeshPipe];
 	
 	self.draggingContainer = [[SPDraggingContainerWindow alloc] initWithFrame:[UIScreen mainScreen].bounds];
 	self.draggingContainer.hidden = NO;
@@ -93,6 +89,8 @@ static NSString *const kDragMetadataKey = @"eu.thirdcog.dragndrop.meta";
 
 - (void)dealloc
 {
+	[[NSNotificationCenter defaultCenter] removeObserver:self];
+	
     self.draggingContainer.hidden = YES;
     self.draggingContainer = nil;
 	
@@ -101,6 +99,22 @@ static NSString *const kDragMetadataKey = @"eu.thirdcog.dragndrop.meta";
 		objc_setAssociatedObject(source.view, kDragSourceKey, nil, OBJC_ASSOCIATION_RETAIN);
 	}
 }
+
+#pragma mark - Network establish
+
+- (void)_establishMeshPipe
+{
+	_cerfing = nil;
+	
+	NSString *appName = [[NSBundle mainBundle] objectForInfoDictionaryKey:@"CFBundleDisplayName"] ?:
+						[[NSBundle mainBundle] objectForInfoDictionaryKey:@"CFBundleName"] ?:
+						[[NSProcessInfo processInfo] processName];
+	
+	_cerfing = [[CerfingMeshPipe alloc] initWithBasePort:23576 count:16 peerName:appName];
+	_cerfing.delegate = self;
+}
+
+
 
 #pragma mark - Registration
 
