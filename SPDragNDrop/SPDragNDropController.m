@@ -8,6 +8,9 @@
 
 @class SPDropTarget, SPDragSource;
 
+//#define DNDLog(...) NSLog(__VA_ARGS__)
+#define DNDLog(...)
+
 static const void *kDragSourceKey = &kDragSourceKey;
 static const void *kDropTargetKey = &kDropTargetKey;
 static const NSTimeInterval kSpringloadDelay = 1.3;
@@ -204,7 +207,7 @@ static UIImage *screenshotForView(UIView *view)
 - (void)startDraggingWithInitiator:(UIView*)initiator event:(UIGestureRecognizer*)grec
 {
 	if(_state != nil) {
-		[self finishDragging];
+		[self _cleanUpDragging];
 	}
 	
 	SPDragSource *source = objc_getAssociatedObject(initiator, kDragSourceKey);
@@ -380,6 +383,7 @@ static UIImage *screenshotForView(UIView *view)
 
 #pragma mark Conclude dragging
 
+// Finger has been lifted, conclude the dragging operation!
 - (void)concludeDraggingFromGesture
 {
 	[_cerfing broadcastDict:@{
@@ -391,13 +395,17 @@ static UIImage *screenshotForView(UIView *view)
 {
 	[self _concludeDragging];
 }
+// This will either end up calling 'cancelDragging' or 'cleanUpDragging'
 - (void)_concludeDragging
 {
-	// Another app will take care of the proper drag conclusion?
+	// Another app will take care of the proper drag conclusion because the touch was in that app?
 	if(![self _draggingIsWithinMyApp]) {
-		[self finishDragging];
+		// finishDragging will be called from either remote calling 'cancelDragging' or
+		// 'remoteSideConcludedDragging'.
+		DNDLog(@"Drag concluded at %@, which is outside of my bounds %@", NSStringFromCGPoint([self convertLocalPointToScreenSpace:_state.proxyView.layer.position]), NSStringFromCGRect([self localFrameInScreenSpace]));
 		return;
 	}
+	DNDLog(@"Concluding dragging!");
 	
     SPDropTarget *targetThatWasHit = [self targetUnderFinger];
     
@@ -413,7 +421,7 @@ static UIImage *screenshotForView(UIView *view)
     __block int count = 0;
     dispatch_block_t completion = ^{
         if(++count == 2)
-            [self finishDragging];
+            [self cleanUpDragging];
     };
     [targetThatWasHit.highlight animateAcceptedDropWithCompletion:completion];
     [UIView animateWithDuration:.3 delay:0 options:UIViewAnimationOptionCurveEaseIn animations:^{
@@ -424,7 +432,7 @@ static UIImage *screenshotForView(UIView *view)
 
 #pragma mark Cancel dragging
 
-// Animate indicating that the drag failed
+// Animate indicating that the drag failed, across all apps.
 - (void)cancelDragging
 {
 	[_cerfing broadcastDict:@{
@@ -442,18 +450,37 @@ static UIImage *screenshotForView(UIView *view)
     [UIView animateWithDuration:.5 animations:^{
         _state.proxyView.layer.position = [self convertScreenPointToLocalSpace:_state.initialPositionInScreenSpace];
     } completion:^(BOOL finished) {
-        [self finishDragging];
+        [self _cleanUpDragging];
     }];
 }
 
-#pragma mark Util - Finish dragging
+#pragma mark Clean up dragging
+
+// Okay, this app (or another app that handled the touch lifting) has finished handling
+// the drag operation. We can now clean up.
+- (void)cleanUpDragging
+{
+	[_cerfing broadcastDict:@{
+		kCerfingCommand: @"completeDragging",
+	}];
+	[self _cleanUpDragging];
+}
+
+- (void)command:(CerfingConnection*)connection completeDragging:(NSDictionary*)dict
+{
+	[self _cleanUpDragging];
+}
 
 // Tear down and reset all dragging related state
-- (void)finishDragging
+- (void)_cleanUpDragging
 {
     [_state.springloadingTimer invalidate];
     [_state.proxyView removeFromSuperview];
     [self stopHighlightingDropTargets];
+	
+	if(self.state.originalPasteboardContents)
+		self.state.pasteboard.items = self.state.originalPasteboardContents;
+	
     self.state = nil;
 }
 
