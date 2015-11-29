@@ -3,13 +3,24 @@
 
 /// Controller for managing drag an drop between views (possibly between applications).
 @interface SPDragNDropController : NSObject
+/*! Get the shared SPDragNDropController. Only use this singleton: don't instantiate
+	more of them. */
 + (id)sharedController;
+
+
 @property(nonatomic,weak) id<SPDragProxyIconDelegate> proxyIconDelegate;
 
+/*! Allow drags to be started from the 'draggable' UIView. The given delegate
+	will be asked to customize this drag (by providing the data to be dragged, etc)
+	if/when a drag starts. */
 - (void)registerDragSource:(UIView *)draggable delegate:(id<SPDragDelegate>)delegate;
+/*! Stop allowing drags from this view.*/
 - (void)unregisterDragSource:(UIView *)draggable;
 
+/*! Allow drags to end up in the 'droppable' UIView. The given delegate
+	will be asked to accept the drop data if/when a drag ends over this view. */
 - (void)registerDropTarget:(UIView *)droppable delegate:(id<SPDropDelegate>)delegate;
+/*! Stop allowing drops to this view. */
 - (void)unregisterDropTarget:(id)droppableOrDelegate;
 @end
 
