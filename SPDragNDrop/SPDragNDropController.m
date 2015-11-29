@@ -531,7 +531,7 @@ static UIImage *screenshotForView(UIView *view)
 
 - (CGRect)localFrameInScreenSpace
 {
-	return [self.draggingContainer convertRect:self.draggingContainer.bounds fromCoordinateSpace:self.draggingContainer.screen.fixedCoordinateSpace];
+	return [self.draggingContainer convertRect:self.draggingContainer.bounds toCoordinateSpace:self.draggingContainer.screen.fixedCoordinateSpace];
 }
 
 - (BOOL)_draggingIsWithinMyApp
