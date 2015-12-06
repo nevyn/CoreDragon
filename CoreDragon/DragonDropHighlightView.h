@@ -1,6 +1,6 @@
 #import <UIKit/UIKit.h>
 
-@interface SPDropHighlightView : UIView
+@interface DragonDropHighlightView : UIView
 @property(nonatomic) BOOL droppable;
 @property(nonatomic) BOOL springloadable;
 

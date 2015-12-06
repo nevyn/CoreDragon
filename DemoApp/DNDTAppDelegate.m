@@ -9,7 +9,7 @@
 #import "DNDTAppDelegate.h"
 #import "DNDTFirstViewController.h"
 #import "DNDTSecondViewController.h"
-#import <SPDragNDrop/SPDragNDrop.h>
+#import <CoreDragon/CoreDragon.h>
 #import <MobileCoreServices/UTCoreTypes.h>
 
 @interface DNDTAppDelegate () <SPDropDelegate>
@@ -21,7 +21,7 @@
 {
 	self.tabBarController = (id)self.window.rootViewController;
     
-    [[SPDragNDropController sharedController] registerDropTarget:self.tabBarController.tabBar delegate:self];
+    [[DragonController sharedController] registerDropTarget:self.tabBarController.tabBar delegate:self];
     return YES;
 }
 - (BOOL)dropTarget:(UIView *)droppable canAcceptDrag:(id<SPDraggingInfo>)drag

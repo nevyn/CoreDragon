@@ -6,9 +6,9 @@
 //  Copyright (c) 2012 Spotify. All rights reserved.
 //
 
-#import "SPDraggingContainerWindow.h"
+#import "DragonContainerWindow.h"
 
-@implementation SPDraggingContainerWindow
+@implementation DragonContainerWindow
 - (instancetype)initWithFrame:(CGRect)frame
 {
     if(!(self = [super initWithFrame:frame]))

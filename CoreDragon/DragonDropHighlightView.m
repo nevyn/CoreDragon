@@ -1,7 +1,7 @@
-#import "SPDropHighlightView.h"
+#import "DragonDropHighlightView.h"
 #import <QuartzCore/QuartzCore.h>
 
-@implementation SPDropHighlightView
+@implementation DragonDropHighlightView
 
 - (id)initWithFrame:(CGRect)frame
 {

@@ -8,6 +8,6 @@
 
 #import <UIKit/UIKit.h>
 
-@interface SPDragProxyView : UIView
+@interface DragonProxyView : UIView
 - (id)initWithIcon:(UIImage*)icon title:(NSString*)title subtitle:(NSString*)subtitle;
 @end

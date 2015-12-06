@@ -15,7 +15,7 @@
 		059191101B2E767C00AD5DE8 /* DNDTAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 05EDCE8A18E9FF73003CF165 /* DNDTAppDelegate.m */; };
 		059191111B2E767C00AD5DE8 /* DNDTFirstViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 05EDCE8E18E9FF73003CF165 /* DNDTFirstViewController.m */; };
 		059191121B2E767C00AD5DE8 /* DNDTSecondViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 05EDCE9018E9FF73003CF165 /* DNDTSecondViewController.m */; };
-		059191131B2E786700AD5DE8 /* libSPDragNDrop.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 05EDCE1F18E9F03E003CF165 /* libSPDragNDrop.a */; };
+		059191131B2E786700AD5DE8 /* libCoreDragon.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 05EDCE1F18E9F03E003CF165 /* libCoreDragon.a */; };
 		059191141B2E78C400AD5DE8 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 059191041B2E764700AD5DE8 /* Main.storyboard */; };
 		059191151B2E7CE700AD5DE8 /* first.png in Resources */ = {isa = PBXBuildFile; fileRef = 05EDCE9B18E9FF73003CF165 /* first.png */; };
 		059191161B2E7CE700AD5DE8 /* first@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 05EDCE9C18E9FF73003CF165 /* first@2x.png */; };
@@ -36,18 +36,17 @@
 		05EDCE3118E9F03E003CF165 /* XCTest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 05EDCE3018E9F03E003CF165 /* XCTest.framework */; };
 		05EDCE3218E9F03E003CF165 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 05EDCE2218E9F03E003CF165 /* Foundation.framework */; };
 		05EDCE3418E9F03E003CF165 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 05EDCE3318E9F03E003CF165 /* UIKit.framework */; };
-		05EDCE3718E9F03E003CF165 /* libSPDragNDrop.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 05EDCE1F18E9F03E003CF165 /* libSPDragNDrop.a */; };
+		05EDCE3718E9F03E003CF165 /* libCoreDragon.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 05EDCE1F18E9F03E003CF165 /* libCoreDragon.a */; };
 		05EDCE3D18E9F03E003CF165 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 05EDCE3B18E9F03E003CF165 /* InfoPlist.strings */; };
 		05EDCE3F18E9F03E003CF165 /* SPDragNDropTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 05EDCE3E18E9F03E003CF165 /* SPDragNDropTests.m */; };
-		05EDCE5218E9F072003CF165 /* SPDraggingContainerWindow.m in Sources */ = {isa = PBXBuildFile; fileRef = 05EDCE4A18E9F072003CF165 /* SPDraggingContainerWindow.m */; };
-		05EDCE5318E9F072003CF165 /* SPDragNDropController.m in Sources */ = {isa = PBXBuildFile; fileRef = 05EDCE4D18E9F072003CF165 /* SPDragNDropController.m */; };
-		05EDCE5418E9F072003CF165 /* SPDragProxyView.m in Sources */ = {isa = PBXBuildFile; fileRef = 05EDCE4F18E9F072003CF165 /* SPDragProxyView.m */; };
-		05EDCE5518E9F072003CF165 /* SPDropHighlightView.m in Sources */ = {isa = PBXBuildFile; fileRef = 05EDCE5118E9F072003CF165 /* SPDropHighlightView.m */; };
+		05EDCE5218E9F072003CF165 /* DragonContainerWindow.m in Sources */ = {isa = PBXBuildFile; fileRef = 05EDCE4A18E9F072003CF165 /* DragonContainerWindow.m */; };
+		05EDCE5318E9F072003CF165 /* DragonController.m in Sources */ = {isa = PBXBuildFile; fileRef = 05EDCE4D18E9F072003CF165 /* DragonController.m */; };
+		05EDCE5418E9F072003CF165 /* DragonProxyView.m in Sources */ = {isa = PBXBuildFile; fileRef = 05EDCE4F18E9F072003CF165 /* DragonProxyView.m */; };
+		05EDCE5518E9F072003CF165 /* DragonDropHighlightView.m in Sources */ = {isa = PBXBuildFile; fileRef = 05EDCE5118E9F072003CF165 /* DragonDropHighlightView.m */; };
 		05EDCE5B18E9FF23003CF165 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 05EDCE2218E9F03E003CF165 /* Foundation.framework */; };
 		05EDCE5D18E9FF23003CF165 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 05EDCE5C18E9FF23003CF165 /* CoreGraphics.framework */; };
 		05EDCE5E18E9FF23003CF165 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 05EDCE3318E9F03E003CF165 /* UIKit.framework */; };
 		05EDCEA418E9FF73003CF165 /* DNDTAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 05EDCE8A18E9FF73003CF165 /* DNDTAppDelegate.m */; };
-		05EDCEA518E9FF73003CF165 /* DemoApp-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 05EDCE8B18E9FF73003CF165 /* DemoApp-Info.plist */; };
 		05EDCEA618E9FF73003CF165 /* DNDTFirstViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 05EDCE8E18E9FF73003CF165 /* DNDTFirstViewController.m */; };
 		05EDCEA718E9FF73003CF165 /* DNDTSecondViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 05EDCE9018E9FF73003CF165 /* DNDTSecondViewController.m */; };
 		05EDCEAC18E9FF73003CF165 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 05EDCE9918E9FF73003CF165 /* InfoPlist.strings */; };
@@ -57,10 +56,24 @@
 		05EDCEB018E9FF73003CF165 /* second.png in Resources */ = {isa = PBXBuildFile; fileRef = 05EDCE9E18E9FF73003CF165 /* second.png */; };
 		05EDCEB118E9FF73003CF165 /* second@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 05EDCE9F18E9FF73003CF165 /* second@2x.png */; };
 		05EDCEB218E9FF73003CF165 /* testimage.png in Resources */ = {isa = PBXBuildFile; fileRef = 05EDCEA018E9FF73003CF165 /* testimage.png */; };
-		05EDCEB318E9FFBD003CF165 /* libSPDragNDrop.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 05EDCE1F18E9F03E003CF165 /* libSPDragNDrop.a */; };
+		05EDCEB318E9FFBD003CF165 /* libCoreDragon.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 05EDCE1F18E9F03E003CF165 /* libCoreDragon.a */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
+		053CD62C1C13DFAF003EE626 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 05EDCE1718E9F03D003CF165 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 05EDCE1E18E9F03D003CF165;
+			remoteInfo = CoreDragon;
+		};
+		053CD62E1C13DFB2003EE626 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 05EDCE1718E9F03D003CF165 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 05EDCE1E18E9F03D003CF165;
+			remoteInfo = CoreDragon;
+		};
 		05EDCE3518E9F03E003CF165 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 05EDCE1718E9F03D003CF165 /* Project object */;
@@ -83,6 +96,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		053CD6301C13E071003EE626 /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		059190F01B2E6CCD00AD5DE8 /* Launch Screen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = "Launch Screen.storyboard"; sourceTree = "<group>"; };
 		059190F61B2E764700AD5DE8 /* DemoApp2.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DemoApp2.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		059190F91B2E764700AD5DE8 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
@@ -108,23 +122,23 @@
 		05B92CDF1B8E8D7B00226846 /* GZIP.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = GZIP.m; sourceTree = "<group>"; };
 		05B92CE11B8E8D7B00226846 /* MeshPipe.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MeshPipe.h; sourceTree = "<group>"; };
 		05B92CE21B8E8D7B00226846 /* MeshPipe.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MeshPipe.m; sourceTree = "<group>"; };
-		05EDCE1F18E9F03E003CF165 /* libSPDragNDrop.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libSPDragNDrop.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		05EDCE1F18E9F03E003CF165 /* libCoreDragon.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libCoreDragon.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		05EDCE2218E9F03E003CF165 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
-		05EDCE2F18E9F03E003CF165 /* SPDragNDropTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SPDragNDropTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		05EDCE2F18E9F03E003CF165 /* CoreDragon.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = CoreDragon.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		05EDCE3018E9F03E003CF165 /* XCTest.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = XCTest.framework; path = Library/Frameworks/XCTest.framework; sourceTree = DEVELOPER_DIR; };
 		05EDCE3318E9F03E003CF165 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = Library/Frameworks/UIKit.framework; sourceTree = DEVELOPER_DIR; };
-		05EDCE3A18E9F03E003CF165 /* SPDragNDropTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "SPDragNDropTests-Info.plist"; sourceTree = "<group>"; };
+		05EDCE3A18E9F03E003CF165 /* CoreDragonTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "CoreDragonTests-Info.plist"; sourceTree = "<group>"; };
 		05EDCE3C18E9F03E003CF165 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		05EDCE3E18E9F03E003CF165 /* SPDragNDropTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SPDragNDropTests.m; sourceTree = "<group>"; };
-		05EDCE4918E9F072003CF165 /* SPDraggingContainerWindow.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SPDraggingContainerWindow.h; sourceTree = "<group>"; };
-		05EDCE4A18E9F072003CF165 /* SPDraggingContainerWindow.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SPDraggingContainerWindow.m; sourceTree = "<group>"; };
-		05EDCE4B18E9F072003CF165 /* SPDragNDrop.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SPDragNDrop.h; sourceTree = "<group>"; };
-		05EDCE4C18E9F072003CF165 /* SPDragNDropController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SPDragNDropController.h; sourceTree = "<group>"; };
-		05EDCE4D18E9F072003CF165 /* SPDragNDropController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SPDragNDropController.m; sourceTree = "<group>"; };
-		05EDCE4E18E9F072003CF165 /* SPDragProxyView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SPDragProxyView.h; sourceTree = "<group>"; };
-		05EDCE4F18E9F072003CF165 /* SPDragProxyView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SPDragProxyView.m; sourceTree = "<group>"; };
-		05EDCE5018E9F072003CF165 /* SPDropHighlightView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SPDropHighlightView.h; sourceTree = "<group>"; };
-		05EDCE5118E9F072003CF165 /* SPDropHighlightView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SPDropHighlightView.m; sourceTree = "<group>"; };
+		05EDCE4918E9F072003CF165 /* DragonContainerWindow.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DragonContainerWindow.h; sourceTree = "<group>"; };
+		05EDCE4A18E9F072003CF165 /* DragonContainerWindow.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DragonContainerWindow.m; sourceTree = "<group>"; };
+		05EDCE4B18E9F072003CF165 /* CoreDragon.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CoreDragon.h; sourceTree = "<group>"; };
+		05EDCE4C18E9F072003CF165 /* DragonController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DragonController.h; sourceTree = "<group>"; };
+		05EDCE4D18E9F072003CF165 /* DragonController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DragonController.m; sourceTree = "<group>"; };
+		05EDCE4E18E9F072003CF165 /* DragonProxyView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DragonProxyView.h; sourceTree = "<group>"; };
+		05EDCE4F18E9F072003CF165 /* DragonProxyView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DragonProxyView.m; sourceTree = "<group>"; };
+		05EDCE5018E9F072003CF165 /* DragonDropHighlightView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DragonDropHighlightView.h; sourceTree = "<group>"; };
+		05EDCE5118E9F072003CF165 /* DragonDropHighlightView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DragonDropHighlightView.m; sourceTree = "<group>"; };
 		05EDCE5A18E9FF23003CF165 /* DemoApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DemoApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		05EDCE5C18E9FF23003CF165 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
 		05EDCE8918E9FF73003CF165 /* DNDTAppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DNDTAppDelegate.h; sourceTree = "<group>"; };
@@ -148,7 +162,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				059191131B2E786700AD5DE8 /* libSPDragNDrop.a in Frameworks */,
+				059191131B2E786700AD5DE8 /* libCoreDragon.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -166,7 +180,7 @@
 			files = (
 				05EDCE3118E9F03E003CF165 /* XCTest.framework in Frameworks */,
 				05EDCE3418E9F03E003CF165 /* UIKit.framework in Frameworks */,
-				05EDCE3718E9F03E003CF165 /* libSPDragNDrop.a in Frameworks */,
+				05EDCE3718E9F03E003CF165 /* libCoreDragon.a in Frameworks */,
 				05EDCE3218E9F03E003CF165 /* Foundation.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -175,7 +189,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				05EDCEB318E9FFBD003CF165 /* libSPDragNDrop.a in Frameworks */,
+				05EDCEB318E9FFBD003CF165 /* libCoreDragon.a in Frameworks */,
 				05EDCE5D18E9FF23003CF165 /* CoreGraphics.framework in Frameworks */,
 				05EDCE5E18E9FF23003CF165 /* UIKit.framework in Frameworks */,
 				05EDCE5B18E9FF23003CF165 /* Foundation.framework in Frameworks */,
@@ -272,9 +286,10 @@
 		05EDCE1618E9F03D003CF165 = {
 			isa = PBXGroup;
 			children = (
+				053CD6301C13E071003EE626 /* README.md */,
 				05A3BA111B9371930014780A /* TODO.md */,
-				05EDCE4818E9F072003CF165 /* SPDragNDrop */,
-				05EDCE3818E9F03E003CF165 /* SPDragNDropTests */,
+				05EDCE4818E9F072003CF165 /* CoreDragon */,
+				05EDCE3818E9F03E003CF165 /* Tests */,
 				05EDCE8518E9FF73003CF165 /* DemoApp */,
 				059190F71B2E764700AD5DE8 /* DemoApp2 */,
 				05EDCE2118E9F03E003CF165 /* Frameworks */,
@@ -285,8 +300,8 @@
 		05EDCE2018E9F03E003CF165 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				05EDCE1F18E9F03E003CF165 /* libSPDragNDrop.a */,
-				05EDCE2F18E9F03E003CF165 /* SPDragNDropTests.xctest */,
+				05EDCE1F18E9F03E003CF165 /* libCoreDragon.a */,
+				05EDCE2F18E9F03E003CF165 /* CoreDragon.xctest */,
 				05EDCE5A18E9FF23003CF165 /* DemoApp.app */,
 				059190F61B2E764700AD5DE8 /* DemoApp2.app */,
 			);
@@ -306,38 +321,39 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
-		05EDCE3818E9F03E003CF165 /* SPDragNDropTests */ = {
+		05EDCE3818E9F03E003CF165 /* Tests */ = {
 			isa = PBXGroup;
 			children = (
 				05EDCE3E18E9F03E003CF165 /* SPDragNDropTests.m */,
 				05EDCE3918E9F03E003CF165 /* Supporting Files */,
 			);
-			path = SPDragNDropTests;
+			name = Tests;
+			path = CoreDragonTests;
 			sourceTree = "<group>";
 		};
 		05EDCE3918E9F03E003CF165 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
-				05EDCE3A18E9F03E003CF165 /* SPDragNDropTests-Info.plist */,
+				05EDCE3A18E9F03E003CF165 /* CoreDragonTests-Info.plist */,
 				05EDCE3B18E9F03E003CF165 /* InfoPlist.strings */,
 			);
 			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
-		05EDCE4818E9F072003CF165 /* SPDragNDrop */ = {
+		05EDCE4818E9F072003CF165 /* CoreDragon */ = {
 			isa = PBXGroup;
 			children = (
-				05EDCE4B18E9F072003CF165 /* SPDragNDrop.h */,
-				05EDCE4C18E9F072003CF165 /* SPDragNDropController.h */,
-				05EDCE4D18E9F072003CF165 /* SPDragNDropController.m */,
-				05EDCE4918E9F072003CF165 /* SPDraggingContainerWindow.h */,
-				05EDCE4A18E9F072003CF165 /* SPDraggingContainerWindow.m */,
-				05EDCE4E18E9F072003CF165 /* SPDragProxyView.h */,
-				05EDCE4F18E9F072003CF165 /* SPDragProxyView.m */,
-				05EDCE5018E9F072003CF165 /* SPDropHighlightView.h */,
-				05EDCE5118E9F072003CF165 /* SPDropHighlightView.m */,
+				05EDCE4B18E9F072003CF165 /* CoreDragon.h */,
+				05EDCE4C18E9F072003CF165 /* DragonController.h */,
+				05EDCE4D18E9F072003CF165 /* DragonController.m */,
+				05EDCE4918E9F072003CF165 /* DragonContainerWindow.h */,
+				05EDCE4A18E9F072003CF165 /* DragonContainerWindow.m */,
+				05EDCE4E18E9F072003CF165 /* DragonProxyView.h */,
+				05EDCE4F18E9F072003CF165 /* DragonProxyView.m */,
+				05EDCE5018E9F072003CF165 /* DragonDropHighlightView.h */,
+				05EDCE5118E9F072003CF165 /* DragonDropHighlightView.m */,
 			);
-			path = SPDragNDrop;
+			path = CoreDragon;
 			sourceTree = "<group>";
 		};
 		05EDCE8518E9FF73003CF165 /* DemoApp */ = {
@@ -377,15 +393,16 @@
 			buildRules = (
 			);
 			dependencies = (
+				053CD62F1C13DFB2003EE626 /* PBXTargetDependency */,
 			);
 			name = DemoApp2;
 			productName = DemoApp2;
 			productReference = 059190F61B2E764700AD5DE8 /* DemoApp2.app */;
 			productType = "com.apple.product-type.application";
 		};
-		05EDCE1E18E9F03D003CF165 /* SPDragNDrop */ = {
+		05EDCE1E18E9F03D003CF165 /* CoreDragon */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 05EDCE4218E9F03E003CF165 /* Build configuration list for PBXNativeTarget "SPDragNDrop" */;
+			buildConfigurationList = 05EDCE4218E9F03E003CF165 /* Build configuration list for PBXNativeTarget "CoreDragon" */;
 			buildPhases = (
 				05EDCE1B18E9F03D003CF165 /* Sources */,
 				05EDCE1C18E9F03D003CF165 /* Frameworks */,
@@ -395,14 +412,14 @@
 			);
 			dependencies = (
 			);
-			name = SPDragNDrop;
+			name = CoreDragon;
 			productName = SPDragNDrop;
-			productReference = 05EDCE1F18E9F03E003CF165 /* libSPDragNDrop.a */;
+			productReference = 05EDCE1F18E9F03E003CF165 /* libCoreDragon.a */;
 			productType = "com.apple.product-type.library.static";
 		};
-		05EDCE2E18E9F03E003CF165 /* SPDragNDropTests */ = {
+		05EDCE2E18E9F03E003CF165 /* CoreDragonTests */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 05EDCE4518E9F03E003CF165 /* Build configuration list for PBXNativeTarget "SPDragNDropTests" */;
+			buildConfigurationList = 05EDCE4518E9F03E003CF165 /* Build configuration list for PBXNativeTarget "CoreDragonTests" */;
 			buildPhases = (
 				05EDCE2B18E9F03E003CF165 /* Sources */,
 				05EDCE2C18E9F03E003CF165 /* Frameworks */,
@@ -413,9 +430,9 @@
 			dependencies = (
 				05EDCE3618E9F03E003CF165 /* PBXTargetDependency */,
 			);
-			name = SPDragNDropTests;
+			name = CoreDragonTests;
 			productName = SPDragNDropTests;
-			productReference = 05EDCE2F18E9F03E003CF165 /* SPDragNDropTests.xctest */;
+			productReference = 05EDCE2F18E9F03E003CF165 /* CoreDragon.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
 		05EDCE5918E9FF23003CF165 /* DemoApp */ = {
@@ -429,6 +446,7 @@
 			buildRules = (
 			);
 			dependencies = (
+				053CD62D1C13DFAF003EE626 /* PBXTargetDependency */,
 			);
 			name = DemoApp;
 			productName = DemoApp;
@@ -452,7 +470,7 @@
 					};
 				};
 			};
-			buildConfigurationList = 05EDCE1A18E9F03D003CF165 /* Build configuration list for PBXProject "SPDragNDrop" */;
+			buildConfigurationList = 05EDCE1A18E9F03D003CF165 /* Build configuration list for PBXProject "CoreDragon" */;
 			compatibilityVersion = "Xcode 3.2";
 			developmentRegion = English;
 			hasScannedForEncodings = 0;
@@ -465,8 +483,8 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				05EDCE1E18E9F03D003CF165 /* SPDragNDrop */,
-				05EDCE2E18E9F03E003CF165 /* SPDragNDropTests */,
+				05EDCE1E18E9F03D003CF165 /* CoreDragon */,
+				05EDCE2E18E9F03E003CF165 /* CoreDragonTests */,
 				05EDCE5918E9FF23003CF165 /* DemoApp */,
 				059190F51B2E764700AD5DE8 /* DemoApp2 */,
 			);
@@ -511,7 +529,6 @@
 				05EDCEB018E9FF73003CF165 /* second.png in Resources */,
 				05EDCEB218E9FF73003CF165 /* testimage.png in Resources */,
 				05EDCEAC18E9FF73003CF165 /* InfoPlist.strings in Resources */,
-				05EDCEA518E9FF73003CF165 /* DemoApp-Info.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -536,14 +553,14 @@
 				05B92CF61B8E911C00226846 /* GZIP.m in Sources */,
 				05B92CF11B8E911C00226846 /* CerfingSerializer.m in Sources */,
 				05B92CF51B8E911C00226846 /* AsyncUdpSocket.m in Sources */,
-				05EDCE5318E9F072003CF165 /* SPDragNDropController.m in Sources */,
+				05EDCE5318E9F072003CF165 /* DragonController.m in Sources */,
 				05B92CF71B8E911C00226846 /* MeshPipe.m in Sources */,
-				05EDCE5218E9F072003CF165 /* SPDraggingContainerWindow.m in Sources */,
+				05EDCE5218E9F072003CF165 /* DragonContainerWindow.m in Sources */,
 				05B92CF41B8E911C00226846 /* CerfingMeshPipeTransport.m in Sources */,
 				05B92CF01B8E911C00226846 /* CerfingConnection.m in Sources */,
-				05EDCE5418E9F072003CF165 /* SPDragProxyView.m in Sources */,
+				05EDCE5418E9F072003CF165 /* DragonProxyView.m in Sources */,
 				05B92CF31B8E911C00226846 /* CerfingMeshPipe.m in Sources */,
-				05EDCE5518E9F072003CF165 /* SPDropHighlightView.m in Sources */,
+				05EDCE5518E9F072003CF165 /* DragonDropHighlightView.m in Sources */,
 				05B92CF21B8E911C00226846 /* CerfingTransport.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -570,9 +587,19 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
+		053CD62D1C13DFAF003EE626 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 05EDCE1E18E9F03D003CF165 /* CoreDragon */;
+			targetProxy = 053CD62C1C13DFAF003EE626 /* PBXContainerItemProxy */;
+		};
+		053CD62F1C13DFB2003EE626 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 05EDCE1E18E9F03D003CF165 /* CoreDragon */;
+			targetProxy = 053CD62E1C13DFB2003EE626 /* PBXContainerItemProxy */;
+		};
 		05EDCE3618E9F03E003CF165 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = 05EDCE1E18E9F03D003CF165 /* SPDragNDrop */;
+			target = 05EDCE1E18E9F03D003CF165 /* CoreDragon */;
 			targetProxy = 05EDCE3518E9F03E003CF165 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
@@ -739,7 +766,7 @@
 					"$(inherited)",
 				);
 				OTHER_LDFLAGS = "-ObjC";
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = CoreDragon;
 				SKIP_INSTALL = YES;
 			};
 			name = Debug;
@@ -754,7 +781,7 @@
 					"$(inherited)",
 				);
 				OTHER_LDFLAGS = "-ObjC";
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = CoreDragon;
 				SKIP_INSTALL = YES;
 			};
 			name = Release;
@@ -769,13 +796,13 @@
 					"$(DEVELOPER_FRAMEWORKS_DIR)",
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = "SPDragNDrop/SPDragNDrop-Prefix.pch";
+				GCC_PREFIX_HEADER = "SPDragNDrop/CoreDragon-Prefix.pch";
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					"DEBUG=1",
 					"$(inherited)",
 				);
-				INFOPLIST_FILE = "SPDragNDropTests/SPDragNDropTests-Info.plist";
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				INFOPLIST_FILE = "SPDragNDropTests/CoreDragonTests-Info.plist";
+				PRODUCT_NAME = CoreDragon;
 				TEST_HOST = "$(BUNDLE_LOADER)";
 				WRAPPER_EXTENSION = xctest;
 			};
@@ -791,9 +818,9 @@
 					"$(DEVELOPER_FRAMEWORKS_DIR)",
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = "SPDragNDrop/SPDragNDrop-Prefix.pch";
-				INFOPLIST_FILE = "SPDragNDropTests/SPDragNDropTests-Info.plist";
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				GCC_PREFIX_HEADER = "SPDragNDrop/CoreDragon-Prefix.pch";
+				INFOPLIST_FILE = "SPDragNDropTests/CoreDragonTests-Info.plist";
+				PRODUCT_NAME = CoreDragon;
 				TEST_HOST = "$(BUNDLE_LOADER)";
 				WRAPPER_EXTENSION = xctest;
 			};
@@ -851,7 +878,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		05EDCE1A18E9F03D003CF165 /* Build configuration list for PBXProject "SPDragNDrop" */ = {
+		05EDCE1A18E9F03D003CF165 /* Build configuration list for PBXProject "CoreDragon" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				05EDCE4018E9F03E003CF165 /* Debug */,
@@ -860,7 +887,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		05EDCE4218E9F03E003CF165 /* Build configuration list for PBXNativeTarget "SPDragNDrop" */ = {
+		05EDCE4218E9F03E003CF165 /* Build configuration list for PBXNativeTarget "CoreDragon" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				05EDCE4318E9F03E003CF165 /* Debug */,
@@ -869,7 +896,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		05EDCE4518E9F03E003CF165 /* Build configuration list for PBXNativeTarget "SPDragNDropTests" */ = {
+		05EDCE4518E9F03E003CF165 /* Build configuration list for PBXNativeTarget "CoreDragonTests" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				05EDCE4618E9F03E003CF165 /* Debug */,

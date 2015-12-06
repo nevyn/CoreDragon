@@ -14,3 +14,4 @@
 - [ ] Make gesture recognizer survive view disappearing from its superview.
 	  We need to be able to navigate away from the drag source during dnd.
 - [ ] Implement some proper example apps! Maybe a 'contacts/chat' app and a 'photos' app
+- [X] Find a better name, and rename project

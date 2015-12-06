@@ -1,9 +1,9 @@
-#import "SPDragNDropController.h"
+#import "DragonController.h"
 #import <QuartzCore/QuartzCore.h>
 #import <objc/runtime.h>
-#import "SPDropHighlightView.h"
-#import "SPDraggingContainerWindow.h"
-#import "SPDragProxyView.h"
+#import "DragonDropHighlightView.h"
+#import "DragonContainerWindow.h"
+#import "DragonProxyView.h"
 #import <CerfingMeshPipeTransport/CerfingMeshPipe.h>
 
 @class SPDropTarget, SPDragSource;
@@ -44,28 +44,28 @@ static NSString *const kDragMetadataKey = @"eu.thirdcog.dragndrop.meta";
 @interface SPDropTarget : NSObject
 @property(nonatomic,weak) UIView *view;
 @property(nonatomic,weak) id<SPDropDelegate> delegate;
-@property(nonatomic,strong) SPDropHighlightView *highlight;
+@property(nonatomic,strong) DragonDropHighlightView *highlight;
 - (BOOL)canSpringload:(id<SPDraggingInfo>)drag;
 - (BOOL)canDrop:(id<SPDraggingInfo>)drag;
 @end
 
-@interface SPDragNDropController () <UIGestureRecognizerDelegate, CerfingConnectionDelegate>
+@interface DragonController () <UIGestureRecognizerDelegate, CerfingConnectionDelegate>
 {
 	NSMutableSet *_dragSources;
     NSMutableSet *_dropTargets;
 	CerfingMeshPipe *_cerfing;
 }
 @property(nonatomic,strong) SPDraggingState *state;
-@property(nonatomic,strong) SPDraggingContainerWindow *draggingContainer;
+@property(nonatomic,strong) DragonContainerWindow *draggingContainer;
 @end
 
-@implementation SPDragNDropController
+@implementation DragonController
 + (id)sharedController
 {
-    static SPDragNDropController *singleton = nil;
+    static DragonController *singleton = nil;
     static dispatch_once_t onceToken;
     dispatch_once(&onceToken, ^{
-        singleton = [SPDragNDropController new];
+        singleton = [DragonController new];
     });
     return singleton;
 }
@@ -81,7 +81,7 @@ static NSString *const kDragMetadataKey = @"eu.thirdcog.dragndrop.meta";
 	[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(_establishMeshPipe) name:UIApplicationDidBecomeActiveNotification object:nil];
 	[self _establishMeshPipe];
 	
-	self.draggingContainer = [[SPDraggingContainerWindow alloc] initWithFrame:[UIScreen mainScreen].bounds];
+	self.draggingContainer = [[DragonContainerWindow alloc] initWithFrame:[UIScreen mainScreen].bounds];
 	self.draggingContainer.hidden = NO;
 	
     return self;
@@ -335,7 +335,7 @@ static UIImage *unserializedImage(NSDictionary *rep)
 	self.state = state;
 	
     if(state.draggingIcon || !state.screenshot) {
-        state.proxyView = [[SPDragProxyView alloc] initWithIcon:state.draggingIcon title:state.title subtitle:state.subtitle];
+        state.proxyView = [[DragonProxyView alloc] initWithIcon:state.draggingIcon title:state.title subtitle:state.subtitle];
     } else {
         state.proxyView = [[UIImageView alloc] initWithImage:state.screenshot];
     }
@@ -520,7 +520,7 @@ static UIImage *unserializedImage(NSDictionary *rep)
             continue;
         
         // Make a drop target highlight
-        target.highlight = [[SPDropHighlightView alloc] initWithFrame:target.view.bounds];
+        target.highlight = [[DragonDropHighlightView alloc] initWithFrame:target.view.bounds];
         target.highlight.springloadable = [target canSpringload:_state];
         target.highlight.droppable = [target canDrop:_state];
 

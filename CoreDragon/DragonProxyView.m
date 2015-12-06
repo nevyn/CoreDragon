@@ -6,10 +6,10 @@
 //  Copyright (c) 2012 Spotify. All rights reserved.
 //
 
-#import "SPDragProxyView.h"
+#import "DragonProxyView.h"
 #import <QuartzCore/QuartzCore.h>
 
-@interface SPDragProxyView ()
+@interface DragonProxyView ()
 {
     UIView *_iconContainer;
     UIView *_icon;
@@ -21,7 +21,7 @@
 
 @end
 
-@implementation SPDragProxyView
+@implementation DragonProxyView
 - (id)initWithIcon:(UIImage*)icon title:(NSString*)title subtitle:(NSString*)subtitle
 {
     if(!(self = [super initWithFrame:(CGRect){.size=icon.size}]))

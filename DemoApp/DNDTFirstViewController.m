@@ -7,7 +7,7 @@
 //
 
 #import "DNDTFirstViewController.h"
-#import <SPDragNDrop/SPDragNDrop.h>
+#import <CoreDragon/CoreDragon.h>
 #import <MobileCoreServices/UTCoreTypes.h>
 
 @interface DNDTFirstViewController () <SPDragDelegate, SPDropDelegate>
@@ -34,8 +34,8 @@
 {
     [super viewDidLoad];
     
-    [[SPDragNDropController sharedController] registerDragSource:label1 delegate:self];
-    [[SPDragNDropController sharedController] registerDropTarget:label2 delegate:self];
+    [[DragonController sharedController] registerDragSource:label1 delegate:self];
+    [[DragonController sharedController] registerDropTarget:label2 delegate:self];
 }
 
 - (void)didReceiveMemoryWarning

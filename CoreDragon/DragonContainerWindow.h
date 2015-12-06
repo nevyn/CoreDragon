@@ -8,6 +8,6 @@
 
 #import <UIKit/UIKit.h>
 
-@interface SPDraggingContainerWindow : UIWindow
+@interface DragonContainerWindow : UIWindow
 - (instancetype)initWithFrame:(CGRect)frame;
 @end

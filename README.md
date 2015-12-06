@@ -1,15 +1,14 @@
-SPDragNDrop
+CoreDragon
 ===========
 Nevyn Bengtsson <nevyn.jpg@gmail.com>
 
-SPDragNDrop is a Hackweek experiment written by me during the December 2012 Hackweek at Spotify. Since I really love the idea and would hate for the code+idea to just rot away, Spotify's letting me release the code under Apache 2.0 before my employment there ends.
+CoreDragon is a drag'n'drop library for iOS applications. Instead of using context menus, modal view controllers, share sheets and other "indirect manipulation" ways of moving data around, it's much more intuitive to just grab the thing you want to move, and drop it on the place where you want to move it to.
 
-Progress in Modern Times
-------------------------
+CoreDragon uses similar concepts as the drag'n' drop APIs on MacOS, and modifies them to work better in a world with view controllers. It works within a single application, and on modern iPads, between applications that are running in split screen mode.
 
-This project is many years old, but I'm resurrecting it in order to bring iPad split-screen cross-app drag and drop to the world! Progress:
+CoreDragon was originally called SPDragNDrop, and was a Hackweek experiment written by me during the December 2012 Hackweek at Spotify. Since I really love the idea and would hate for the code+idea to just rot away, Spotify allowed me to release the code under Apache 2.0 before my employment there ended.
 
-* 20150831: [first cross-app drag and drop](https://lookback.io/watch/gFRLes3mS5CWRYqNN)
+I'm working on some proper demo applications. Until then, see a demo movie here: https://www.youtube.com/watch?v=sCm0F4UrXJg
 
 Background
 ----------
@@ -25,3 +24,5 @@ So during Hackweek December 2012, I mocked up drag&drop inside the Spotify iPad 
 <img src="https://dl.dropboxusercontent.com/u/6775/dragndrop.gif" width=400/>
 
 Unfortunately, the idea never got any traction within the company and the branch died. That was over a year ago, and the code is now uncompileable. (Yes, when your build system breaks with every point update of Xcode, code really does rot.) Thus, the only screenshot I have is of the trivial demo app in this repo. Hopefully it is inspiring enough that you now feel the immediate need to use the code or the concept in your own app! Hooray!
+
+After WWDC 2015, when split-screen multitasking was introduced, I started working on inter-app drag'n'drop. [Here's what it looked like on 20150831](https://lookback.io/watch/gFRLes3mS5CWRYqNN), and [further progress on 20151129](https://www.youtube.com/watch?v=sCm0F4UrXJg).

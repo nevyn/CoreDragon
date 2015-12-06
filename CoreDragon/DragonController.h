@@ -2,8 +2,8 @@
 @protocol SPDragDelegate, SPDropDelegate;
 
 /// Controller for managing drag an drop between views (possibly between applications).
-@interface SPDragNDropController : NSObject
-/*! Get the shared SPDragNDropController. Only use this singleton: don't instantiate
+@interface DragonController : NSObject
+/*! Get the shared DragonController. Only use this singleton: don't instantiate
 	more of them. */
 + (id)sharedController;
 
