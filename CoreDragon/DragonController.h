@@ -3,9 +3,29 @@
 
 /// Controller for managing drag an drop between views (possibly between applications).
 @interface DragonController : NSObject
+
 /*! Get the shared DragonController. Only use this singleton: don't instantiate
 	more of them. */
 + (id)sharedController;
+
+#pragma mark Gesture handling
+
+/*! To enable drag'n'drop within your application, some gesture must be used to start
+	a dragging operation. You can enable the default 'long-press-then-drag' gesture
+	by calling `allowLongPressDraggingInWindow:` with your app's main window
+	(or any other window).
+	
+	@see also `dragGesture:`
+	*/
+- (void)enableLongPressDraggingInWindow:(UIWindow*)window;
+/*! Uninstall the 'long-press-then-drag' gesture from your window. */
+- (void)disableLongPressDraggingInWindow:(UIWindow*)window;
+
+/*! To enable a custom drag'n'drop gesture, set this method as your gesture
+	recognizer's action method. */
+- (void)dragGesture:(UIGestureRecognizer*)grec;
+
+#pragma mark Drag sources
 
 /*! Allow drags to be started from the 'draggable' UIView. The given delegate
 	will be asked to customize this drag (by providing the data to be dragged, etc)
@@ -14,11 +34,17 @@
 /*! Stop allowing drags from this view.*/
 - (void)unregisterDragSource:(UIView *)draggable;
 
+#pragma mark Drop targets
+
 /*! Allow drags to end up in the 'droppable' UIView. The given delegate
 	will be asked to accept the drop data if/when a drag ends over this view. */
 - (void)registerDropTarget:(UIView *)droppable delegate:(id<SPDropDelegate>)delegate;
 /*! Stop allowing drops to this view. */
 - (void)unregisterDropTarget:(id)droppableOrDelegate;
+
+#pragma mark Misc
+/*!	Is the user currently dragging something, in this app or any other app? */
+- (BOOL)draggingOperationIsInProgress;
 @end
 
 /// Information about a dragging operation that is about to start or is in progress.

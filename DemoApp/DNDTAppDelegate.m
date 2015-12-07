@@ -20,7 +20,11 @@
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
 	self.tabBarController = (id)self.window.rootViewController;
-    
+	
+	// Must be called when the app starts, or drag'n'drop won't work.
+	[[DragonController sharedController] enableLongPressDraggingInWindow:self.window];
+	
+	// Enable spring-loading on the tab bar.
     [[DragonController sharedController] registerDropTarget:self.tabBarController.tabBar delegate:self];
     return YES;
 }

@@ -11,6 +11,7 @@
 //#define DNDLog(...) NSLog(__VA_ARGS__)
 #define DNDLog(...)
 
+static const void *kLongPressGrecKey = &kLongPressGrecKey;
 static const void *kDragSourceKey = &kDragSourceKey;
 static const void *kDropTargetKey = &kDropTargetKey;
 static const NSTimeInterval kSpringloadDelay = 1.3;
@@ -28,7 +29,7 @@ static NSString *const kDragMetadataKey = @"eu.thirdcog.dragndrop.meta";
 
 // During-drag state
 @property(nonatomic,strong) NSArray *originalPasteboardContents;
-@property(nonatomic,strong) UIView *dragInitiator; // the thing that was long-pressed
+@property(nonatomic,strong) UIView *dragView; // the thing that was long-pressed
 @property(nonatomic,strong) UIView *proxyView; // thing under finger
 @property(nonatomic,strong) NSArray *activeDropTargets;
 @property(nonatomic,strong) NSTimer *springloadingTimer;
@@ -38,7 +39,6 @@ static NSString *const kDragMetadataKey = @"eu.thirdcog.dragndrop.meta";
 @interface SPDragSource : NSObject
 @property(nonatomic,weak) UIView *view;
 @property(nonatomic,weak) id<SPDragDelegate> delegate;
-@property(nonatomic) UILongPressGestureRecognizer *longPressGrec;
 @end
 
 @interface SPDropTarget : NSObject
@@ -95,7 +95,6 @@ static NSString *const kDragMetadataKey = @"eu.thirdcog.dragndrop.meta";
     self.draggingContainer = nil;
 	
 	for(SPDragSource *source in _dragSources) {
-		[source.view removeGestureRecognizer:source.longPressGrec];
 		objc_setAssociatedObject(source.view, kDragSourceKey, nil, OBJC_ASSOCIATION_RETAIN);
 	}
 }
@@ -114,6 +113,49 @@ static NSString *const kDragMetadataKey = @"eu.thirdcog.dragndrop.meta";
 	_cerfing.delegate = self;
 }
 
+#pragma mark - Gestures
+
+- (void)enableLongPressDraggingInWindow:(UIWindow*)window
+{
+	UILongPressGestureRecognizer *longPressGrec = [[UILongPressGestureRecognizer alloc] initWithTarget:self action:@selector(dragGesture:)];
+	longPressGrec.delegate = self;
+	[window addGestureRecognizer:longPressGrec];
+	objc_setAssociatedObject(window, kLongPressGrecKey, longPressGrec, OBJC_ASSOCIATION_RETAIN);
+}
+
+- (void)disableLongPressDraggingInWindow:(UIWindow*)window
+{
+	UILongPressGestureRecognizer *longPressGrec = objc_getAssociatedObject(window, kLongPressGrecKey);
+	if(!longPressGrec)
+		return;
+	
+	[window removeGestureRecognizer:longPressGrec];
+	objc_setAssociatedObject(window, kLongPressGrecKey, nil, OBJC_ASSOCIATION_RETAIN);
+}
+
+- (BOOL)draggingOperationIsInProgress
+{
+	return _state != nil;
+}
+
+- (BOOL)gestureRecognizer:(UIGestureRecognizer *)gestureRecognizer shouldRecognizeSimultaneouslyWithGestureRecognizer:(UIGestureRecognizer *)otherGestureRecognizer
+{
+    return self.draggingOperationIsInProgress;
+}
+
+- (void)dragGesture:(UIGestureRecognizer*)grec
+{
+    if(grec.state == UIGestureRecognizerStateBegan) {
+        SPDragSource *initiator = [self sourceUnderLocation:[grec locationInView:grec.view]];
+        [self startDraggingWithInitiator:initiator event:grec];
+    } else if(grec.state == UIGestureRecognizerStateChanged) {
+        [self continueDraggingFromGesture:[grec locationInView:_draggingContainer]];
+    } else if(grec.state == UIGestureRecognizerStateEnded) {
+        [self concludeDraggingFromGesture];
+    } else if(grec.state == UIGestureRecognizerStateCancelled) {
+        [self cancelDragging];
+    }
+}
 
 
 #pragma mark - Registration
@@ -121,11 +163,8 @@ static NSString *const kDragMetadataKey = @"eu.thirdcog.dragndrop.meta";
 - (void)registerDragSource:(UIView *)draggable delegate:(id<SPDragDelegate>)delegate
 {
 	SPDragSource *source = [SPDragSource new];
+	source.view = draggable;
 	source.delegate = delegate;
-	source.longPressGrec = [[UILongPressGestureRecognizer alloc] initWithTarget:self action:@selector(dragGesture:)];
-	source.longPressGrec.delegate = self;
-	[draggable addGestureRecognizer:source.longPressGrec];
-
     objc_setAssociatedObject(draggable, kDragSourceKey, source, OBJC_ASSOCIATION_RETAIN);
 }
 
@@ -133,7 +172,6 @@ static NSString *const kDragMetadataKey = @"eu.thirdcog.dragndrop.meta";
 {
     SPDragSource *source = objc_getAssociatedObject(draggable, kDragSourceKey);
 	if(source) {
-		[draggable removeGestureRecognizer:source.longPressGrec];
 		[_dragSources removeObject:source];
 		objc_setAssociatedObject(draggable, kDragSourceKey, NULL, OBJC_ASSOCIATION_RETAIN);
 	}
@@ -197,28 +235,6 @@ static UIImage *unserializedImage(NSDictionary *rep)
 	return [UIImage imageWithData:rep[@"pngData"] scale:[rep[@"scale"] floatValue]];
 }
 
-#pragma mark - Gesture recognition, network and state handling
-
-- (BOOL)gestureRecognizer:(UIGestureRecognizer *)gestureRecognizer shouldRecognizeSimultaneouslyWithGestureRecognizer:(UIGestureRecognizer *)otherGestureRecognizer
-{
-    return _state != nil;
-}
-
-- (void)dragGesture:(UILongPressGestureRecognizer*)grec
-{
-	
-    if(grec.state == UIGestureRecognizerStateBegan) {
-        UIView *initiator = grec.view;
-        [self startDraggingWithInitiator:initiator event:grec];
-    } else if(grec.state == UIGestureRecognizerStateChanged) {
-        [self continueDraggingFromGesture:[grec locationInView:_draggingContainer]];
-    } else if(grec.state == UIGestureRecognizerStateEnded) {
-        [self concludeDraggingFromGesture];
-    } else if(grec.state == UIGestureRecognizerStateCancelled) {
-        [self cancelDragging];
-    }
-}
-
 #pragma mark Application frame and coordinate system util
 
 - (CGPoint)convertLocalPointToScreenSpace:(CGPoint)localPoint
@@ -233,24 +249,23 @@ static UIImage *unserializedImage(NSDictionary *rep)
 
 #pragma mark Start dragging
 
-- (void)startDraggingWithInitiator:(UIView*)initiator event:(UIGestureRecognizer*)grec
+- (void)startDraggingWithInitiator:(SPDragSource*)source event:(UIGestureRecognizer*)grec
 {
 	if(_state != nil) {
 		[self _cleanUpDragging];
 	}
 	
-	SPDragSource *source = objc_getAssociatedObject(initiator, kDragSourceKey);
     id<SPDragDelegate> delegate = source.delegate;
 
     SPDraggingState *state = [SPDraggingState new];
-    state.dragInitiator = initiator;
+    state.dragView = source.view;
 	state.operationIdentifier = [[NSUUID UUID] UUIDString];
 	
 	// Setup pasteboard contents
 	state.pasteboard = [UIPasteboard generalPasteboard];
 	state.originalPasteboardContents = state.pasteboard.items;
 	state.pasteboard.items = @[];
-	[delegate beginDragOperation:state fromView:initiator];
+	[delegate beginDragOperation:state fromView:state.dragView];
 	if(state.pasteboard.items.count == 0) {
 		NSLog(@"%@: Cancelling drag operation because no item was put on pasteboard", [self class]);
 		state.pasteboard.items = state.originalPasteboardContents;
@@ -259,7 +274,7 @@ static UIImage *unserializedImage(NSDictionary *rep)
 	
     // Dragging displayables
 	if(!state.draggingIcon)
-		state.screenshot = screenshotForView(initiator);
+		state.screenshot = screenshotForView(state.dragView);
 	
 	// Put displayables on pasteboard for transfer to other apps
 	NSMutableDictionary *meta = [@{
@@ -271,10 +286,10 @@ static UIImage *unserializedImage(NSDictionary *rep)
 	[state.pasteboard addItems:@[@{kDragMetadataKey: metadata}]];
 	
 	// Figure out anchor point and locations
-	CGPoint hitInView = [grec locationInView:initiator];
+	CGPoint hitInView = [grec locationInView:state.dragView];
 	CGPoint anchorPoint = CGPointMake(
-		hitInView.x/initiator.frame.size.width,
-		hitInView.y/initiator.frame.size.height
+		hitInView.x/state.dragView.frame.size.width,
+		hitInView.y/state.dragView.frame.size.height
 	);
 	
 	CGPoint initialLocation = [grec locationInView:_draggingContainer];
@@ -561,6 +576,23 @@ static UIImage *unserializedImage(NSDictionary *rep)
     }];
 }
 
+- (SPDragSource*)sourceUnderLocation:(CGPoint)locationInWindow
+{
+	for(UIWindow *window in [UIApplication sharedApplication].windows) {
+		UIView *view = [window hitTest:locationInWindow withEvent:nil];
+		SPDragSource *source = nil;
+		do {
+			source = objc_getAssociatedObject(view, kDragSourceKey);
+			if (source)
+				break;
+			view = [view superview];
+		} while(view);
+
+		return source;
+	}
+	return nil;
+}
+
 - (SPDropTarget*)targetUnderFinger
 {
 	for(UIWindow *window in [UIApplication sharedApplication].windows) {
@@ -574,7 +606,7 @@ static UIImage *unserializedImage(NSDictionary *rep)
 			if (target)
 				break;
 			view = [view superview];
-		} while(view && view != _draggingContainer);
+		} while(view);
 
 		return target;
 	}
