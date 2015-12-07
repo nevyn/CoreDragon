@@ -29,7 +29,9 @@
     
     UIFont *titleFont = [UIFont boldSystemFontOfSize:16];
     CGSize iconSize = CGSizeMake(80, 80);
-    CGSize labelSize = [title sizeWithFont:titleFont];
+    CGSize labelSize = [title sizeWithAttributes:@{
+		NSFontAttributeName: titleFont
+	}];
     static const CGFloat iconCornerRadius = 10.;
     static const CGFloat labelCornerRadius = 5.;
     static const CGFloat margin = 12;
