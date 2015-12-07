@@ -11,11 +11,13 @@
 //#define DNDLog(...) NSLog(__VA_ARGS__)
 #define DNDLog(...)
 
+static const NSTimeInterval kSpringloadDelay = 1.3;
+static const NSTimeInterval kDragConclusionTimeoutInterval = 1.0;
+static NSString *const kDragMetadataKey = @"eu.thirdcog.dragndrop.meta";
+
 static const void *kLongPressGrecKey = &kLongPressGrecKey;
 static const void *kDragSourceKey = &kDragSourceKey;
 static const void *kDropTargetKey = &kDropTargetKey;
-static const NSTimeInterval kSpringloadDelay = 1.3;
-static NSString *const kDragMetadataKey = @"eu.thirdcog.dragndrop.meta";
 
 @interface SPDraggingState : NSObject <SPDraggingInfo>
 // Initial, transferrable state
@@ -33,6 +35,7 @@ static NSString *const kDragMetadataKey = @"eu.thirdcog.dragndrop.meta";
 @property(nonatomic,strong) UIView *proxyView; // thing under finger
 @property(nonatomic,strong) NSArray *activeDropTargets;
 @property(nonatomic,strong) NSTimer *springloadingTimer;
+@property(nonatomic,strong) NSTimer *conclusionTimeoutTimer;
 @property(nonatomic,weak) SPDropTarget *hoveringTarget;
 @end
 
@@ -443,6 +446,10 @@ static UIImage *unserializedImage(NSDictionary *rep)
 		// finishDragging will be called from either remote calling 'cancelDragging' or
 		// 'remoteSideConcludedDragging'.
 		DNDLog(@"Drag concluded at %@, which is outside of my bounds %@", NSStringFromCGPoint([self convertLocalPointToScreenSpace:_state.proxyView.layer.position]), NSStringFromCGRect([self localFrameInScreenSpace]));
+		
+		if([self _draggingStartedWithinMyApp]) {
+			[self _waitForDraggingTimeout];
+		}
 		return;
 	}
 	DNDLog(@"Concluding dragging!");
@@ -486,12 +493,20 @@ static UIImage *unserializedImage(NSDictionary *rep)
 }
 - (void)_cancelDragging
 {
+	[_state.conclusionTimeoutTimer invalidate];
     [self stopHighlightingDropTargets];
     [UIView animateWithDuration:.5 animations:^{
         _state.proxyView.layer.position = [self convertScreenPointToLocalSpace:_state.initialPositionInScreenSpace];
     } completion:^(BOOL finished) {
         [self _cleanUpDragging];
     }];
+}
+
+- (void)_waitForDraggingTimeout
+{
+	if(!_state) return;
+	[_state.conclusionTimeoutTimer invalidate];
+	_state.conclusionTimeoutTimer = [NSTimer scheduledTimerWithTimeInterval:kDragConclusionTimeoutInterval target:self selector:@selector(cancelDragging) userInfo:nil repeats:NO];
 }
 
 #pragma mark Clean up dragging
@@ -514,6 +529,9 @@ static UIImage *unserializedImage(NSDictionary *rep)
 // Tear down and reset all dragging related state
 - (void)_cleanUpDragging
 {
+	[_state.conclusionTimeoutTimer invalidate];
+	_state.conclusionTimeoutTimer = nil;
+	
     [_state.springloadingTimer invalidate];
     [_state.proxyView removeFromSuperview];
     [self stopHighlightingDropTargets];
@@ -616,6 +634,11 @@ static UIImage *unserializedImage(NSDictionary *rep)
 - (CGRect)localFrameInScreenSpace
 {
 	return [self.draggingContainer convertRect:self.draggingContainer.bounds toCoordinateSpace:self.draggingContainer.screen.fixedCoordinateSpace];
+}
+
+- (BOOL)_draggingStartedWithinMyApp
+{
+	return _state.originalPasteboardContents != nil;
 }
 
 - (BOOL)_draggingIsWithinMyApp

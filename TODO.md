@@ -3,6 +3,8 @@
 	  of adding it as a separate item
 - [ ] Add a drop shadow under the drag screenshot
 - [ ] Implement some proper example apps! Maybe a 'contacts/chat' app and a 'photos' app
+- [X] Implement timeout, so that if no one seems to be taking care of a drag conclusion,
+      do it from the source app
 - [X] Use a top-layer root window instead of 'dragging container'
 - [X] Change API to use pasteboard instead of modelObject
 - [X] Send drag metadata such as thumbnail, icon, name over auxilliary pasteboard
@@ -17,3 +19,7 @@
 - [X] Make gesture recognizer survive view disappearing from its superview.
 	  We need to be able to navigate away from the drag source during dnd.
 - [X] Find a better name, and rename project
+
+## oooh?!
+
+- [ ] A shelf! Which is just a representation of the pasteboard and its items :)
