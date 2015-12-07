@@ -2,7 +2,7 @@
 //  SPDraggingProxyView.m
 //  DragNDropFeature
 //
-//  Created by Joachim Bengtsson on 2012-12-14.
+//  Created by Nevyn Bengtsson on 2012-12-14.
 //  Copyright (c) 2012 Spotify. All rights reserved.
 //
 
