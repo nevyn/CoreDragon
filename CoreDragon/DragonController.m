@@ -32,7 +32,7 @@ static const void *kDropTargetKey = &kDropTargetKey;
 // During-drag state
 @property(nonatomic,strong) NSArray *originalPasteboardContents;
 @property(nonatomic,strong) UIView *dragView; // the thing that was long-pressed
-@property(nonatomic,strong) UIView *proxyView; // thing under finger
+@property(nonatomic,strong) UIView<DragonProxyView> *proxyView; // thing under finger
 @property(nonatomic,strong) NSArray *activeDropTargets;
 @property(nonatomic,strong) NSTimer *springloadingTimer;
 @property(nonatomic,strong) NSTimer *conclusionTimeoutTimer;
@@ -355,7 +355,7 @@ static UIImage *unserializedImage(NSDictionary *rep)
     if(state.draggingIcon || !state.screenshot) {
         state.proxyView = [[DragonProxyView alloc] initWithIcon:state.draggingIcon title:state.title subtitle:state.subtitle];
     } else {
-        state.proxyView = [[UIImageView alloc] initWithImage:state.screenshot];
+        state.proxyView = [[DragonScreenshotProxyView alloc] initWithScreenshot:state.screenshot];
     }
 	
 
@@ -467,9 +467,10 @@ static UIImage *unserializedImage(NSDictionary *rep)
     
     __block int count = 0;
     dispatch_block_t completion = ^{
-        if(++count == 2)
+        if(++count == 3)
             [self cleanUpDragging];
     };
+	[_state.proxyView animateOut:completion];
     [targetThatWasHit.highlight animateAcceptedDropWithCompletion:completion];
 	[UIView animateKeyframesWithDuration:.5 delay:0 options:UIViewKeyframeAnimationOptionCalculationModeCubicPaced animations:^{
 		[UIView addKeyframeWithRelativeStartTime:0 relativeDuration:.3 animations:^{
@@ -500,6 +501,7 @@ static UIImage *unserializedImage(NSDictionary *rep)
 {
 	[_state.conclusionTimeoutTimer invalidate];
     [self stopHighlightingDropTargets];
+	[_state.proxyView animateOut:nil];
     [UIView animateWithDuration:.5 animations:^{
         _state.proxyView.layer.position = [self convertScreenPointToLocalSpace:_state.initialPositionInScreenSpace];
     } completion:^(BOOL finished) {

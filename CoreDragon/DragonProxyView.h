@@ -8,10 +8,14 @@
 
 #import <UIKit/UIKit.h>
 
-@interface DragonProxyView : UIView
+@protocol DragonProxyView <NSObject>
+- (void)animateOut:(dispatch_block_t)completion;
+@end
+
+@interface DragonProxyView : UIView <DragonProxyView>
 - (instancetype)initWithIcon:(UIImage*)icon title:(NSString*)title subtitle:(NSString*)subtitle;
 @end
 
-@interface DragonScreenshotProxyView : UIImageView
+@interface DragonScreenshotProxyView : UIImageView <DragonProxyView>
 - (instancetype)initWithScreenshot:(UIImage *)screenshot;
 @end

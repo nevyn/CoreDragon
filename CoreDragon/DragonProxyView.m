@@ -79,4 +79,33 @@
     return self;
 }
 
+- (void)animateOut:(dispatch_block_t)completion
+{
+	if(completion) completion();
+}
+@end
+
+@implementation DragonScreenshotProxyView
+- (instancetype)initWithScreenshot:(UIImage *)screenshot
+{
+	if(!(self = [super initWithImage:screenshot]))
+		return nil;
+	self.layer.shadowColor = [UIColor blackColor].CGColor;
+	self.layer.shadowOffset = CGSizeMake(0, 0);
+	self.layer.shadowOpacity = .5;
+	self.layer.shadowRadius = 15;
+	
+	return self;
+}
+- (void)animateOut:(dispatch_block_t)completion
+{
+	[CATransaction begin];
+	[CATransaction setAnimationDuration:.5];
+	[CATransaction setDisableActions:NO];
+//#error why isn't this working? just sets shadow to 0 immediately
+	self.layer.shadowRadius = 0;
+	self.layer.shadowOpacity = 0;
+	[CATransaction setCompletionBlock:completion];
+	[CATransaction commit];
+}
 @end
