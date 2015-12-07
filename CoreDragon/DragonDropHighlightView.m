@@ -78,7 +78,6 @@
 
 - (void)animateAcceptedDropWithCompletion:(dispatch_block_t)completion
 {
-    if(completion)
-        completion();
+    [self _blink:completion];
 }
 @end

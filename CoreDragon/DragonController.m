@@ -471,10 +471,15 @@ static UIImage *unserializedImage(NSDictionary *rep)
             [self cleanUpDragging];
     };
     [targetThatWasHit.highlight animateAcceptedDropWithCompletion:completion];
-    [UIView animateWithDuration:.3 delay:0 options:UIViewAnimationOptionCurveEaseIn animations:^{
-        _state.proxyView.transform = CGAffineTransformMakeScale(0, 0);
-        _state.proxyView.alpha = 0;
-    } completion:(id)completion];
+	[UIView animateKeyframesWithDuration:.5 delay:0 options:UIViewKeyframeAnimationOptionCalculationModeCubicPaced animations:^{
+		[UIView addKeyframeWithRelativeStartTime:0 relativeDuration:.3 animations:^{
+			_state.proxyView.transform = CGAffineTransformMakeScale(1.2, 1.2);
+		}];
+		[UIView addKeyframeWithRelativeStartTime:.3 relativeDuration:.7 animations:^{
+			_state.proxyView.transform = CGAffineTransformMakeScale(0.001, 0.001);
+			_state.proxyView.alpha = 0;
+		}];
+	} completion:(id)completion];
 }
 
 #pragma mark Cancel dragging
@@ -515,6 +520,7 @@ static UIImage *unserializedImage(NSDictionary *rep)
 // the drag operation. We can now clean up.
 - (void)cleanUpDragging
 {
+	DNDLog(@"Asking everybody to clean up dragging");
 	[_cerfing broadcastDict:@{
 		kCerfingCommand: @"completeDragging",
 	}];
@@ -529,6 +535,7 @@ static UIImage *unserializedImage(NSDictionary *rep)
 // Tear down and reset all dragging related state
 - (void)_cleanUpDragging
 {
+	DNDLog(@"Performing cleanup");
 	[_state.conclusionTimeoutTimer invalidate];
 	_state.conclusionTimeoutTimer = nil;
 	
