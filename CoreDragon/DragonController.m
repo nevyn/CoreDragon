@@ -279,14 +279,20 @@ static UIImage *unserializedImage(NSDictionary *rep)
 	if(!state.draggingIcon)
 		state.screenshot = screenshotForView(state.dragView);
 	
-	// Put displayables on pasteboard for transfer to other apps
+	// Create image metadata that we want to put on auxiliary pasteboard
 	NSMutableDictionary *meta = [@{
 		@"uuid": state.operationIdentifier,
 	} mutableCopy];
 	if(state.draggingIcon) meta[@"draggingIcon"] = serializedImage(state.draggingIcon);
 	if(state.screenshot) meta[@"screenshot"] = serializedImage(state.screenshot);
 	NSData *metadata = [NSKeyedArchiver archivedDataWithRootObject:meta];
-	[state.pasteboard addItems:@[@{kDragMetadataKey: metadata}]];
+	
+	// Now attach it to the new pasteboard items. can't find API to do so, so mess with the items array...
+	NSMutableArray *items = [[state.pasteboard items] mutableCopy];
+	NSMutableDictionary *firstItem = [[items firstObject] mutableCopy];
+	firstItem[kDragMetadataKey] = metadata;
+	items[0] = firstItem;
+	state.pasteboard.items = items;
 	
 	// Figure out anchor point and locations
 	CGPoint hitInView = [grec locationInView:state.dragView];
