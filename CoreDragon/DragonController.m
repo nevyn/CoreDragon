@@ -285,7 +285,7 @@ static UIImage *unserializedImage(NSDictionary *rep)
 	} mutableCopy];
 	if(state.draggingIcon) meta[@"draggingIcon"] = serializedImage(state.draggingIcon);
 	if(state.screenshot) meta[@"screenshot"] = serializedImage(state.screenshot);
-	NSData *metadata = [NSKeyedArchiver archivedDataWithRootObject:meta];
+	NSData *metadata = [NSKeyedArchiver archivedDataWithRootObject:[meta copy]];
 	
 	// Now attach it to the new pasteboard items. can't find API to do so, so mess with the items array...
 	NSMutableArray *items = [[state.pasteboard items] mutableCopy];
@@ -342,7 +342,18 @@ static UIImage *unserializedImage(NSDictionary *rep)
 	
 	// Setup state that comes from Pasteboard
 	NSData *metadata = [[state.pasteboard dataForPasteboardType:kDragMetadataKey inItemSet:NULL] firstObject];
-	NSDictionary *meta = [NSKeyedUnarchiver unarchiveObjectWithData:metadata]; // TODO: Use secure coding
+	NSKeyedUnarchiver *unarch = [[NSKeyedUnarchiver alloc] initForReadingWithData:metadata];
+	unarch.requiresSecureCoding = YES;
+	
+	NSDictionary *meta = nil;
+	@try {
+		meta = [unarch decodeObjectOfClasses:[NSSet setWithObjects:[NSDictionary class], [NSData class], nil] forKey:NSKeyedArchiveRootObjectKey];
+	} @catch (NSException *exc) {
+		NSLog(@"Failure unarchiving auxilliary pasteboard, cancelling drag: %@", exc);
+		// Don't try to perform drag operation with someone who is sending us dangerous data.
+		return;
+	}
+	
 	if([meta[@"uuid"] isEqual:state.operationIdentifier]) {
 		state.draggingIcon = unserializedImage(meta[@"draggingIcon"]);
 		state.screenshot = unserializedImage(meta[@"screenshot"]);
