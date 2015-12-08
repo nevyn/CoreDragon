@@ -79,9 +79,15 @@
     return self;
 }
 
-- (void)animateOut:(dispatch_block_t)completion
+- (void)animateOut:(dispatch_block_t)completion forSuccess:(BOOL)wasSuccessful
 {
-	if(completion) completion();
+	if(wasSuccessful) {
+		if(completion) completion();
+	} else {
+		[UIView animateWithDuration:.5 animations:^{
+			self.alpha = 0;
+		} completion:(id)completion];
+	}
 }
 @end
 
@@ -97,15 +103,16 @@
 	
 	return self;
 }
-- (void)animateOut:(dispatch_block_t)completion
+- (void)animateOut:(dispatch_block_t)completion forSuccess:(BOOL)wasSuccessful
 {
 	[CATransaction begin];
-	[CATransaction setAnimationDuration:.5];
-	[CATransaction setDisableActions:NO];
-//#error why isn't this working? just sets shadow to 0 immediately
-	self.layer.shadowRadius = 0;
-	self.layer.shadowOpacity = 0;
 	[CATransaction setCompletionBlock:completion];
+	CABasicAnimation *animation = [CABasicAnimation animationWithKeyPath:@"shadowRadius"];
+	animation.fromValue = @15;
+	animation.toValue = @0;
+
+	self.layer.shadowRadius = 0;
+	[self.layer addAnimation:animation forKey:@"shadowRadius"];
 	[CATransaction commit];
 }
 @end

@@ -9,7 +9,7 @@
 #import <UIKit/UIKit.h>
 
 @protocol DragonProxyView <NSObject>
-- (void)animateOut:(dispatch_block_t)completion;
+- (void)animateOut:(dispatch_block_t)completion forSuccess:(BOOL)wasSuccessful;
 @end
 
 @interface DragonProxyView : UIView <DragonProxyView>

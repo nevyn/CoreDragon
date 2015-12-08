@@ -1,7 +1,9 @@
 - [ ] Put the dragging metadata as an alt type in the first pasteboard item instead
 	  of adding it as a separate item
-- [ ] Add a drop shadow under the drag screenshot
+- [ ] When drag fails, if original view isn't on screen anymore, find a better 'cancellation' animation.
 - [ ] Implement some proper example apps! Maybe a 'contacts/chat' app and a 'photos' app
+
+- [X] Add a drop shadow under the drag screenshot
 - [X] Implement a "successful drop" animation
 - [X] Implement timeout, so that if no one seems to be taking care of a drag conclusion,
       do it from the source app

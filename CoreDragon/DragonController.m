@@ -470,7 +470,7 @@ static UIImage *unserializedImage(NSDictionary *rep)
         if(++count == 3)
             [self cleanUpDragging];
     };
-	[_state.proxyView animateOut:completion];
+	[_state.proxyView animateOut:completion forSuccess:YES];
     [targetThatWasHit.highlight animateAcceptedDropWithCompletion:completion];
 	[UIView animateKeyframesWithDuration:.5 delay:0 options:UIViewKeyframeAnimationOptionCalculationModeCubicPaced animations:^{
 		[UIView addKeyframeWithRelativeStartTime:0 relativeDuration:.3 animations:^{
@@ -501,7 +501,7 @@ static UIImage *unserializedImage(NSDictionary *rep)
 {
 	[_state.conclusionTimeoutTimer invalidate];
     [self stopHighlightingDropTargets];
-	[_state.proxyView animateOut:nil];
+	[_state.proxyView animateOut:nil forSuccess:NO];
     [UIView animateWithDuration:.5 animations:^{
         _state.proxyView.layer.position = [self convertScreenPointToLocalSpace:_state.initialPositionInScreenSpace];
     } completion:^(BOOL finished) {
