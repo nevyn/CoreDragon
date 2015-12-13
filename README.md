@@ -1,17 +1,106 @@
-CoreDragon
-===========
-Nevyn Bengtsson <nevyn.jpg@gmail.com>
+![Logo](Resources/logo.png)
+
+# CoreDragon
+
+![cocoapods](https://img.shields.io/cocoapods/v/CoreDragon.svg) ![license](https://img.shields.io/cocoapods/l/CoreDragon.svg) <br />[![Twitter](https://img.shields.io/badge/twitter-@nevyn-blue.svg)](http://twitter.com/nevyn) [![email](https://img.shields.io/badge/email-nevyn.jpg@gmail.com-lightgrey.svg)](mailto:nevyn.jpg@gmail.com)
 
 CoreDragon is a drag'n'drop library for iOS applications. Instead of using context menus, modal view controllers, share sheets and other "indirect manipulation" ways of moving data around, it's much more intuitive to just grab the thing you want to move, and drop it on the place where you want to move it to.
 
 CoreDragon uses similar concepts as the drag'n' drop APIs on MacOS, and modifies them to work better in a world with view controllers. It works within a single application, and on modern iPads, between applications that are running in split screen mode.
 
-CoreDragon was originally called SPDragNDrop, and was a Hackweek experiment written by me during the December 2012 Hackweek at Spotify. Since I really love the idea and would hate for the code+idea to just rot away, Spotify allowed me to release the code under Apache 2.0 before my employment there ended.
+CoreDragon was originally called SPDragNDrop, and was a Hackweek experiment written by me during the December 2012 Hackweek at Spotify. Since I really loved the idea and would hate for the code+idea to just rot away, Spotify allowed me to release the code under Apache 2.0 before my employment there ended.
 
-I'm working on some proper demo applications. Until then, see a demo movie here: https://www.youtube.com/watch?v=sCm0F4UrXJg
+I'm working on some proper demo applications. Until then, [see a demo movie](https://www.youtube.com/watch?v=sCm0F4UrXJg).
 
-Background
-----------
+## Installation
+
+
+1. Add `pod 'CoreDragon'` to your Podfile
+2. Run `pod install`
+3. Add `#import <CoreDragon/CoreDragon.h>` from your bridging header, prefix header, or wherever you want to use drag'n'drop features
+
+## Getting Started
+
+### Installation
+By default, CoreDragon uses a long-press-and-drag gesture to start and perform dragging. To install this default gesture, call `enableLongPressDraggingInWindow:` from your Application Delegate like so:
+
+```objc
+- (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
+{
+	
+	[[DragonController sharedController] enableLongPressDraggingInWindow:self.window];
+	
+    return YES;
+}
+```
+
+### Registering things that can be dragged
+
+When you have a view that you would like to allow your users to drag, you can register it with `-[DragonController registerDragSource:delegate:]`. You would probably call it from a view controller's `viewDidLoad`, setting the view controller as the delegate. Whenever a dragging operation is initiated from this view, it is up to your view controller to provide the data for the object being dragged by putting it on a pasteboard:
+
+```objc
+- (void)viewDidLoad
+{
+    [super viewDidLoad];
+    
+    [[DragonController sharedController] registerDragSource:label1 delegate:self];
+}
+
+- (void)beginDragOperation:(id<SPDraggingInfo>)drag fromView:(UIView *)draggable
+{
+	// Required: Provide the data to be dragged by adding it to the dragging info's pasteboard:
+	[drag.pasteboard setValue:text forPasteboardType:(NSString*)kUTTypePlainText];
+	
+	// By default, the item being dragged is represented by a screenshot of the draggable view.
+	// Optionally, you can set 'title', 'subtitle' and 'draggingIcon' on the dragging info
+	// to give it a pretty icon.
+	NSString *text = [(UILabel*)draggable text];
+    drag.title = text;
+    drag.draggingIcon = [UIImage imageNamed:@"testimage"];
+}
+
+```
+
+Drag sources are automatically unregistered when they are deinited.
+
+### Registering drop targets
+
+Now that the user is holding an object with their finger, they will need somewhere to drop it. You can register drop targets in a very similar manner to drag sources. The delegate protocol for drop targets has several methods:
+
+* For accepting the dragged data (required)
+* For indicating that it does or does not support being dragged to
+* For springloading (hovering over the drop target to navigate into it, like hovering an icon in Finder while dragging)
+* For customizing the visualization of the drop target based on where the user's finger is pointing (to support custom highlighting in a table view, etc).
+
+A simple drop target could look like so:
+
+```objc
+- (void)viewDidLoad
+{
+    [super viewDidLoad];
+    
+    [[DragonController sharedController] registerDropTarget:label2 delegate:self];
+}
+
+// Ensure that we only receive drops for plain text
+- (BOOL)dropTarget:(UIView *)droppable canAcceptDrag:(id<SPDraggingInfo>)drag
+{
+	return [drag.pasteboard containsPasteboardTypes:@[(NSString*)kUTTypePlainText]];
+}
+
+// When some plain text is dropped on this target, set the label's text to the incoming text.
+- (void)dropTarget:(UIView *)droppable acceptDrag:(id<SPDraggingInfo>)drag atPoint:(CGPoint)p
+{
+	[(UITextView*)droppable setText:[drag.pasteboard valueForPasteboardType:(NSString*)kUTTypePlainText]];
+}
+
+```
+
+## License
+
+[Apache 2.0](LICENSE.txt)
+
+## Background
 
 I've always loved multitouch. In addition, I love working spatially with windows and drag&drop. Neither concept has gained much traction on iPad, and not even exploring those concepts means missing out.
 
