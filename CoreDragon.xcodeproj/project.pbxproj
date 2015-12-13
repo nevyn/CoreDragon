@@ -267,7 +267,8 @@
 				05B92CD71B8E8D7B00226846 /* CerfingMeshPipeTransport.h */,
 				05B92CD81B8E8D7B00226846 /* CerfingMeshPipeTransport.m */,
 			);
-			path = CerfingMeshPipeTransport;
+			name = CerfingMeshPipeTransport;
+			path = MeshPipe/CerfingMeshPipeTransport;
 			sourceTree = "<group>";
 		};
 		05B92CDB1B8E8D7B00226846 /* MeshPipe */ = {
