@@ -27,9 +27,7 @@ By default, CoreDragon uses a long-press-and-drag gesture to start and perform d
 ```objc
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
-	
 	[[DragonController sharedController] enableLongPressDraggingInWindow:self.window];
-	
     return YES;
 }
 ```

@@ -54,7 +54,6 @@ static const void *kDropTargetKey = &kDropTargetKey;
 
 @interface DragonController () <UIGestureRecognizerDelegate, CerfingConnectionDelegate>
 {
-	NSMutableSet *_dragSources;
     NSMutableSet *_dropTargets;
 	CerfingMeshPipe *_cerfing;
 }
@@ -78,7 +77,6 @@ static const void *kDropTargetKey = &kDropTargetKey;
     if (!(self = [super init]))
         return nil;
 	
-	_dragSources = [NSMutableSet new];
     _dropTargets = [NSMutableSet new];
 	
 	[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(_establishMeshPipe) name:UIApplicationDidBecomeActiveNotification object:nil];
@@ -96,10 +94,6 @@ static const void *kDropTargetKey = &kDropTargetKey;
 	
     self.draggingContainer.hidden = YES;
     self.draggingContainer = nil;
-	
-	for(SPDragSource *source in _dragSources) {
-		objc_setAssociatedObject(source.view, kDragSourceKey, nil, OBJC_ASSOCIATION_RETAIN);
-	}
 }
 
 #pragma mark - Network establish
@@ -175,7 +169,6 @@ static const void *kDropTargetKey = &kDropTargetKey;
 {
     SPDragSource *source = objc_getAssociatedObject(draggable, kDragSourceKey);
 	if(source) {
-		[_dragSources removeObject:source];
 		objc_setAssociatedObject(draggable, kDragSourceKey, NULL, OBJC_ASSOCIATION_RETAIN);
 	}
 }
