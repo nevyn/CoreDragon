@@ -1,0 +1,456 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		056369241C1E911100B24389 /* DragonPhotos.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 056369221C1E911100B24389 /* DragonPhotos.xcdatamodeld */; };
+		05AB5EAE1C1D141B0016BB44 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05AB5EAD1C1D141B0016BB44 /* AppDelegate.swift */; };
+		05AB5EB01C1D141B0016BB44 /* PhotosFolderController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05AB5EAF1C1D141B0016BB44 /* PhotosFolderController.swift */; };
+		05AB5EB31C1D141B0016BB44 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 05AB5EB11C1D141B0016BB44 /* Main.storyboard */; };
+		05AB5EB51C1D141B0016BB44 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 05AB5EB41C1D141B0016BB44 /* Assets.xcassets */; };
+		05AB5EB81C1D141B0016BB44 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 05AB5EB61C1D141B0016BB44 /* LaunchScreen.storyboard */; };
+		05AB5ED01C1D144D0016BB44 /* libCoreDragon.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 05AB5EC71C1D14400016BB44 /* libCoreDragon.a */; };
+		05AB5F431C1E6C010016BB44 /* PhotosModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05AB5F421C1E6C010016BB44 /* PhotosModel.swift */; };
+		05AB5F4A1C1E76740016BB44 /* Photo+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05AB5F441C1E76740016BB44 /* Photo+CoreDataProperties.swift */; };
+		05AB5F4B1C1E76740016BB44 /* Photo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05AB5F451C1E76740016BB44 /* Photo.swift */; };
+		05AB5F4C1C1E76740016BB44 /* Folder+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05AB5F461C1E76740016BB44 /* Folder+CoreDataProperties.swift */; };
+		05AB5F4D1C1E76740016BB44 /* Folder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05AB5F471C1E76740016BB44 /* Folder.swift */; };
+		05AB5F4E1C1E76740016BB44 /* Entry+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05AB5F481C1E76740016BB44 /* Entry+CoreDataProperties.swift */; };
+		05AB5F4F1C1E76740016BB44 /* Entry.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05AB5F491C1E76740016BB44 /* Entry.swift */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		05AB5EC61C1D14400016BB44 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 05AB5EBF1C1D14400016BB44 /* CoreDragon.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 05EDCE1F18E9F03E003CF165;
+			remoteInfo = CoreDragon;
+		};
+		05AB5EC81C1D14400016BB44 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 05AB5EBF1C1D14400016BB44 /* CoreDragon.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 05EDCE2F18E9F03E003CF165;
+			remoteInfo = CoreDragonTests;
+		};
+		05AB5ECA1C1D14400016BB44 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 05AB5EBF1C1D14400016BB44 /* CoreDragon.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 05EDCE5A18E9FF23003CF165;
+			remoteInfo = DemoApp;
+		};
+		05AB5ECC1C1D14400016BB44 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 05AB5EBF1C1D14400016BB44 /* CoreDragon.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 059190F61B2E764700AD5DE8;
+			remoteInfo = DemoApp2;
+		};
+		05AB5ECE1C1D14490016BB44 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 05AB5EBF1C1D14400016BB44 /* CoreDragon.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = 05EDCE1E18E9F03D003CF165;
+			remoteInfo = CoreDragon;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		056369231C1E911100B24389 /* DragonPhotos.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = DragonPhotos.xcdatamodel; sourceTree = "<group>"; };
+		05AB5EAA1C1D141B0016BB44 /* DragonPhotos.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DragonPhotos.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		05AB5EAD1C1D141B0016BB44 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		05AB5EAF1C1D141B0016BB44 /* PhotosFolderController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotosFolderController.swift; sourceTree = "<group>"; };
+		05AB5EB21C1D141B0016BB44 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		05AB5EB41C1D141B0016BB44 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		05AB5EB71C1D141B0016BB44 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		05AB5EB91C1D141B0016BB44 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		05AB5EBF1C1D14400016BB44 /* CoreDragon.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = CoreDragon.xcodeproj; path = ../../CoreDragon.xcodeproj; sourceTree = "<group>"; };
+		05AB5ED11C1D14610016BB44 /* DragonPhotos-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "DragonPhotos-Bridging-Header.h"; sourceTree = "<group>"; };
+		05AB5F421C1E6C010016BB44 /* PhotosModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = PhotosModel.swift; path = DragonPhotos/PhotosModel.swift; sourceTree = "<group>"; };
+		05AB5F441C1E76740016BB44 /* Photo+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "Photo+CoreDataProperties.swift"; path = "DragonPhotos/Photo+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		05AB5F451C1E76740016BB44 /* Photo.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Photo.swift; path = DragonPhotos/Photo.swift; sourceTree = "<group>"; };
+		05AB5F461C1E76740016BB44 /* Folder+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "Folder+CoreDataProperties.swift"; path = "DragonPhotos/Folder+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		05AB5F471C1E76740016BB44 /* Folder.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Folder.swift; path = DragonPhotos/Folder.swift; sourceTree = "<group>"; };
+		05AB5F481C1E76740016BB44 /* Entry+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "Entry+CoreDataProperties.swift"; path = "DragonPhotos/Entry+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		05AB5F491C1E76740016BB44 /* Entry.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Entry.swift; path = DragonPhotos/Entry.swift; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		05AB5EA71C1D141B0016BB44 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				05AB5ED01C1D144D0016BB44 /* libCoreDragon.a in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		05AB5EA11C1D141B0016BB44 = {
+			isa = PBXGroup;
+			children = (
+				05AB5EBF1C1D14400016BB44 /* CoreDragon.xcodeproj */,
+				05AB5EAC1C1D141B0016BB44 /* DragonPhotos */,
+				05AB5EAB1C1D141B0016BB44 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		05AB5EAB1C1D141B0016BB44 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				05AB5EAA1C1D141B0016BB44 /* DragonPhotos.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		05AB5EAC1C1D141B0016BB44 /* DragonPhotos */ = {
+			isa = PBXGroup;
+			children = (
+				05AB5EAD1C1D141B0016BB44 /* AppDelegate.swift */,
+				05AB5EAF1C1D141B0016BB44 /* PhotosFolderController.swift */,
+				05AB5F501C1E76870016BB44 /* Data Model */,
+				05AB5EB11C1D141B0016BB44 /* Main.storyboard */,
+				05AB5EB41C1D141B0016BB44 /* Assets.xcassets */,
+				05AB5EB61C1D141B0016BB44 /* LaunchScreen.storyboard */,
+				05AB5EB91C1D141B0016BB44 /* Info.plist */,
+				05AB5ED11C1D14610016BB44 /* DragonPhotos-Bridging-Header.h */,
+				056369221C1E911100B24389 /* DragonPhotos.xcdatamodeld */,
+			);
+			path = DragonPhotos;
+			sourceTree = "<group>";
+		};
+		05AB5EC01C1D14400016BB44 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				05AB5EC71C1D14400016BB44 /* libCoreDragon.a */,
+				05AB5EC91C1D14400016BB44 /* CoreDragon.xctest */,
+				05AB5ECB1C1D14400016BB44 /* DemoApp.app */,
+				05AB5ECD1C1D14400016BB44 /* DemoApp2.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		05AB5F501C1E76870016BB44 /* Data Model */ = {
+			isa = PBXGroup;
+			children = (
+				05AB5F421C1E6C010016BB44 /* PhotosModel.swift */,
+				05AB5F441C1E76740016BB44 /* Photo+CoreDataProperties.swift */,
+				05AB5F451C1E76740016BB44 /* Photo.swift */,
+				05AB5F461C1E76740016BB44 /* Folder+CoreDataProperties.swift */,
+				05AB5F471C1E76740016BB44 /* Folder.swift */,
+				05AB5F481C1E76740016BB44 /* Entry+CoreDataProperties.swift */,
+				05AB5F491C1E76740016BB44 /* Entry.swift */,
+			);
+			name = "Data Model";
+			path = ..;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		05AB5EA91C1D141B0016BB44 /* DragonPhotos */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 05AB5EBC1C1D141B0016BB44 /* Build configuration list for PBXNativeTarget "DragonPhotos" */;
+			buildPhases = (
+				05AB5EA61C1D141B0016BB44 /* Sources */,
+				05AB5EA71C1D141B0016BB44 /* Frameworks */,
+				05AB5EA81C1D141B0016BB44 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				05AB5ECF1C1D14490016BB44 /* PBXTargetDependency */,
+			);
+			name = DragonPhotos;
+			productName = DragonPhotos;
+			productReference = 05AB5EAA1C1D141B0016BB44 /* DragonPhotos.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		05AB5EA21C1D141B0016BB44 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastSwiftUpdateCheck = 0710;
+				LastUpgradeCheck = 0710;
+				ORGANIZATIONNAME = ThirdCog;
+				TargetAttributes = {
+					05AB5EA91C1D141B0016BB44 = {
+						CreatedOnToolsVersion = 7.1.1;
+					};
+				};
+			};
+			buildConfigurationList = 05AB5EA51C1D141B0016BB44 /* Build configuration list for PBXProject "DragonPhotos" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = 05AB5EA11C1D141B0016BB44;
+			productRefGroup = 05AB5EAB1C1D141B0016BB44 /* Products */;
+			projectDirPath = "";
+			projectReferences = (
+				{
+					ProductGroup = 05AB5EC01C1D14400016BB44 /* Products */;
+					ProjectRef = 05AB5EBF1C1D14400016BB44 /* CoreDragon.xcodeproj */;
+				},
+			);
+			projectRoot = "";
+			targets = (
+				05AB5EA91C1D141B0016BB44 /* DragonPhotos */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXReferenceProxy section */
+		05AB5EC71C1D14400016BB44 /* libCoreDragon.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = libCoreDragon.a;
+			remoteRef = 05AB5EC61C1D14400016BB44 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		05AB5EC91C1D14400016BB44 /* CoreDragon.xctest */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.cfbundle;
+			path = CoreDragon.xctest;
+			remoteRef = 05AB5EC81C1D14400016BB44 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		05AB5ECB1C1D14400016BB44 /* DemoApp.app */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.application;
+			path = DemoApp.app;
+			remoteRef = 05AB5ECA1C1D14400016BB44 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		05AB5ECD1C1D14400016BB44 /* DemoApp2.app */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.application;
+			path = DemoApp2.app;
+			remoteRef = 05AB5ECC1C1D14400016BB44 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+/* End PBXReferenceProxy section */
+
+/* Begin PBXResourcesBuildPhase section */
+		05AB5EA81C1D141B0016BB44 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				05AB5EB81C1D141B0016BB44 /* LaunchScreen.storyboard in Resources */,
+				05AB5EB51C1D141B0016BB44 /* Assets.xcassets in Resources */,
+				05AB5EB31C1D141B0016BB44 /* Main.storyboard in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		05AB5EA61C1D141B0016BB44 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				05AB5F4F1C1E76740016BB44 /* Entry.swift in Sources */,
+				056369241C1E911100B24389 /* DragonPhotos.xcdatamodeld in Sources */,
+				05AB5F4B1C1E76740016BB44 /* Photo.swift in Sources */,
+				05AB5F4C1C1E76740016BB44 /* Folder+CoreDataProperties.swift in Sources */,
+				05AB5EB01C1D141B0016BB44 /* PhotosFolderController.swift in Sources */,
+				05AB5F4D1C1E76740016BB44 /* Folder.swift in Sources */,
+				05AB5EAE1C1D141B0016BB44 /* AppDelegate.swift in Sources */,
+				05AB5F431C1E6C010016BB44 /* PhotosModel.swift in Sources */,
+				05AB5F4E1C1E76740016BB44 /* Entry+CoreDataProperties.swift in Sources */,
+				05AB5F4A1C1E76740016BB44 /* Photo+CoreDataProperties.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		05AB5ECF1C1D14490016BB44 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = CoreDragon;
+			targetProxy = 05AB5ECE1C1D14490016BB44 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		05AB5EB11C1D141B0016BB44 /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				05AB5EB21C1D141B0016BB44 /* Base */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+		05AB5EB61C1D141B0016BB44 /* LaunchScreen.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				05AB5EB71C1D141B0016BB44 /* Base */,
+			);
+			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		05AB5EBA1C1D141B0016BB44 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.1;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		05AB5EBB1C1D141B0016BB44 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.1;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		05AB5EBD1C1D141B0016BB44 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
+				HEADER_SEARCH_PATHS = ../..;
+				INFOPLIST_FILE = DragonPhotos/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = eu.thirdcog.DragonPhotos;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "DragonPhotos/DragonPhotos-Bridging-Header.h";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+			};
+			name = Debug;
+		};
+		05AB5EBE1C1D141B0016BB44 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
+				HEADER_SEARCH_PATHS = ../..;
+				INFOPLIST_FILE = DragonPhotos/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = eu.thirdcog.DragonPhotos;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "DragonPhotos/DragonPhotos-Bridging-Header.h";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		05AB5EA51C1D141B0016BB44 /* Build configuration list for PBXProject "DragonPhotos" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				05AB5EBA1C1D141B0016BB44 /* Debug */,
+				05AB5EBB1C1D141B0016BB44 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		05AB5EBC1C1D141B0016BB44 /* Build configuration list for PBXNativeTarget "DragonPhotos" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				05AB5EBD1C1D141B0016BB44 /* Debug */,
+				05AB5EBE1C1D141B0016BB44 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+
+/* Begin XCVersionGroup section */
+		056369221C1E911100B24389 /* DragonPhotos.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				056369231C1E911100B24389 /* DragonPhotos.xcdatamodel */,
+			);
+			currentVersion = 056369231C1E911100B24389 /* DragonPhotos.xcdatamodel */;
+			path = DragonPhotos.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
+	};
+	rootObject = 05AB5EA21C1D141B0016BB44 /* Project object */;
+}

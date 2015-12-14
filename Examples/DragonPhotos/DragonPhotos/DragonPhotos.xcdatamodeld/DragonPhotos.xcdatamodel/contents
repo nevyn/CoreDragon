@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<model userDefinedModelVersionIdentifier="" type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="9057" systemVersion="15A282b" minimumToolsVersion="Automatic">
+    <entity name="Entry" representedClassName=".Entry" syncable="YES">
+        <relationship name="parentFolder" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Folder" inverseName="entries" inverseEntity="Folder" syncable="YES"/>
+    </entity>
+    <entity name="Folder" representedClassName=".Folder" parentEntity="Entry" syncable="YES">
+        <relationship name="entries" optional="YES" toMany="YES" deletionRule="Cascade" ordered="YES" destinationEntity="Entry" inverseName="parentFolder" inverseEntity="Entry" syncable="YES"/>
+    </entity>
+    <entity name="Photo" representedClassName=".Photo" parentEntity="Entry" syncable="YES">
+        <attribute name="jpgData" optional="YES" attributeType="Binary" allowsExternalBinaryDataStorage="YES" syncable="YES"/>
+    </entity>
+    <elements>
+        <element name="Entry" positionX="-144" positionY="-351" width="128" height="58"/>
+        <element name="Photo" positionX="36" positionY="-216" width="128" height="58"/>
+        <element name="Folder" positionX="-225" positionY="-211" width="128" height="58"/>
+    </elements>
+</model>
