@@ -8,15 +8,14 @@
 
 import UIKit
 import CoreData
+import MobileCoreServices
 
 /* This view controller presents a user-defined list of photos. Photos can be imported
 	from the camera roll. They can then be organized into folders by dragging and dropping.
 	
-	 Three pieces of code allow these photos to be dragged. They are marked drag1, drag2 and drag3.
-	 
-	 Three pieces of code allow these photos to be dropped, to put them into folders. They
-	 are marked drop1, drop2 and drop3. */
-class PhotosFolderController: UICollectionViewController, NSFetchedResultsControllerDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate, DragonDelegate {
+	 All comments below are pertaining to dragging and dropping, so just look for the
+	 green text. */
+class PhotosFolderController: UICollectionViewController, NSFetchedResultsControllerDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate, DragonDelegate, DragonDropDelegate {
 	
 	var folder : Folder!
 	let imagePicker = UIImagePickerController()
@@ -55,26 +54,30 @@ class PhotosFolderController: UICollectionViewController, NSFetchedResultsContro
     override func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell
 	{
 		let entry = folder.entries![indexPath.item]
+		let entryCell : UICollectionViewCell
 		if let photo = entry as? Photo {
 			let cell = self.collectionView!.dequeueReusableCellWithReuseIdentifier("PhotoCell", forIndexPath: indexPath) as! PhotoCell
+			entryCell = cell
 			cell.imageView.image = photo.image
-			
-			// drag1: Allow any PhotoCell to be dragged, and have this view controller handle it.
-			DragonController.sharedController().registerDragSource(cell, delegate: self)
-			return cell
 		} else if let folder = entry as? Folder {
 			let cell = self.collectionView!.dequeueReusableCellWithReuseIdentifier("FolderCell", forIndexPath: indexPath) as! FolderCell
+			entryCell = cell
 			cell.label.text = "\(folder.entries!.count) photos"
-			
-			// drag2: Same for FolderCells.
-			DragonController.sharedController().registerDragSource(cell, delegate: self)
-			return cell
 		} else {
 			abort()
 		}
+		
+		// DRAGGING: We register all photos and folders as a drag source, so we can pick them up.
+		DragonController.sharedController().registerDragSource(entryCell, delegate: self)
+		
+		// DROPPING: We also register all photos and folders as a drop source, so we can drop
+		// things on them to group them together into folders.
+		DragonController.sharedController().registerDropTarget(entryCell, delegate: self)
+		
+		return entryCell
 	}
 	
-	// drag3: The user has initiated a drag from a specific cell. Handle it.
+	// DRAGGING: The user has initiated a drag from a specific cell. Handle it.
 	func beginDragOperation(drag: DragonInfo, fromView draggable: UIView) {
 		let indexPath = self.collectionView!.indexPathForCell(draggable as! UICollectionViewCell)!
 		let entry = folder.entries![indexPath.item]
@@ -83,6 +86,20 @@ class PhotosFolderController: UICollectionViewController, NSFetchedResultsContro
 			// pasteboard. Here we put an image on there.
 			drag.pasteboard.image = photo.image
 		}
+	}
+	
+	func dropTarget(droppable: UIView, canAcceptDrag drag: DragonInfo) -> Bool {
+		// Is there something image-like on the pasteboard?
+		return drag.pasteboard.pasteboardTypes().contains({ (str) -> Bool in
+			return UIPasteboardTypeListImage.containsObject(str)
+		})
+	}
+	
+	func dropTarget(droppable: UIView, acceptDrag drag: DragonInfo, atPoint p: CGPoint) {
+		let indexPath = self.collectionView!.indexPathForCell(droppable as! UICollectionViewCell)!
+		let entry = folder.entries![indexPath.item]
+		// This is where we will take the photo or folder from the pasteboard and
+		// put it in the dropped folder, or create one if it was dropped on a photo.
 	}
 
 }
