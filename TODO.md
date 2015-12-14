@@ -23,7 +23,7 @@
 	  to restore the pasteboard!
 - [X] If drop target doesn't accept drop, don't send the drop to it when dragging ends!
 - [X] Fix connection reestablishment when foregrounding
-- [X] Get rid of SPDragProxyIconDelegate and just put it into SPDragDelegate like on Mac
+- [X] Get rid of SPDragProxyIconDelegate and just put it into DragonDelegate like on Mac
 
 - [X] Make gesture recognizer survive view disappearing from its superview.
 	  We need to be able to navigate away from the drag source during dnd.

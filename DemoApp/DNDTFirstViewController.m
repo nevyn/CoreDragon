@@ -10,7 +10,7 @@
 #import <CoreDragon/CoreDragon.h>
 #import <MobileCoreServices/UTCoreTypes.h>
 
-@interface DNDTFirstViewController () <SPDragDelegate, SPDropDelegate>
+@interface DNDTFirstViewController () <DragonDelegate, DragonDropDelegate>
 {
     IBOutlet UIView *label1;
     IBOutlet UIView *label2;
@@ -44,7 +44,7 @@
     // Dispose of any resources that can be recreated.
 }
 
-- (void)beginDragOperation:(id<SPDraggingInfo>)drag fromView:(UIView *)draggable
+- (void)beginDragOperation:(id<DragonInfo>)drag fromView:(UIView *)draggable
 {
 	NSString *text = [(UILabel*)draggable text];
     drag.title = text;
@@ -53,12 +53,12 @@
 	[drag.pasteboard setValue:text forPasteboardType:(NSString*)kUTTypePlainText];
 }
 
-- (BOOL)dropTarget:(UIView *)droppable canAcceptDrag:(id<SPDraggingInfo>)drag
+- (BOOL)dropTarget:(UIView *)droppable canAcceptDrag:(id<DragonInfo>)drag
 {
 	return [drag.pasteboard containsPasteboardTypes:@[(NSString*)kUTTypePlainText]];
 }
 
-- (void)dropTarget:(UIView *)droppable acceptDrag:(id<SPDraggingInfo>)drag atPoint:(CGPoint)p
+- (void)dropTarget:(UIView *)droppable acceptDrag:(id<DragonInfo>)drag atPoint:(CGPoint)p
 {
 	[(UITextView*)droppable setText:[drag.pasteboard valueForPasteboardType:(NSString*)kUTTypePlainText]];
 }

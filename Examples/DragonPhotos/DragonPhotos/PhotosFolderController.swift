@@ -16,7 +16,7 @@ import CoreData
 	 
 	 Three pieces of code allow these photos to be dropped, to put them into folders. They
 	 are marked drop1, drop2 and drop3. */
-class PhotosFolderController: UICollectionViewController, NSFetchedResultsControllerDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate, SPDragDelegate {
+class PhotosFolderController: UICollectionViewController, NSFetchedResultsControllerDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate, DragonDelegate {
 	
 	var folder : Folder!
 	let imagePicker = UIImagePickerController()
@@ -75,7 +75,7 @@ class PhotosFolderController: UICollectionViewController, NSFetchedResultsContro
 	}
 	
 	// drag3: The user has initiated a drag from a specific cell. Handle it.
-	func beginDragOperation(drag: SPDraggingInfo, fromView draggable: UIView) {
+	func beginDragOperation(drag: DragonInfo, fromView draggable: UIView) {
 		let indexPath = self.collectionView!.indexPathForCell(draggable as! UICollectionViewCell)!
 		let entry = folder.entries![indexPath.item]
 		if let photo = entry as? Photo {

@@ -12,7 +12,7 @@
 #import <CoreDragon/CoreDragon.h>
 #import <MobileCoreServices/UTCoreTypes.h>
 
-@interface DNDTAppDelegate () <SPDropDelegate>
+@interface DNDTAppDelegate () <DragonDropDelegate>
 @end
 
 @implementation DNDTAppDelegate
@@ -28,16 +28,16 @@
     [[DragonController sharedController] registerDropTarget:self.tabBarController.tabBar delegate:self];
     return YES;
 }
-- (BOOL)dropTarget:(UIView *)droppable canAcceptDrag:(id<SPDraggingInfo>)drag
+- (BOOL)dropTarget:(UIView *)droppable canAcceptDrag:(id<DragonInfo>)drag
 {
     return YES;
 }
 
-- (BOOL)dropTarget:(UIView *)droppable shouldSpringload:(id<SPDraggingInfo>)drag
+- (BOOL)dropTarget:(UIView *)droppable shouldSpringload:(id<DragonInfo>)drag
 {
     return YES;
 }
-- (void)dropTarget:(UIView *)droppable springload:(id<SPDraggingInfo>)drag atPoint:(CGPoint)p
+- (void)dropTarget:(UIView *)droppable springload:(id<DragonInfo>)drag atPoint:(CGPoint)p
 {
     [self.tabBarController setSelectedIndex:(self.tabBarController.selectedIndex + 1) % 2];
 }

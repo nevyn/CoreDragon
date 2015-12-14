@@ -19,7 +19,7 @@ static const void *kLongPressGrecKey = &kLongPressGrecKey;
 static const void *kDragSourceKey = &kDragSourceKey;
 static const void *kDropTargetKey = &kDropTargetKey;
 
-@interface SPDraggingState : NSObject <SPDraggingInfo>
+@interface SPDraggingState : NSObject <DragonInfo>
 // Initial, transferrable state
 @property(nonatomic,strong) UIImage *screenshot;
 @property(nonatomic,copy) NSString *title;
@@ -41,15 +41,15 @@ static const void *kDropTargetKey = &kDropTargetKey;
 
 @interface SPDragSource : NSObject
 @property(nonatomic,weak) UIView *view;
-@property(nonatomic,weak) id<SPDragDelegate> delegate;
+@property(nonatomic,weak) id<DragonDelegate> delegate;
 @end
 
 @interface SPDropTarget : NSObject
 @property(nonatomic,weak) UIView *view;
-@property(nonatomic,weak) id<SPDropDelegate> delegate;
+@property(nonatomic,weak) id<DragonDropDelegate> delegate;
 @property(nonatomic,strong) DragonDropHighlightView *highlight;
-- (BOOL)canSpringload:(id<SPDraggingInfo>)drag;
-- (BOOL)canDrop:(id<SPDraggingInfo>)drag;
+- (BOOL)canSpringload:(id<DragonInfo>)drag;
+- (BOOL)canDrop:(id<DragonInfo>)drag;
 @end
 
 @interface DragonController () <UIGestureRecognizerDelegate, CerfingConnectionDelegate>
@@ -157,7 +157,7 @@ static const void *kDropTargetKey = &kDropTargetKey;
 
 #pragma mark - Registration
 
-- (void)registerDragSource:(UIView *)draggable delegate:(id<SPDragDelegate>)delegate
+- (void)registerDragSource:(UIView *)draggable delegate:(id<DragonDelegate>)delegate
 {
 	SPDragSource *source = [SPDragSource new];
 	source.view = draggable;
@@ -173,7 +173,7 @@ static const void *kDropTargetKey = &kDropTargetKey;
 	}
 }
 
-- (void)registerDropTarget:(UIView *)droppable delegate:(id<SPDropDelegate>)delegate
+- (void)registerDropTarget:(UIView *)droppable delegate:(id<DragonDropDelegate>)delegate
 {
     [self unregisterDropTarget:droppable];
     
@@ -251,7 +251,7 @@ static UIImage *unserializedImage(NSDictionary *rep)
 		[self _cleanUpDragging];
 	}
 	
-    id<SPDragDelegate> delegate = source.delegate;
+    id<DragonDelegate> delegate = source.delegate;
 
     SPDraggingState *state = [SPDraggingState new];
     state.dragView = source.view;
@@ -678,14 +678,14 @@ static UIImage *unserializedImage(NSDictionary *rep)
 @end
 
 @implementation SPDropTarget
-- (BOOL)canSpringload:(id<SPDraggingInfo>)drag
+- (BOOL)canSpringload:(id<DragonInfo>)drag
 {
     BOOL supportsSpringloading = [self.delegate respondsToSelector:@selector(dropTarget:springload:atPoint:)];
     BOOL supportsShould = [self.delegate respondsToSelector:@selector(dropTarget:shouldSpringload:)];
     BOOL shouldStartSpringloading = supportsSpringloading && (!supportsShould || [self.delegate dropTarget:self.view shouldSpringload:drag]);
     return shouldStartSpringloading;
 }
-- (BOOL)canDrop:(id<SPDraggingInfo>)drag
+- (BOOL)canDrop:(id<DragonInfo>)drag
 {
     BOOL supportsShouldDrop = [self.delegate respondsToSelector:@selector(dropTarget:shouldAcceptDrag:)];
     BOOL supportsDrop = [self.delegate respondsToSelector:@selector(dropTarget:acceptDrag:atPoint:)];

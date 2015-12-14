@@ -44,7 +44,7 @@ When you have a view that you would like to allow your users to drag, you can re
     [[DragonController sharedController] registerDragSource:label1 delegate:self];
 }
 
-- (void)beginDragOperation:(id<SPDraggingInfo>)drag fromView:(UIView *)draggable
+- (void)beginDragOperation:(id<DragonInfo>)drag fromView:(UIView *)draggable
 {
 	// Required: Provide the data to be dragged by adding it to the dragging info's pasteboard:
 	[drag.pasteboard setValue:text forPasteboardType:(NSString*)kUTTypePlainText];
@@ -81,13 +81,13 @@ A simple drop target could look like so:
 }
 
 // Ensure that we only receive drops for plain text
-- (BOOL)dropTarget:(UIView *)droppable canAcceptDrag:(id<SPDraggingInfo>)drag
+- (BOOL)dropTarget:(UIView *)droppable canAcceptDrag:(id<DragonInfo>)drag
 {
 	return [drag.pasteboard containsPasteboardTypes:@[(NSString*)kUTTypePlainText]];
 }
 
 // When some plain text is dropped on this target, set the label's text to the incoming text.
-- (void)dropTarget:(UIView *)droppable acceptDrag:(id<SPDraggingInfo>)drag atPoint:(CGPoint)p
+- (void)dropTarget:(UIView *)droppable acceptDrag:(id<DragonInfo>)drag atPoint:(CGPoint)p
 {
 	[(UITextView*)droppable setText:[drag.pasteboard valueForPasteboardType:(NSString*)kUTTypePlainText]];
 }
