@@ -23,6 +23,10 @@ class PhotosFolderController: UICollectionViewController, NSFetchedResultsContro
 	override func viewDidLoad() {
 		super.viewDidLoad()		
 		imagePicker.delegate = self
+		
+		// DROPPING: Drop a photo onto the background to reorder it, or if it's a new photo,
+		// insert it into this folder.
+		DragonController.sharedController().registerDropTarget(self.collectionView!, delegate: self)
 	}
 	
 	@IBAction func addPhoto(sender: UIBarButtonItem)
@@ -129,6 +133,9 @@ class PhotosFolderController: UICollectionViewController, NSFetchedResultsContro
 	func dropTarget(droppable: UIView, canAcceptDrag drag: DragonInfo) -> Bool {
 		// Is there a reference to an object from within this app?
 		if let entry = entryFromPasteboard(drag.pasteboard) {
+			if droppable == self.collectionView! {
+				return true
+			}
 			// if the droppable isn't in the table view yet, 'entry' cannot be 'thisEntry'
 			guard let thisIndexPath = self.collectionView!.indexPathForCell(droppable as! UICollectionViewCell) else {
 				return true
@@ -153,18 +160,12 @@ class PhotosFolderController: UICollectionViewController, NSFetchedResultsContro
 		// put it in the dropped folder, or create one if it was dropped on a photo.
 		
 		self.collectionView!.performBatchUpdates({ () -> Void in
-			let indexPath = self.collectionView!.indexPathForCell(droppable as! UICollectionViewCell)!
-			let destinationEntry = self.folder.entries![indexPath.item]
 			
-			// Determine what's coming in.
+			// First: Determine what's coming in.
 			let incoming : Entry
 			if let droppedEntry = self.entryFromPasteboard(drag.pasteboard) {
 				// If it's an existing photo or folder from inside the app, we will move it.
 				incoming = droppedEntry
-				let sourceIndex = self.folder.entries.indexOfObject(droppedEntry)
-				if sourceIndex != NSNotFound {
-					self.collectionView?.deleteItemsAtIndexPaths([NSIndexPath(forItem: sourceIndex, inSection: indexPath.section)])
-				}
 			} else if let droppedImage = drag.pasteboard.image {
 				// If it's a photo, create a new one and insert it.
 				let newPhoto = NSEntityDescription.insertNewObjectForEntityForName("Photo", inManagedObjectContext: self.folder.managedObjectContext!) as! Photo
@@ -172,18 +173,51 @@ class PhotosFolderController: UICollectionViewController, NSFetchedResultsContro
 				incoming = newPhoto
 			} else { abort() }
 			
-			// Determine where we're going to put it.
-			if let toFolder = destinationEntry as? Folder {
-				// If we're dropping on a folder, insert the photo into that folder.
-				incoming.parentFolder = toFolder
-			} else if let toPhoto = destinationEntry as? Photo {
-				// If we're dropping on a photo, create a new folder with the existing photo and the new photo.
-				let newFolder = NSEntityDescription.insertNewObjectForEntityForName("Folder", inManagedObjectContext: self.folder.managedObjectContext!) as! Folder
-				newFolder.mutableOrderedSetValueForKey("entries").addObjectsFromArray([toPhoto, incoming])
-				self.folder.mutableOrderedSetValueForKey("entries").insertObject(newFolder, atIndex: indexPath.item)
+			// Then: Determine where we're going to put it.
+			let destination : Folder
+			if let cell = droppable as? UICollectionViewCell,
+			   let indexPath = self.collectionView!.indexPathForCell(cell) {
+				// Did we drop onto a cell?
+				let destinationEntry = self.folder.entries![indexPath.item]
+				if let toFolder = destinationEntry as? Folder {
+					// If we're dropping on a folder, insert the photo into that folder.
+					destination = toFolder
+				} else if let toPhoto = destinationEntry as? Photo {
+					// If we're dropping on a photo, create a new folder with the existing photo and the new photo.
+					let newFolder = NSEntityDescription.insertNewObjectForEntityForName("Folder", inManagedObjectContext: self.folder.managedObjectContext!) as! Folder
+					newFolder.mutableOrderedSetValueForKey("entries").addObjectsFromArray([toPhoto])
+					self.folder.mutableOrderedSetValueForKey("entries").insertObject(newFolder, atIndex: indexPath.item)
+					destination = newFolder
+				} else { abort() }
+				self.collectionView!.reloadItemsAtIndexPaths([indexPath])
+			} else {
+				// Dropped onto background.
+				destination = self.folder
 			}
 			
-			self.collectionView!.reloadItemsAtIndexPaths([indexPath])
+			// Finally: Perform move/copy of 'incoming' into 'destination'.
+			if destination == self.folder {
+				// We're moving into this VC's folder.
+				
+				if incoming.parentFolder != self.folder {
+					// It wasn't in this folder before.
+					self.collectionView!.insertItemsAtIndexPaths([NSIndexPath(forItem: self.folder.entries.count-1, inSection: 0)])
+				} else {
+					// It was in this folder before. TODO: perform a reordering operation.
+				}
+			} else {
+				// We're moving to some other folder.
+				if incoming.parentFolder == self.folder {
+					// and moving out of this one.
+					let sourceIndex = self.folder.entries.indexOfObject(incoming)
+					self.collectionView?.deleteItemsAtIndexPaths([NSIndexPath(forItem: sourceIndex, inSection: 0)])
+				} else {
+					abort()
+				}
+			}
+			incoming.parentFolder = destination
+			
+
 		}) { (success) -> Void in
 			
 		}
