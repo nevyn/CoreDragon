@@ -94,6 +94,51 @@ A simple drop target could look like so:
 
 ```
 
+## Examples
+
+### DragonFrame
+
+TO BE IMPLEMENTED
+
+A "photo frame" app with the simplest possible drag and drop support. Has a single image view which
+accepts drops on one tab, and another tab with a few example photos.
+
+Features:
+
+* Registering drag sources (example photos)
+* Registering drop targets (the photo frame)
+* Two-handed navigation: Grab a photo with one hand, and tap the tab bar to navigate to the photo frame.
+
+### DragonPhotos
+
+This is a photo organizer app with folder support, demoing all features of CoreDragon.
+
+Photos are laid out in a collection view in a user-defined order. Dropping a photo onto another photo creates a folder. Photos can be imported from the camera roll, or dragged to the application.
+
+Features:
+
+* Registering drag sources (photos and folders)
+* Registering drop targets (folders and the view controller's root view)
+* Multiple dragging representations.
+	* Image data is put on pasteboard to support dragging images to other applications.
+	* Database reference is put on pasteboard to support reordering and reorganizing photos within the
+	  application.
+* Custom highlighting. It is possible to re-order objects within a folder by drag-and-drop, with an indicator showing the new location for an item as a custom highlight view.
+* Spring-loading. By hovering an object over a folder, the hovered folder view controller is opened, so
+  that you can continue organizing within it.
+* Two-handed navigation. Instead of spring-loading, you can grab an object with one hand, and then tap
+  in the application with your other hand to navigate to the location in the application where
+  you want to drop the object.
+
+![dragonphotos](https://cloud.githubusercontent.com/assets/34791/11920705/4f69cb44-a72b-11e5-95fb-8b0e89deec3b.PNG)
+
+### DragonChat
+
+TO BE IMPLEMENTED
+
+A fake chat app with demo conversations, where you can attach photos to the conversation by dragging them
+from DragonPhotos. The purpose of this app is to show a real-world use case of drag&drop.
+
 ## License
 
 [Apache 2.0](LICENSE.txt)

@@ -1,11 +1,21 @@
-- [ ] Cocoapods spec
-- [ ] Implement some proper example apps! Maybe a 'contacts/chat' app and a 'photos' app
+- [ ] Implement some proper example apps!
+	- [ ] Fake 'chat' app
+	- [-] 'Photos' app
+		- [X] List photos
+		- [X] Move photos between folders
+		- [X] Reorder photos
+		- [X] Springloading
+- [ ] Visualize the drop targets as cut-outs (instead of blue rectangles) and dim the rest of the screen
+- [ ] Support different dragging modes (moving, copying, aliasing, ...)
+- [ ] Support multiple dragged items
+- [ ] Promises (only put description of data on pasteboard until transfer is needed)
+
 - [ ] When drag fails, if original view isn't on screen anymore, find a better 'cancellation' animation.
 - [ ] Protocol versioning
-- [ ] Support multiple dragged items
-- [ ] Support different dragging modes (moving, copying, aliasing, ...)
 - [ ] Make unregistering drag sources/drop targets be optional (unregistered when dealloc'd)
 
+- [X] Hide the item being dragged (so it doesn't look like we have two of them)
+- [X] Cocoapods spec
 - [X] Better readme/documentation
 - [X] Use secure coding
 - [X] Put the dragging metadata as an alt type in the first pasteboard item instead

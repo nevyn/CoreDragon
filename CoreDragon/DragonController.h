@@ -93,4 +93,9 @@ NS_ASSUME_NONNULL_BEGIN
 - (void)dropTarget:(UIView *)droppable updateHighlight:(UIView*)highlightContainer forDrag:(id<DragonInfo>)drag atPoint:(CGPoint)p;
 @end
 
+/// Sent when a drag operation starts.
+static NSString *const DragonDragOperationStartedNotificationName = @"eu.thirdcog.dragon.dragStarted";
+/// Sent when a drag operation stops.
+static NSString *const DragonDragOperationStoppedNotificationName = @"eu.thirdcog.dragon.dragStarted";
+
 NS_ASSUME_NONNULL_END

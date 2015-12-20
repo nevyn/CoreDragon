@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		055902641C274774006843D0 /* PhotoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 055902631C274774006843D0 /* PhotoViewController.swift */; };
 		056369241C1E911100B24389 /* DragonPhotos.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 056369221C1E911100B24389 /* DragonPhotos.xcdatamodeld */; };
 		05AB5EAE1C1D141B0016BB44 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05AB5EAD1C1D141B0016BB44 /* AppDelegate.swift */; };
 		05AB5EB01C1D141B0016BB44 /* PhotosFolderController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05AB5EAF1C1D141B0016BB44 /* PhotosFolderController.swift */; };
@@ -62,6 +63,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		055902631C274774006843D0 /* PhotoViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PhotoViewController.swift; sourceTree = "<group>"; };
 		056369231C1E911100B24389 /* DragonPhotos.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = DragonPhotos.xcdatamodel; sourceTree = "<group>"; };
 		05AB5EAA1C1D141B0016BB44 /* DragonPhotos.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DragonPhotos.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		05AB5EAD1C1D141B0016BB44 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -115,6 +117,7 @@
 			children = (
 				05AB5EAD1C1D141B0016BB44 /* AppDelegate.swift */,
 				05AB5EAF1C1D141B0016BB44 /* PhotosFolderController.swift */,
+				055902631C274774006843D0 /* PhotoViewController.swift */,
 				05AB5F501C1E76870016BB44 /* Data Model */,
 				05AB5EB11C1D141B0016BB44 /* Main.storyboard */,
 				05AB5EB41C1D141B0016BB44 /* Assets.xcassets */,
@@ -271,6 +274,7 @@
 				05AB5F431C1E6C010016BB44 /* PhotosModel.swift in Sources */,
 				05AB5F4E1C1E76740016BB44 /* Entry+CoreDataProperties.swift in Sources */,
 				05AB5F4A1C1E76740016BB44 /* Photo+CoreDataProperties.swift in Sources */,
+				055902641C274774006843D0 /* PhotoViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
