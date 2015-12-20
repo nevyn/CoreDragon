@@ -98,8 +98,8 @@
 		return nil;
 	self.layer.shadowColor = [UIColor blackColor].CGColor;
 	self.layer.shadowOffset = CGSizeMake(0, 0);
-	self.layer.shadowOpacity = .5;
-	self.layer.shadowRadius = 15;
+	self.layer.shadowOpacity = .8;
+	self.layer.shadowRadius = 30;
 	
 	return self;
 }
@@ -108,7 +108,7 @@
 	[CATransaction begin];
 	[CATransaction setCompletionBlock:completion];
 	CABasicAnimation *animation = [CABasicAnimation animationWithKeyPath:@"shadowRadius"];
-	animation.fromValue = @15;
+	animation.fromValue = @(self.layer.shadowRadius);
 	animation.toValue = @0;
 
 	self.layer.shadowRadius = 0;
