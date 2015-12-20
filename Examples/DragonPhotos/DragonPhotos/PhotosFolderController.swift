@@ -114,6 +114,13 @@ class PhotosFolderController: UICollectionViewController, NSFetchedResultsContro
 				UTEntryReference: entry.objectID.URIRepresentation().dataRepresentation
 			]
 			drag.pasteboard.items = [item]
+		} else if let folder = entry as? Folder {
+			let item : [String: AnyObject] = [
+				// For a folder, the only possible representation is one we can move
+				// around inside the app.
+				UTEntryReference: folder.objectID.URIRepresentation().dataRepresentation
+			]
+			drag.pasteboard.items = [item]
 		}
 	}
 	
