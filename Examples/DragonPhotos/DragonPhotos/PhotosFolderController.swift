@@ -232,9 +232,13 @@ class PhotosFolderController: UICollectionViewController, NSFetchedResultsContro
 	}
 	
 	override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-		let enteredFolder = folder.entries![self.collectionView!.indexPathsForSelectedItems()!.first!.item] as! Folder
-		let dest = segue.destinationViewController as! PhotosFolderController
-		dest.folder = enteredFolder
+		if let dest = segue.destinationViewController as? PhotosFolderController {
+			let enteredFolder = folder.entries![self.collectionView!.indexPathsForSelectedItems()!.first!.item] as! Folder
+			dest.folder = enteredFolder
+		} else if let dest = segue.destinationViewController as? PhotoViewController {
+			let enteredPhoto = folder.entries![self.collectionView!.indexPathsForSelectedItems()!.first!.item] as! Photo
+			dest.image = enteredPhoto.image!
+		}
 	}
 
 }

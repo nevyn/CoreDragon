@@ -2,7 +2,7 @@
 	- [ ] Fake 'chat' app
 	- [-] 'Photos' app
 		- [X] List photos
-		- [ ] Move photos between folders
+		- [X] Move photos between folders
 		- [ ] Reorder photos
 		- [ ] Make folder thumbnails?
 - [ ] When drag fails, if original view isn't on screen anymore, find a better 'cancellation' animation.

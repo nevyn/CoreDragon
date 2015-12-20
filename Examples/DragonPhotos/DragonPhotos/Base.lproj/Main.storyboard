@@ -51,6 +51,7 @@
                                 </view>
                                 <connections>
                                     <outlet property="imageView" destination="cfe-hK-GVb" id="Buo-Zb-hRE"/>
+                                    <segue destination="lJC-2u-0He" kind="presentation" id="R9C-Vk-TjF"/>
                                 </connections>
                             </collectionViewCell>
                             <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="FolderCell" id="1Xd-Pq-oQ7" customClass="FolderCell" customModule="DragonPhotos" customModuleProvider="target">
@@ -71,7 +72,7 @@
                                 </view>
                                 <connections>
                                     <outlet property="label" destination="yfQ-vb-1oJ" id="uj0-lF-lS9"/>
-                                    <segue destination="601-RI-KR1" kind="show" id="xMy-ND-VLX"/>
+                                    <segue destination="601-RI-KR1" kind="show" id="a0O-Pb-y5d"/>
                                 </connections>
                             </collectionViewCell>
                         </cells>
@@ -91,6 +92,47 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="pnj-dN-mDc" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="749" y="217"/>
+        </scene>
+        <!--Photo View Controller-->
+        <scene sceneID="18D-6q-9ba">
+            <objects>
+                <viewController id="lJC-2u-0He" customClass="PhotoViewController" customModule="DragonPhotos" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="8kk-hA-53V"/>
+                        <viewControllerLayoutGuide type="bottom" id="Vas-aG-NCN"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="MnL-Ch-k20">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <imageView contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="NXb-Gg-GwQ">
+                                <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                                <gestureRecognizers/>
+                                <connections>
+                                    <outletCollection property="gestureRecognizers" destination="DR4-VF-F2C" appends="YES" id="t6k-f3-PAV"/>
+                                </connections>
+                            </imageView>
+                        </subviews>
+                        <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                        <constraints>
+                            <constraint firstItem="NXb-Gg-GwQ" firstAttribute="width" secondItem="MnL-Ch-k20" secondAttribute="width" id="97K-Qe-ouc"/>
+                            <constraint firstItem="NXb-Gg-GwQ" firstAttribute="centerY" secondItem="MnL-Ch-k20" secondAttribute="centerY" id="Cgl-Ka-541"/>
+                            <constraint firstItem="NXb-Gg-GwQ" firstAttribute="height" secondItem="MnL-Ch-k20" secondAttribute="height" id="YCK-2x-pze"/>
+                            <constraint firstItem="NXb-Gg-GwQ" firstAttribute="centerX" secondItem="MnL-Ch-k20" secondAttribute="centerX" id="wH1-bW-DrU"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="imageView" destination="NXb-Gg-GwQ" id="t4i-Ph-jT2"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="0e9-qD-R83" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <swipeGestureRecognizer direction="down" id="DR4-VF-F2C">
+                    <connections>
+                        <action selector="dismiss:" destination="lJC-2u-0He" id="pek-Ow-tVs"/>
+                    </connections>
+                </swipeGestureRecognizer>
+            </objects>
+            <point key="canvasLocation" x="1509" y="171"/>
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
