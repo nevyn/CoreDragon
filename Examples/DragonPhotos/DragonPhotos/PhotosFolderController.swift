@@ -341,12 +341,19 @@ class PhotosFolderController: UICollectionViewController, NSFetchedResultsContro
 	// MARK: Springloading
 	
 	func dropTarget(droppable: UIView, shouldSpringload drag: DragonInfo) -> Bool {
-		guard let cell = droppable as? EntryCell,
-			  let _ = folder.entries![cell.representedIndex] as? Folder
+		guard let cell = droppable as? EntryCell
 		else {
 			return false
 		}
-		return true
+		if let indexPath = self.collectionView?.indexPathForCell(cell),
+		   let _ = folder.entries![indexPath.item] as? Folder {
+			return true
+	    }
+		// If it's not in the collection view yet, we need to get the index path in another manner
+	    if cell.representedIndex < folder.entries.count && folder.entries![cell.representedIndex] as? Folder != nil {
+			return true
+		}
+		return false
 	}
 	
 	func dropTarget(droppable: UIView, springload drag: DragonInfo, atPoint p: CGPoint) {
