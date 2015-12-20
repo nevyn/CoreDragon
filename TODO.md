@@ -4,8 +4,7 @@
 		- [X] List photos
 		- [X] Move photos between folders
 		- [X] Reorder photos
-		- [ ] Make folder thumbnails?
-		- [ ] Springloading
+		- [X] Springloading
 - [ ] Visualize the drop targets as cut-outs (instead of blue rectangles) and dim the rest of the screen
 - [ ] Support different dragging modes (moving, copying, aliasing, ...)
 - [ ] Support multiple dragged items

@@ -34,6 +34,8 @@ class PhotosFolderController: UICollectionViewController, NSFetchedResultsContro
 		self.collectionView?.reloadData()
 	}
 	
+	// MARK: Adding photos
+	
 	@IBAction func addPhoto(sender: UIBarButtonItem)
 	{
 		imagePicker.modalPresentationStyle = .Popover
@@ -54,6 +56,8 @@ class PhotosFolderController: UICollectionViewController, NSFetchedResultsContro
 	func imagePickerControllerDidCancel(picker: UIImagePickerController) {
 		dismissViewControllerAnimated(true, completion: nil)
 	}
+	
+	// MARK: Collection view
 	
 	override func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int
 	{
@@ -86,10 +90,12 @@ class PhotosFolderController: UICollectionViewController, NSFetchedResultsContro
 		return entryCell
 	}
 	
+	// MARK: Dragging
+	
 	// Pasteboard type for a core data reference.
 	let UTEntryReference = "eu.thirdcog.dragonphotos.entryReference"
 	
-	// DRAGGING: The user has initiated a drag from a specific cell. Handle it.
+	// The user has initiated a drag from a specific cell. Handle it.
 	func beginDragOperation(drag: DragonInfo, fromView draggable: UIView) {
 		let indexPath = self.collectionView!.indexPathForCell(draggable as! UICollectionViewCell)!
 		let entry = folder.entries![indexPath.item]
@@ -109,6 +115,8 @@ class PhotosFolderController: UICollectionViewController, NSFetchedResultsContro
 			drag.pasteboard.items = [item]
 		}
 	}
+	
+	// MARK: Dropping
 	
 	// Figures out if there's an entry reference in the pasteboard, and if so, returns the CD entry.
 	func entryFromPasteboard(pasteboard: UIPasteboard) -> Entry? {
@@ -321,6 +329,31 @@ class PhotosFolderController: UICollectionViewController, NSFetchedResultsContro
 		dropInsertionView?.removeFromSuperview()
 		dropInsertionView = nil
 	}
+	
+	// MARK: Springloading
+	
+	func dropTarget(droppable: UIView, shouldSpringload drag: DragonInfo) -> Bool {
+		guard let cell = droppable as? UICollectionViewCell,
+			  let thisIndexPath = self.collectionView!.indexPathForCell(cell),
+			  let _ = folder.entries![thisIndexPath.item] as? Folder
+		else {
+			return false
+		}
+		return true
+	}
+	
+	func dropTarget(droppable: UIView, springload drag: DragonInfo, atPoint p: CGPoint) {
+		guard let cell = droppable as? UICollectionViewCell,
+			  let thisIndexPath = self.collectionView!.indexPathForCell(cell),
+			  let _ = folder.entries![thisIndexPath.item] as? Folder
+		else {
+			abort()
+		}
+		self.collectionView!.selectItemAtIndexPath(thisIndexPath, animated: true, scrollPosition: .None)
+		self.performSegueWithIdentifier("enterFolder", sender: nil)
+	}
+	
+	// MARK: Segues
 	
 	override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
 		if let dest = segue.destinationViewController as? PhotosFolderController {

@@ -72,7 +72,7 @@
                                 </view>
                                 <connections>
                                     <outlet property="label" destination="yfQ-vb-1oJ" id="uj0-lF-lS9"/>
-                                    <segue destination="601-RI-KR1" kind="show" id="a0O-Pb-y5d"/>
+                                    <segue destination="601-RI-KR1" kind="show" identifier="enterFolder" id="a0O-Pb-y5d"/>
                                 </connections>
                             </collectionViewCell>
                         </cells>
