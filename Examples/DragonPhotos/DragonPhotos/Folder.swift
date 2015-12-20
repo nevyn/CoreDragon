@@ -10,7 +10,7 @@ import Foundation
 import CoreData
 
 
-class Folder: NSManagedObject {
+class Folder: Entry {
 
 	class func rootFolder(inContext context: NSManagedObjectContext) -> Folder {
 		let req = NSFetchRequest(entityName: "Folder")
