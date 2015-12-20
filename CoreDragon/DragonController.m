@@ -386,6 +386,7 @@ static UIImage *unserializedImage(NSDictionary *rep)
 	}]];
 	
     [self highlightDropTargets];
+	[[NSNotificationCenter defaultCenter] postNotificationName:DragonDragOperationStartedNotificationName object:self];
 }
 
 #pragma mark Continue dragging
@@ -568,6 +569,7 @@ static UIImage *unserializedImage(NSDictionary *rep)
 		self.state.pasteboard.items = self.state.originalPasteboardContents;
 	
     self.state = nil;
+	[[NSNotificationCenter defaultCenter] postNotificationName:DragonDragOperationStoppedNotificationName object:self];
 }
 
 
