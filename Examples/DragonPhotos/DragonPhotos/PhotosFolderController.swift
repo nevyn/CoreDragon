@@ -67,7 +67,7 @@ class PhotosFolderController: UICollectionViewController, NSFetchedResultsContro
     override func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell
 	{
 		let entry = folder.entries![indexPath.item]
-		let entryCell : UICollectionViewCell
+		let entryCell : EntryCell
 		if let photo = entry as? Photo {
 			let cell = self.collectionView!.dequeueReusableCellWithReuseIdentifier("PhotoCell", forIndexPath: indexPath) as! PhotoCell
 			entryCell = cell
@@ -79,6 +79,7 @@ class PhotosFolderController: UICollectionViewController, NSFetchedResultsContro
 		} else {
 			abort()
 		}
+		entryCell.representedIndex = indexPath.item
 		
 		// DRAGGING: We register all photos and folders as a drag source, so we can pick them up.
 		DragonController.sharedController().registerDragSource(entryCell, delegate: self)
@@ -333,9 +334,8 @@ class PhotosFolderController: UICollectionViewController, NSFetchedResultsContro
 	// MARK: Springloading
 	
 	func dropTarget(droppable: UIView, shouldSpringload drag: DragonInfo) -> Bool {
-		guard let cell = droppable as? UICollectionViewCell,
-			  let thisIndexPath = self.collectionView!.indexPathForCell(cell),
-			  let _ = folder.entries![thisIndexPath.item] as? Folder
+		guard let cell = droppable as? EntryCell,
+			  let _ = folder.entries![cell.representedIndex] as? Folder
 		else {
 			return false
 		}
@@ -364,14 +364,18 @@ class PhotosFolderController: UICollectionViewController, NSFetchedResultsContro
 			dest.image = enteredPhoto.image!
 		}
 	}
-
 }
 
-class PhotoCell : UICollectionViewCell {
+class EntryCell : UICollectionViewCell
+{
+	var representedIndex: Int = 0
+}
+
+class PhotoCell : EntryCell {
 	@IBOutlet var imageView : UIImageView!
 }
 
-class FolderCell : UICollectionViewCell {
+class FolderCell : EntryCell {
 	@IBOutlet var label : UILabel!
 }
 
