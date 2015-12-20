@@ -29,6 +29,10 @@ class PhotosFolderController: UICollectionViewController, NSFetchedResultsContro
 		DragonController.sharedController().registerDropTarget(self.collectionView!, delegate: self)
 	}
 	
+	override func viewWillAppear(animated: Bool) {
+		self.collectionView?.reloadData()
+	}
+	
 	@IBAction func addPhoto(sender: UIBarButtonItem)
 	{
 		imagePicker.modalPresentationStyle = .Popover
