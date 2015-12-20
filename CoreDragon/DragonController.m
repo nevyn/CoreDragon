@@ -372,6 +372,7 @@ static UIImage *unserializedImage(NSDictionary *rep)
     state.proxyView.alpha = 0;
     [UIView animateWithDuration:.2 animations:^{
         state.proxyView.alpha = state.draggingIcon ? 1 : 0.5;
+		state.dragView.alpha = 0;
     }];
     [_draggingContainer addSubview:state.proxyView];
     
@@ -491,6 +492,9 @@ static UIImage *unserializedImage(NSDictionary *rep)
 			_state.proxyView.alpha = 0;
 		}];
 	} completion:(id)completion];
+	[UIView animateWithDuration:0.5 animations:^{
+		_state.dragView.alpha = 1;
+	}];
 }
 
 #pragma mark Cancel dragging
@@ -512,10 +516,15 @@ static UIImage *unserializedImage(NSDictionary *rep)
 	[_state.conclusionTimeoutTimer invalidate];
     [self stopHighlightingDropTargets];
 	[_state.proxyView animateOut:nil forSuccess:NO];
-    [UIView animateWithDuration:.5 animations:^{
+    [UIView animateWithDuration:.4 animations:^{
         _state.proxyView.layer.position = [self convertScreenPointToLocalSpace:_state.initialPositionInScreenSpace];
     } completion:^(BOOL finished) {
-        [self _cleanUpDragging];
+		[UIView animateWithDuration:.2 animations:^{
+			_state.proxyView.alpha = 0;
+			_state.dragView.alpha = 1;
+		} completion:^(BOOL finished) {
+			[self _cleanUpDragging];
+		}];
     }];
 }
 

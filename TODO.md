@@ -11,7 +11,9 @@
 - [ ] Support different dragging modes (moving, copying, aliasing, ...)
 - [ ] Make unregistering drag sources/drop targets be optional (unregistered when dealloc'd)
 - [ ] Promises (only put description of data on pasteboard until transfer is needed)
+- [ ] Visualize the drop targets as cut-outs (instead of blue rectangles) and dim the rest of the screen
 
+- [X] Hide the item being dragged (so it doesn't look like we have two of them)
 - [X] Cocoapods spec
 - [X] Better readme/documentation
 - [X] Use secure coding

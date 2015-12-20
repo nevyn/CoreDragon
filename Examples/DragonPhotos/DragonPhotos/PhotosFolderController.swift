@@ -208,9 +208,13 @@ class PhotosFolderController: UICollectionViewController, NSFetchedResultsContro
 			} else {
 				// We're moving to some other folder.
 				if incoming.parentFolder == self.folder {
-					// and moving out of this one.
+					// and moving out of this one. Animate its deletion.
 					let sourceIndex = self.folder.entries.indexOfObject(incoming)
-					self.collectionView?.deleteItemsAtIndexPaths([NSIndexPath(forItem: sourceIndex, inSection: 0)])
+					let indexPath = NSIndexPath(forItem: sourceIndex, inSection: 0)
+					self.collectionView?.deleteItemsAtIndexPaths([indexPath])
+					
+					// and make sure to hide it so it doesn't fade in after dragging concludes.
+					self.collectionView?.cellForItemAtIndexPath(indexPath)?.hidden = true
 				} else {
 					// Neither source folder nor destination folder are represented by this VC
 				}
