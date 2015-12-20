@@ -10,7 +10,7 @@ import Foundation
 import CoreData
 
 
-class Photo: NSManagedObject {
+class Photo: Entry {
 
 	var image : UIImage? {
 		get {

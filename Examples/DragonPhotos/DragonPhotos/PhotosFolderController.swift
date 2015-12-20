@@ -37,7 +37,7 @@ class PhotosFolderController: UICollectionViewController, NSFetchedResultsContro
 		
 		let photo = NSEntityDescription.insertNewObjectForEntityForName("Photo", inManagedObjectContext: folder.managedObjectContext!) as! Photo
 		photo.image = image
-		folder.entries.addObject(photo)
+		folder.mutableOrderedSetValueForKey("entries").addObject(photo)
 		self.collectionView!.reloadData()
 		
 		dismissViewControllerAnimated(true, completion: nil)

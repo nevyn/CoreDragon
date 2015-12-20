@@ -14,7 +14,7 @@ class Folder: NSManagedObject {
 
 	class func rootFolder(inContext context: NSManagedObjectContext) -> Folder {
 		let req = NSFetchRequest(entityName: "Folder")
-		req.predicate = NSPredicate(format: "parentFolder == nil", argumentArray: nil)
+		req.predicate = NSPredicate(format: "parentFolder = nil", argumentArray: nil)
 		
 		let res = try! context.executeFetchRequest(req)
 		if res.count > 0 {

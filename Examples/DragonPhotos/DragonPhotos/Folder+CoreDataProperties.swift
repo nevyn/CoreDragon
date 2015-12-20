@@ -14,6 +14,6 @@ import CoreData
 
 extension Folder {
 
-    @NSManaged var entries: NSMutableOrderedSet!
+    @NSManaged var entries: NSOrderedSet!
 
 }
