@@ -3,15 +3,17 @@
 	- [-] 'Photos' app
 		- [X] List photos
 		- [X] Move photos between folders
-		- [ ] Reorder photos
+		- [X] Reorder photos
 		- [ ] Make folder thumbnails?
+		- [ ] Springloading
+- [ ] Visualize the drop targets as cut-outs (instead of blue rectangles) and dim the rest of the screen
+- [ ] Support different dragging modes (moving, copying, aliasing, ...)
+- [ ] Support multiple dragged items
+- [ ] Promises (only put description of data on pasteboard until transfer is needed)
+
 - [ ] When drag fails, if original view isn't on screen anymore, find a better 'cancellation' animation.
 - [ ] Protocol versioning
-- [ ] Support multiple dragged items
-- [ ] Support different dragging modes (moving, copying, aliasing, ...)
 - [ ] Make unregistering drag sources/drop targets be optional (unregistered when dealloc'd)
-- [ ] Promises (only put description of data on pasteboard until transfer is needed)
-- [ ] Visualize the drop targets as cut-outs (instead of blue rectangles) and dim the rest of the screen
 
 - [X] Hide the item being dragged (so it doesn't look like we have two of them)
 - [X] Cocoapods spec

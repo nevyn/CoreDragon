@@ -27,6 +27,7 @@ class PhotosFolderController: UICollectionViewController, NSFetchedResultsContro
 		// DROPPING: Drop a photo onto the background to reorder it, or if it's a new photo,
 		// insert it into this folder.
 		DragonController.sharedController().registerDropTarget(self.collectionView!, delegate: self)
+		NSNotificationCenter.defaultCenter().addObserver(self, selector: "draggingEnded", name: DragonDragOperationStoppedNotificationName, object: nil)
 	}
 	
 	override func viewWillAppear(animated: Bool) {
@@ -199,15 +200,24 @@ class PhotosFolderController: UICollectionViewController, NSFetchedResultsContro
 				destination = self.folder
 			}
 			
-			// Finally: Perform move/copy of 'incoming' into 'destination'.
+			// Before performing move/copy: schedule the correct animation.
 			if destination == self.folder {
 				// We're moving into this VC's folder.
 				
 				if incoming.parentFolder != self.folder {
 					// It wasn't in this folder before.
-					self.collectionView!.insertItemsAtIndexPaths([NSIndexPath(forItem: self.folder.entries.count, inSection: 0)])
+					self.collectionView!.insertItemsAtIndexPaths([self.dropInsertionIndex!])
 				} else {
-					// It was in this folder before. TODO: perform a reordering operation.
+					// It was in this folder before.
+					let sourceIndex = self.folder.entries.indexOfObject(incoming)
+					let indexPath = NSIndexPath(forItem: sourceIndex, inSection: 0)
+					
+					// If we're moving it to a higher index, the new index will be 1 too high.
+					if sourceIndex < self.dropInsertionIndex!.item {
+						self.dropInsertionIndex = NSIndexPath(forItem: self.dropInsertionIndex!.item-1, inSection: 0)
+					}
+
+					self.collectionView!.moveItemAtIndexPath(indexPath, toIndexPath: self.dropInsertionIndex!)
 				}
 			} else {
 				// We're moving to some other folder.
@@ -223,12 +233,93 @@ class PhotosFolderController: UICollectionViewController, NSFetchedResultsContro
 					// Neither source folder nor destination folder are represented by this VC
 				}
 			}
-			incoming.parentFolder = destination
+			
+			// Finally: Perform move/copy of 'incoming' into 'destination'.
+			if let destinationIndexPath = self.dropInsertionIndex {
+				if destination.entries.containsObject(incoming) {
+					destination.mutableOrderedSetValueForKey("entries").removeObject(incoming)
+				}
+				destination.mutableOrderedSetValueForKey("entries").insertObject(incoming, atIndex: destinationIndexPath.item)
+			} else {
+				incoming.parentFolder = destination
+			}
 			
 
 		}) { (success) -> Void in
 			
 		}
+	}
+	
+	var dropInsertionIndex : NSIndexPath?
+	var dropInsertionView : UIView?
+	func dropTarget(droppable: UIView, updateHighlight highlightContainer: UIView, forDrag drag: DragonInfo, atPoint hoveringPoint: CGPoint) {
+		if droppable != self.collectionView {
+			dropInsertionIndex = nil
+			dropInsertionView?.removeFromSuperview()
+			dropInsertionView = nil
+			return
+		}
+		
+		// This is potentially a reordering operation. Figure out the index path
+		// for where we would want to put this new item.
+		
+		// Find all the insertion points as CGPoints in the collection view's coordinate space
+		let cells = self.collectionView!.visibleCells().sort { (a, b) -> Bool in
+			return self.collectionView!.indexPathForCell(a)!.compare(self.collectionView!.indexPathForCell(b)!) == .OrderedAscending
+		}
+		var heights : [CGFloat] = []
+		var centerPointsOfEdges = cells.map { (cell) -> CGPoint in
+			var leftEdgeFrame = cell.frame
+			leftEdgeFrame.size.width = 0
+			heights.append(leftEdgeFrame.size.height)
+			return CGPoint(x: leftEdgeFrame.midX, y: leftEdgeFrame.midY)
+		}
+		if centerPointsOfEdges.count == 0 {
+			// This folder is empty. Use the normal highlight and insert at the beginning.
+			highlightContainer.hidden = false
+			centerPointsOfEdges.append(.zero)
+			heights.append(100)
+		} else {
+			// This folder is not empty. Use a custom highlight, and add an extra point at the end for tail insertion
+			highlightContainer.hidden = true
+			var rightmostEdgeFrame = cells.last!.frame
+			rightmostEdgeFrame.origin.x += rightmostEdgeFrame.size.width
+			rightmostEdgeFrame.size.width = 0
+			centerPointsOfEdges.append(CGPoint(x: rightmostEdgeFrame.midX, y: rightmostEdgeFrame.midY))
+			heights.append(rightmostEdgeFrame.size.height)
+		}
+		
+		var bestDistanceSoFar : CGFloat = 1e100
+		let bestIndex = centerPointsOfEdges.reduce(0) { (previousBestIndex, point) -> Int in
+			let diff = CGPoint(x: hoveringPoint.x - point.x, y: hoveringPoint.y - point.y)
+			let distance = sqrt(diff.x*diff.x + diff.y*diff.y)
+			if distance < bestDistanceSoFar {
+				bestDistanceSoFar = distance
+				return centerPointsOfEdges.indexOf(point)!
+			} else {
+				return previousBestIndex
+			}
+		}
+		dropInsertionIndex = NSIndexPath(forItem: bestIndex, inSection: 0)
+		
+		let size = CGSize(width: 5, height: heights[bestIndex])
+		var topLeft = centerPointsOfEdges[bestIndex]
+		topLeft.x -= size.width/2; topLeft.y -= size.height/2
+		
+		let insertionFrame = CGRect(origin: topLeft, size: size)
+		if let view = dropInsertionView {
+			view.frame = insertionFrame
+		} else {
+			let view = UIView(frame: insertionFrame)
+			view.backgroundColor = .blueColor()
+			dropInsertionView = view
+			self.collectionView!.addSubview(view)
+		}
+	}
+	
+	func draggingEnded() {
+		dropInsertionView?.removeFromSuperview()
+		dropInsertionView = nil
 	}
 	
 	override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
