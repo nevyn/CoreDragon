@@ -201,7 +201,7 @@ class PhotosFolderController: UICollectionViewController, NSFetchedResultsContro
 				
 				if incoming.parentFolder != self.folder {
 					// It wasn't in this folder before.
-					self.collectionView!.insertItemsAtIndexPaths([NSIndexPath(forItem: self.folder.entries.count-1, inSection: 0)])
+					self.collectionView!.insertItemsAtIndexPaths([NSIndexPath(forItem: self.folder.entries.count, inSection: 0)])
 				} else {
 					// It was in this folder before. TODO: perform a reordering operation.
 				}
@@ -212,7 +212,7 @@ class PhotosFolderController: UICollectionViewController, NSFetchedResultsContro
 					let sourceIndex = self.folder.entries.indexOfObject(incoming)
 					self.collectionView?.deleteItemsAtIndexPaths([NSIndexPath(forItem: sourceIndex, inSection: 0)])
 				} else {
-					abort()
+					// Neither source folder nor destination folder are represented by this VC
 				}
 			}
 			incoming.parentFolder = destination
