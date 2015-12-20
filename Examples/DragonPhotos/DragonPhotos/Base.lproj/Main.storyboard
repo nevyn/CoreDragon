@@ -71,6 +71,7 @@
                                 </view>
                                 <connections>
                                     <outlet property="label" destination="yfQ-vb-1oJ" id="uj0-lF-lS9"/>
+                                    <segue destination="601-RI-KR1" kind="show" id="xMy-ND-VLX"/>
                                 </connections>
                             </collectionViewCell>
                         </cells>
@@ -92,4 +93,7 @@
             <point key="canvasLocation" x="749" y="217"/>
         </scene>
     </scenes>
+    <inferredMetricsTieBreakers>
+        <segue reference="aBu-5C-LQj"/>
+    </inferredMetricsTieBreakers>
 </document>
