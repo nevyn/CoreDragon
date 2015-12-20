@@ -1,4 +1,10 @@
-- [ ] Implement some proper example apps! Maybe a 'contacts/chat' app and a 'photos' app
+- [ ] Implement some proper example apps!
+	- [ ] Fake 'chat' app
+	- [-] 'Photos' app
+		- [X] List photos
+		- [ ] Move photos between folders
+		- [ ] Reorder photos
+		- [ ] Make folder thumbnails?
 - [ ] When drag fails, if original view isn't on screen anymore, find a better 'cancellation' animation.
 - [ ] Protocol versioning
 - [ ] Support multiple dragged items
