@@ -1,5 +1,6 @@
 - [-] Implement some proper example apps!
 	- [ ] Fake 'chat' app
+		- [ ] Custom proxy icon item
 	- [X] Photo frame app
 	- [X] Photo organizer app
 		- [X] List photos
