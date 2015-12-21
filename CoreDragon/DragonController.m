@@ -453,6 +453,10 @@ static UIImage *unserializedImage(NSDictionary *rep)
 // This will either end up calling 'cancelDragging' or 'cleanUpDragging'
 - (void)_concludeDragging
 {
+	[UIView animateWithDuration:0.5 animations:^{
+		_state.dragView.alpha = 1;
+	}];
+	
 	// Another app will take care of the proper drag conclusion because the touch was in that app?
 	if(![self _draggingIsWithinMyApp]) {
 		// finishDragging will be called from either remote calling 'cancelDragging' or
@@ -493,9 +497,6 @@ static UIImage *unserializedImage(NSDictionary *rep)
 			_state.proxyView.alpha = 0;
 		}];
 	} completion:(id)completion];
-	[UIView animateWithDuration:0.5 animations:^{
-		_state.dragView.alpha = 1;
-	}];
 }
 
 #pragma mark Cancel dragging
