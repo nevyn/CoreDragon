@@ -14,7 +14,6 @@
 		055902801C27E830006843D0 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0559027F1C27E830006843D0 /* Assets.xcassets */; };
 		055902831C27E830006843D0 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 055902811C27E830006843D0 /* LaunchScreen.storyboard */; };
 		0559029B1C27E846006843D0 /* libCoreDragon.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 055902921C27E839006843D0 /* libCoreDragon.a */; };
-		055902A11C27EF46006843D0 /* README.md in Sources */ = {isa = PBXBuildFile; fileRef = 055902A01C27EF46006843D0 /* README.md */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -31,20 +30,6 @@
 			proxyType = 2;
 			remoteGlobalIDString = 05EDCE2F18E9F03E003CF165;
 			remoteInfo = CoreDragonTests;
-		};
-		055902951C27E839006843D0 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 0559028A1C27E839006843D0 /* CoreDragon.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = 05EDCE5A18E9FF23003CF165;
-			remoteInfo = DemoApp;
-		};
-		055902971C27E839006843D0 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 0559028A1C27E839006843D0 /* CoreDragon.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = 059190F61B2E764700AD5DE8;
-			remoteInfo = DemoApp2;
 		};
 		055902991C27E842006843D0 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
@@ -119,8 +104,6 @@
 			children = (
 				055902921C27E839006843D0 /* libCoreDragon.a */,
 				055902941C27E839006843D0 /* CoreDragon.xctest */,
-				055902961C27E839006843D0 /* DemoApp.app */,
-				055902981C27E839006843D0 /* DemoApp2.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -200,20 +183,6 @@
 			remoteRef = 055902931C27E839006843D0 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
-		055902961C27E839006843D0 /* DemoApp.app */ = {
-			isa = PBXReferenceProxy;
-			fileType = wrapper.application;
-			path = DemoApp.app;
-			remoteRef = 055902951C27E839006843D0 /* PBXContainerItemProxy */;
-			sourceTree = BUILT_PRODUCTS_DIR;
-		};
-		055902981C27E839006843D0 /* DemoApp2.app */ = {
-			isa = PBXReferenceProxy;
-			fileType = wrapper.application;
-			path = DemoApp2.app;
-			remoteRef = 055902971C27E839006843D0 /* PBXContainerItemProxy */;
-			sourceTree = BUILT_PRODUCTS_DIR;
-		};
 /* End PBXReferenceProxy section */
 
 /* Begin PBXResourcesBuildPhase section */
@@ -236,7 +205,6 @@
 			files = (
 				0559027B1C27E830006843D0 /* ExamplePhotosController.swift in Sources */,
 				055902771C27E830006843D0 /* AppDelegate.swift in Sources */,
-				055902A11C27EF46006843D0 /* README.md in Sources */,
 				055902791C27E830006843D0 /* PhotoFrameViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -402,6 +370,7 @@
 				055902891C27E830006843D0 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
