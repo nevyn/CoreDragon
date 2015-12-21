@@ -98,8 +98,6 @@ A simple drop target could look like so:
 
 ### DragonFrame
 
-TO BE IMPLEMENTED
-
 A "photo frame" app with the simplest possible drag and drop support. Has a single image view which
 accepts drops on one tab, and another tab with a few example photos.
 

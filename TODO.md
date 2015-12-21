@@ -1,10 +1,12 @@
-- [ ] Implement some proper example apps!
+- [-] Implement some proper example apps!
 	- [ ] Fake 'chat' app
-	- [-] 'Photos' app
+	- [X] Photo frame app
+	- [X] Photo organizer app
 		- [X] List photos
 		- [X] Move photos between folders
 		- [X] Reorder photos
 		- [X] Springloading
+- [ ] Use a UIPasteboard subclass to intercept setItems as a performance improvement
 - [ ] Visualize the drop targets as cut-outs (instead of blue rectangles) and dim the rest of the screen
 - [ ] Support different dragging modes (moving, copying, aliasing, ...)
 - [ ] Support multiple dragged items
