@@ -1,4 +1,4 @@
-![Logo](Resources/logo.png){:height="200px" width="200px"}
+<img src="Resources/logo.png" width="200" height="200">
 
 # CoreDragon
 
