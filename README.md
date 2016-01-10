@@ -10,7 +10,7 @@ CoreDragon uses similar concepts as the drag'n' drop APIs on MacOS, and modifies
 
 CoreDragon was originally called SPDragNDrop, and was a Hackweek experiment written by me during the December 2012 Hackweek at Spotify. Since I really loved the idea and would hate for the code+idea to just rot away, Spotify allowed me to release the code under Apache 2.0 before my employment there ended.
 
-I'm working on some proper demo applications. Until then, [see a demo movie](https://www.youtube.com/watch?v=sCm0F4UrXJg).
+[See a demo introduction with two sample applications that show you the full feature set of Lookback over at https://lookback.io/watch/WfaXvq8vgWGPNYmxJ](https://lookback.io/watch/WfaXvq8vgWGPNYmxJ).
 
 ## Installation
 
@@ -156,3 +156,5 @@ So during Hackweek December 2012, I mocked up drag&drop inside the Spotify iPad 
 Unfortunately, the idea never got any traction within the company and the branch died. That was over a year ago, and the code is now uncompileable. (Yes, when your build system breaks with every point update of Xcode, code really does rot.) Thus, the only screenshot I have is of the trivial demo app in this repo. Hopefully it is inspiring enough that you now feel the immediate need to use the code or the concept in your own app! Hooray!
 
 After WWDC 2015, when split-screen multitasking was introduced, I started working on inter-app drag'n'drop. [Here's what it looked like on 20150831](https://lookback.io/watch/gFRLes3mS5CWRYqNN), and [further progress on 20151129](https://www.youtube.com/watch?v=sCm0F4UrXJg).
+
+Inter-app drag'n'drop was released beginning of 2016, with a [demo movie on Lookback](https://lookback.io/watch/WfaXvq8vgWGPNYmxJ).
