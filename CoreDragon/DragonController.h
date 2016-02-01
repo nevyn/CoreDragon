@@ -47,6 +47,13 @@ NS_ASSUME_NONNULL_BEGIN
 #pragma mark Misc
 /*!	Is the user currently dragging something, in this app or any other app? */
 - (BOOL)draggingOperationIsInProgress;
+
+/*! Recalculates active drop targets, e.g. to allow for refreshing cells in scrolling table view. */
+- (void)recalculateActiveDropTargets;
+
+/*! Explicitely invalidates and redraws a highlight for a specific view. */
+- (void)invalidateHighlightForView:(UIView *)view;
+
 @end
 
 /// Information about a dragging operation that is about to start or is in progress.
