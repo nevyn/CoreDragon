@@ -12,9 +12,9 @@
 		05B92CF21B8E911C00226846 /* CerfingTransport.m in Sources */ = {isa = PBXBuildFile; fileRef = 05B92CC41B8E8D7B00226846 /* CerfingTransport.m */; };
 		05B92CF31B8E911C00226846 /* CerfingMeshPipe.m in Sources */ = {isa = PBXBuildFile; fileRef = 05B92CD61B8E8D7B00226846 /* CerfingMeshPipe.m */; };
 		05B92CF41B8E911C00226846 /* CerfingMeshPipeTransport.m in Sources */ = {isa = PBXBuildFile; fileRef = 05B92CD81B8E8D7B00226846 /* CerfingMeshPipeTransport.m */; };
-		05B92CF51B8E911C00226846 /* AsyncUdpSocket.m in Sources */ = {isa = PBXBuildFile; fileRef = 05B92CDD1B8E8D7B00226846 /* AsyncUdpSocket.m */; };
-		05B92CF61B8E911C00226846 /* GZIP.m in Sources */ = {isa = PBXBuildFile; fileRef = 05B92CDF1B8E8D7B00226846 /* GZIP.m */; };
 		05B92CF71B8E911C00226846 /* MeshPipe.m in Sources */ = {isa = PBXBuildFile; fileRef = 05B92CE21B8E8D7B00226846 /* MeshPipe.m */; };
+		05CBCC0B1C6B1210000CFD12 /* NSData+GZIP.m in Sources */ = {isa = PBXBuildFile; fileRef = 05CBCC0A1C6B1210000CFD12 /* NSData+GZIP.m */; };
+		05CBCC131C6B1227000CFD12 /* GCDAsyncUdpSocket.m in Sources */ = {isa = PBXBuildFile; fileRef = 05CBCC111C6B1227000CFD12 /* GCDAsyncUdpSocket.m */; };
 		05EDCE2318E9F03E003CF165 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 05EDCE2218E9F03E003CF165 /* Foundation.framework */; };
 		05EDCE3118E9F03E003CF165 /* XCTest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 05EDCE3018E9F03E003CF165 /* XCTest.framework */; };
 		05EDCE3218E9F03E003CF165 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 05EDCE2218E9F03E003CF165 /* Foundation.framework */; };
@@ -63,12 +63,14 @@
 		05B92CD61B8E8D7B00226846 /* CerfingMeshPipe.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CerfingMeshPipe.m; sourceTree = "<group>"; };
 		05B92CD71B8E8D7B00226846 /* CerfingMeshPipeTransport.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CerfingMeshPipeTransport.h; sourceTree = "<group>"; };
 		05B92CD81B8E8D7B00226846 /* CerfingMeshPipeTransport.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CerfingMeshPipeTransport.m; sourceTree = "<group>"; };
-		05B92CDC1B8E8D7B00226846 /* AsyncUdpSocket.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AsyncUdpSocket.h; sourceTree = "<group>"; };
-		05B92CDD1B8E8D7B00226846 /* AsyncUdpSocket.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AsyncUdpSocket.m; sourceTree = "<group>"; };
-		05B92CDE1B8E8D7B00226846 /* GZIP.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GZIP.h; sourceTree = "<group>"; };
-		05B92CDF1B8E8D7B00226846 /* GZIP.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = GZIP.m; sourceTree = "<group>"; };
 		05B92CE11B8E8D7B00226846 /* MeshPipe.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MeshPipe.h; sourceTree = "<group>"; };
 		05B92CE21B8E8D7B00226846 /* MeshPipe.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MeshPipe.m; sourceTree = "<group>"; };
+		05CBCC071C6B1210000CFD12 /* GZIP.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GZIP.h; sourceTree = "<group>"; };
+		05CBCC081C6B1210000CFD12 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		05CBCC091C6B1210000CFD12 /* NSData+GZIP.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSData+GZIP.h"; sourceTree = "<group>"; };
+		05CBCC0A1C6B1210000CFD12 /* NSData+GZIP.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSData+GZIP.m"; sourceTree = "<group>"; };
+		05CBCC101C6B1227000CFD12 /* GCDAsyncUdpSocket.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GCDAsyncUdpSocket.h; sourceTree = "<group>"; };
+		05CBCC111C6B1227000CFD12 /* GCDAsyncUdpSocket.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GCDAsyncUdpSocket.m; sourceTree = "<group>"; };
 		05EDCE1F18E9F03E003CF165 /* libCoreDragon.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libCoreDragon.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		05EDCE2218E9F03E003CF165 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		05EDCE2F18E9F03E003CF165 /* CoreDragon.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = CoreDragon.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -167,14 +169,34 @@
 		05B92CDB1B8E8D7B00226846 /* MeshPipe */ = {
 			isa = PBXGroup;
 			children = (
-				05B92CDC1B8E8D7B00226846 /* AsyncUdpSocket.h */,
-				05B92CDD1B8E8D7B00226846 /* AsyncUdpSocket.m */,
-				05B92CDE1B8E8D7B00226846 /* GZIP.h */,
-				05B92CDF1B8E8D7B00226846 /* GZIP.m */,
 				05B92CE11B8E8D7B00226846 /* MeshPipe.h */,
 				05B92CE21B8E8D7B00226846 /* MeshPipe.m */,
+				05CBCC061C6B1210000CFD12 /* GZIP */,
+				05CBCC0C1C6B1227000CFD12 /* GCDAsyncSocket */,
 			);
 			path = MeshPipe;
+			sourceTree = "<group>";
+		};
+		05CBCC061C6B1210000CFD12 /* GZIP */ = {
+			isa = PBXGroup;
+			children = (
+				05CBCC071C6B1210000CFD12 /* GZIP.h */,
+				05CBCC081C6B1210000CFD12 /* Info.plist */,
+				05CBCC091C6B1210000CFD12 /* NSData+GZIP.h */,
+				05CBCC0A1C6B1210000CFD12 /* NSData+GZIP.m */,
+			);
+			name = GZIP;
+			path = ../../../../MeshPipe/Libraries/GZIP/GZIP;
+			sourceTree = "<group>";
+		};
+		05CBCC0C1C6B1227000CFD12 /* GCDAsyncSocket */ = {
+			isa = PBXGroup;
+			children = (
+				05CBCC101C6B1227000CFD12 /* GCDAsyncUdpSocket.h */,
+				05CBCC111C6B1227000CFD12 /* GCDAsyncUdpSocket.m */,
+			);
+			name = GCDAsyncSocket;
+			path = ../../../../MeshPipe/Libraries/CocoaAsyncSocket/Source/GCD;
 			sourceTree = "<group>";
 		};
 		05EDCE1618E9F03D003CF165 = {
@@ -333,9 +355,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				05B92CF61B8E911C00226846 /* GZIP.m in Sources */,
+				05CBCC0B1C6B1210000CFD12 /* NSData+GZIP.m in Sources */,
 				05B92CF11B8E911C00226846 /* CerfingSerializer.m in Sources */,
-				05B92CF51B8E911C00226846 /* AsyncUdpSocket.m in Sources */,
+				05CBCC131C6B1227000CFD12 /* GCDAsyncUdpSocket.m in Sources */,
 				05EDCE5318E9F072003CF165 /* DragonController.m in Sources */,
 				05B92CF71B8E911C00226846 /* MeshPipe.m in Sources */,
 				05EDCE5218E9F072003CF165 /* DragonContainerWindow.m in Sources */,
@@ -461,6 +483,7 @@
 				DSTROOT = /tmp/SPDragNDrop.dst;
 				HEADER_SEARCH_PATHS = (
 					Libraries/MeshPipe,
+					Libraries/MeshPipe/Libraries/GZIP,
 					Libraries/Cerfing,
 					"$(inherited)",
 				);
@@ -476,6 +499,7 @@
 				DSTROOT = /tmp/SPDragNDrop.dst;
 				HEADER_SEARCH_PATHS = (
 					Libraries/MeshPipe,
+					Libraries/MeshPipe/Libraries/GZIP,
 					Libraries/Cerfing,
 					"$(inherited)",
 				);

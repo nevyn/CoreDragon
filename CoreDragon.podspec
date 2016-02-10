@@ -36,7 +36,7 @@ Pod::Spec.new do |s|
   s.public_header_files = "CoreDragon/CoreDragon.h", "CoreDragon/DragonController.h"
   s.resources = "Resources/*.png"
   
-  s.dependency "Cerfing"
-  s.dependency "MeshPipe/CerfingMeshPipe"
+  s.dependency "Cerfing", '~> 2.0'
+  s.dependency "MeshPipe/CerfingMeshPipe", '~> 0.1.2'
 
 end
