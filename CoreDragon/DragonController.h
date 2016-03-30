@@ -96,6 +96,6 @@ NS_ASSUME_NONNULL_BEGIN
 /// Sent when a drag operation starts.
 static NSString *const DragonDragOperationStartedNotificationName = @"eu.thirdcog.dragon.dragStarted";
 /// Sent when a drag operation stops.
-static NSString *const DragonDragOperationStoppedNotificationName = @"eu.thirdcog.dragon.dragStarted";
+static NSString *const DragonDragOperationStoppedNotificationName = @"eu.thirdcog.dragon.dragStopped";
 
 NS_ASSUME_NONNULL_END
