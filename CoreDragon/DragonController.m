@@ -30,10 +30,10 @@ static const void *kDropTargetKey = &kDropTargetKey;
 @property(nonatomic,assign) NSString *operationIdentifier;
 
 // During-drag state
-@property(nonatomic,strong) NSArray *originalPasteboardContents;
+@property(nonatomic,strong) NSArray<NSPasteboardItem *> *originalPasteboardContents;
 @property(nonatomic,strong) UIView *dragView; // the thing that was long-pressed
 @property(nonatomic,strong) UIView<DragonProxyView> *proxyView; // thing under finger
-@property(nonatomic,strong) NSArray *activeDropTargets;
+@property(nonatomic,strong) NSArray<SPDropTarget *> *activeDropTargets;
 @property(nonatomic,strong) NSTimer *springloadingTimer;
 @property(nonatomic,strong) NSTimer *conclusionTimeoutTimer;
 @property(nonatomic,weak) SPDropTarget *hoveringTarget;
@@ -101,7 +101,7 @@ static const void *kDropTargetKey = &kDropTargetKey;
 - (void)_establishMeshPipe
 {
 	_cerfing = nil;
-	
+    
 	NSString *appName = [[NSBundle mainBundle] objectForInfoDictionaryKey:@"CFBundleDisplayName"] ?:
 						[[NSBundle mainBundle] objectForInfoDictionaryKey:@"CFBundleName"] ?:
 						[[NSProcessInfo processInfo] processName];
@@ -358,6 +358,19 @@ static UIImage *unserializedImage(NSDictionary *rep)
 	[self startDraggingWithState:state anchorPoint:anchorPoint initialPosition:initialLocalPosition];
 }
 
+- (NSArray<SPDropTarget *> *)_calculateActiveDropTargets
+{
+    return [_dropTargets.allObjects filteredArrayUsingPredicate:[NSPredicate predicateWithBlock:^(SPDropTarget *target, NSDictionary *bindings) {
+        return [target.delegate dropTarget:target.view canAcceptDrag:self.state];
+    }]];
+}
+
+- (void)recalculateActiveDropTargets
+{
+    _state.activeDropTargets = [self _calculateActiveDropTargets];
+    [self highlightDropTargets];
+}
+
 - (void)startDraggingWithState:(SPDraggingState*)state anchorPoint:(CGPoint)anchorPoint initialPosition:(CGPoint)position
 {
 	self.state = state;
@@ -381,11 +394,8 @@ static UIImage *unserializedImage(NSDictionary *rep)
     }
     state.proxyView.layer.position = position;
     
-    _state.activeDropTargets = [_dropTargets.allObjects filteredArrayUsingPredicate:[NSPredicate predicateWithBlock:^(SPDropTarget *target, NSDictionary *bindings) {
-		return [target.delegate dropTarget:target.view canAcceptDrag:state];
-	}]];
+    [self recalculateActiveDropTargets];
 	
-    [self highlightDropTargets];
 	[[NSNotificationCenter defaultCenter] postNotificationName:DragonDragOperationStartedNotificationName object:self];
 }
 
@@ -583,30 +593,63 @@ static UIImage *unserializedImage(NSDictionary *rep)
         if(target.highlight)
             continue;
         
-        // Make a drop target highlight
-        target.highlight = [[DragonDropHighlightView alloc] initWithFrame:target.view.bounds];
-        target.highlight.springloadable = [target canSpringload:_state];
-        target.highlight.droppable = [target canDrop:_state];
-
-        target.highlight.alpha = 0;
-        [target.view addSubview:target.highlight];
-        [UIView animateWithDuration:.2 animations:^{
-            target.highlight.alpha = 1;
-        }];
+        [DragonController _highlightTarget:target forState:_state];
     }
+}
+
++ (void)_highlightTarget:(SPDropTarget *)target forState:(SPDraggingState *)state
+{
+    // Make a drop target highlight
+    target.highlight = [[DragonDropHighlightView alloc] initWithFrame:target.view.bounds];
+    target.highlight.springloadable = [target canSpringload:state];
+    target.highlight.droppable = [target canDrop:state];
+    
+    target.highlight.alpha = 0;
+    [target.view addSubview:target.highlight];
+    [UIView animateWithDuration:.2 animations:^{
+        target.highlight.alpha = 1;
+    }];
 }
 
 - (void)stopHighlightingDropTargets
 {
     for(SPDropTarget *target in _state.activeDropTargets) {
-        UIView *highlight = target.highlight;
-        target.highlight = nil;
-        [UIView animateWithDuration:.2 animations:^{
-            highlight.alpha = 0;
-        } completion:^(BOOL finished) {
-            [highlight removeFromSuperview];
-        }];
+        [DragonController _stopHighlightingTarget:target];
     }
+}
+
++ (void)_stopHighlightingTarget:(SPDropTarget *)target
+{
+    UIView *highlight = target.highlight;
+    target.highlight = nil;
+    [UIView animateWithDuration:.2 animations:^{
+        highlight.alpha = 0;
+    } completion:^(BOOL finished) {
+        [highlight removeFromSuperview];
+    }];
+}
+
++ (SPDropTarget *)_targetForView:(UIView *)view withState:(SPDraggingState *)state
+{
+    NSArray<SPDropTarget *> *targetsForView = [state.activeDropTargets filteredArrayUsingPredicate:[NSPredicate predicateWithBlock:^BOOL(SPDropTarget *target, NSDictionary *bindings) {
+        return (target.view == view);
+    }]];
+    
+    return targetsForView.firstObject;
+}
+
+- (void)invalidateHighlightForView:(UIView *)view
+{
+    SPDropTarget *target = [DragonController _targetForView:view withState:_state];
+    
+    [DragonController _redrawHighlightForTarget:target
+                                       forState:_state];
+}
+
++ (void)_redrawHighlightForTarget:(SPDropTarget *)target forState:(SPDraggingState *)state
+{
+    [DragonController _stopHighlightingTarget:target];
+    [DragonController _highlightTarget:target forState:state];
 }
 
 #pragma mark - Etc
