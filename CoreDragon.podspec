@@ -2,7 +2,7 @@ Pod::Spec.new do |s|
 
   # ―――  Spec Metadata  ―――――――――――――――――――――――――――――――――――――――――――――――――――――――――― #
   s.name         = "CoreDragon"
-  s.version      = "0.1.1"
+  s.version      = "0.1.2"
   s.summary      = "Stop using context menus. Drag and drop instead, even between apps!"
 
   s.description  = <<-DESC
@@ -29,7 +29,7 @@ Pod::Spec.new do |s|
 
   # ――― Build settings ――――――――――――――――――――――――――――――――――――――――――――――――――――――――――― #
 
-  s.platform     = :ios, "9.1"
+  s.platform     = :ios, "8.4"
   s.source       = { :git => "https://github.com/nevyn/CoreDragon.git", :tag => s.version }
 
   s.source_files  = "CoreDragon", "CoreDragon/*.{h,m}"
