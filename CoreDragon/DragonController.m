@@ -30,7 +30,7 @@ static const void *kDropTargetKey = &kDropTargetKey;
 @property(nonatomic,assign) NSString *operationIdentifier;
 
 // During-drag state
-@property(nonatomic,strong) NSArray<NSPasteboardItem *> *originalPasteboardContents;
+@property(nonatomic,strong) NSArray<NSDictionary *> *originalPasteboardContents;
 @property(nonatomic,strong) UIView *dragView; // the thing that was long-pressed
 @property(nonatomic,strong) UIView<DragonProxyView> *proxyView; // thing under finger
 @property(nonatomic,strong) NSArray<SPDropTarget *> *activeDropTargets;
