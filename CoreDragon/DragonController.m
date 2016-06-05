@@ -676,11 +676,9 @@ static UIImage *unserializedImage(NSDictionary *rep)
 		do {
 			source = objc_getAssociatedObject(view, kDragSourceKey);
 			if (source)
-				break;
+				return source;
 			view = [view superview];
 		} while(view);
-
-		return source;
 	}
 	return nil;
 }
@@ -696,11 +694,9 @@ static UIImage *unserializedImage(NSDictionary *rep)
 		do {
 			target = objc_getAssociatedObject(view, kDropTargetKey);
 			if (target)
-				break;
+				return target;
 			view = [view superview];
 		} while(view);
-
-		return target;
 	}
 	return nil;
 }
