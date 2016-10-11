@@ -2,7 +2,7 @@ Pod::Spec.new do |s|
 
   # ―――  Spec Metadata  ―――――――――――――――――――――――――――――――――――――――――――――――――――――――――― #
   s.name         = "CoreDragon"
-  s.version      = "0.1.2"
+  s.version      = "0.1.3"
   s.summary      = "Stop using context menus. Drag and drop instead, even between apps!"
 
   s.description  = <<-DESC
@@ -36,7 +36,7 @@ Pod::Spec.new do |s|
   s.public_header_files = "CoreDragon/CoreDragon.h", "CoreDragon/DragonController.h"
   s.resources = "Resources/*.png"
   
-  s.dependency "Cerfing", '~> 2.0'
-  s.dependency "MeshPipe/CerfingMeshPipe", '~> 0.1.2'
+  s.dependency "Cerfing", '2.0.4'
+  s.dependency "MeshPipe/CerfingMeshPipe", '0.1.3'
 
 end
