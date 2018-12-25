@@ -2,6 +2,8 @@
 
 # CoreDragon
 
+**DEPRECATED: Please use [Apple's Drag'n'drop APIs introduced in iOS 11](https://developer.apple.com/ios/drag-and-drop/) instead.**
+
 ![cocoapods](https://img.shields.io/cocoapods/v/CoreDragon.svg) ![license](https://img.shields.io/cocoapods/l/CoreDragon.svg) <br />[![Twitter](https://img.shields.io/badge/twitter-@nevyn-blue.svg)](http://twitter.com/nevyn) [![email](https://img.shields.io/badge/email-nevyn.jpg@gmail.com-lightgrey.svg)](mailto:nevyn.jpg@gmail.com)
 
 CoreDragon is a drag'n'drop library for iOS applications. Instead of using context menus, modal view controllers, share sheets and other "indirect manipulation" ways of moving data around, it's much more intuitive to just grab the thing you want to move, and drop it on the place where you want to move it to.
